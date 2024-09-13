@@ -7,19 +7,25 @@ import javafx.scene.control.TextField;
 
 public class MainController {
     @FXML
-    private Label welcomeText;
-    @FXML
     private Button profileButton;
     @FXML
     private Button signinRegister;
+    @FXML
     private TextField usernameEntry;
+    @FXML
     private TextField passwordEntry;
 
 
+    public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
 
     @FXML
     protected void viewProfileClick() {
-        profileButton.setText("SIGNIN FIRST");
+        if (isLoggedIn == true){
+            profileButton.setText("asd");
+        }
+        else{
+            profileButton.setText("SIGNIN FIRST");
+        }
     }
 
     @FXML
@@ -29,3 +35,4 @@ public class MainController {
     }
 
 }
+

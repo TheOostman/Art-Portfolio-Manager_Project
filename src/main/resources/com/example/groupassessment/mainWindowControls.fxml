@@ -9,16 +9,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.MainController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.MainController" style="-fx-background-color: gray">
 
+  <!--
+  This anchor Pane controls the design of the main page.
+  -->
   <HBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" style="-fx-background-color: lightgrey;" >
-
     <VBox spacing="10" style="-fx-padding: 40 0 0 30;">
-      <Label fx:id="usernameTest" text="NOT SIGNED IN" maxWidth="150" maxHeight="10"/>
-      <Button fx:id="profileButton" maxWidth="150" maxHeight="10" text="View Profile" onAction="#viewProfileClick" />
+      <Label fx:id="usernameTest" text="NOT SIGNED IN" prefWidth="150" maxHeight="10"/>
+      <Button fx:id="profileButton" prefWidth="150" maxHeight="10" text="View Profile" onAction="#viewProfileClick" />
     </VBox>
-
   </HBox>
+
   <HBox AnchorPane.topAnchor="250" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" style="-fx-background-color: lightgrey;">
     <VBox spacing="10" style="-fx-padding: 20 0 0 30;">
       <Label text="Username"/>
@@ -28,6 +30,7 @@
       <Button fx:id="signinRegister" maxWidth="150" maxHeight="10" text="SIGNIN / REGISTER" onAction="#signInRegisterBn" />
     </VBox>
   </HBox>
+
 
 
 
