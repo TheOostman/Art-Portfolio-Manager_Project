@@ -3,20 +3,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
 
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.MainController">
-  <HBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="400.0">
-    <VBox spacing="10" style="-fx-background-color: lightgrey;">
-      <Label fx:id="usernameTest" text="NOT SIGNED IN" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="20"/>
-      <Button fx:id="Profile" AnchorPane.topAnchor="70.0" AnchorPane.leftAnchor="10.0">SIGNIN / REGISTER</Button>
 
+  <HBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" style="-fx-background-color: lightgrey;" >
 
-      <Label fx:id="welcomeText" text="Welcome!" AnchorPane.topAnchor="1000.0" AnchorPane.leftAnchor="20.0" />
-      <Button text="Hello!" onAction="#onHelloButtonClick" AnchorPane.topAnchor="1020.0" AnchorPane.leftAnchor="20.0" />
+    <VBox spacing="10" style="-fx-padding: 40 0 0 30;">
+      <Label fx:id="usernameTest" text="NOT SIGNED IN" maxWidth="150" maxHeight="10"/>
+      <Button fx:id="signinRegister" maxWidth="150" maxHeight="10">SIGNIN / REGISTER</Button>
+      <Button fx:id="profileButton" maxWidth="150" maxHeight="10" text="View Profile" onAction="#viewProfileClick" />
+
+      <Label fx:id="welcomeText" text="Welcome!"/>
+      <Button text="Hello!" onAction="#onHelloButtonClick"/>
     </VBox>
+
+
   </HBox>
+
 
 </AnchorPane>
