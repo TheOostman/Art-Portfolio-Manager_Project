@@ -14,14 +14,14 @@
   <!--
   This anchor Pane controls the design of the main page.
   -->
-  <HBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" style="-fx-background-color: lightgrey;" >
+  <HBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" maxWidth="10" style="-fx-background-color: lightgrey;" >
     <VBox spacing="10" style="-fx-padding: 40 0 0 30;">
-      <Label fx:id="usernameTest" text="NOT SIGNED IN" prefWidth="150" maxHeight="10"/>
+      <Label fx:id="loginLabel" text="NOT SIGNED IN" prefWidth="150" maxHeight="10"/>
       <Button fx:id="profileButton" prefWidth="150" maxHeight="10" text="View Profile" onAction="#viewProfileClick" />
     </VBox>
   </HBox>
 
-  <HBox AnchorPane.topAnchor="250" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" style="-fx-background-color: lightgrey;">
+  <HBox AnchorPane.topAnchor="250" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" maxWidth="10" style="-fx-background-color: lightgrey;">
     <VBox spacing="10" style="-fx-padding: 20 0 0 30;">
       <Label text="Username"/>
       <TextField fx:id="usernameEntry"/>
@@ -31,7 +31,12 @@
     </VBox>
   </HBox>
 
-
-
+  <HBox fx:id="HBoxDefult" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="700" AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="0.0" style="-fx-background-color: darkgray;">
+    <VBox>
+      <AnchorPane>
+        <Label text="NOT SIGNED IN" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="50"/>
+      </AnchorPane>
+    </VBox>
+  </HBox>
 
 </AnchorPane>
