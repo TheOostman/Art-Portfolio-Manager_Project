@@ -14,29 +14,33 @@
   <!--
   This anchor Pane controls the design of the main page.
   -->
-  <HBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" maxWidth="10" style="-fx-background-color: lightgrey;" >
-    <VBox spacing="10" style="-fx-padding: 40 0 0 30;">
-      <Label fx:id="loginLabel" text="NOT SIGNED IN" prefWidth="150" maxHeight="10"/>
-      <Button fx:id="profileButton" prefWidth="150" maxHeight="10" text="View Profile" onAction="#viewProfileClick" />
-    </VBox>
-  </HBox>
+  <!--
+  The first Hbox controls all the design of the left column which holds items like the signin or the profile page button
+  -->
+  <HBox>
+    <HBox style="-fx-background-color: lightgrey;" prefHeight="1200" prefWidth="200">
+      <VBox>
+        <VBox spacing="10" style="-fx-padding: 20;">
+          <Label fx:id="loginLabel" text="NOT SIGNED IN" prefWidth="150" maxHeight="10"/>
+          <Button fx:id="profileButton" prefWidth="150" maxHeight="10" text="View Profile" onAction="#viewProfileClick" />
+        </VBox>
+        <VBox spacing="10" style="-fx-padding: 20;">
+          <Label text="Username"/>
+          <TextField fx:id="usernameEntry"/>
+          <Label text="Password"/>
+          <TextField fx:id="passwordEntry"/>
+          <Button fx:id="signinRegister" maxWidth="150" maxHeight="10" text="SIGNIN / REGISTER" onAction="#signInRegisterBn" />
+        </VBox>
+      </VBox>
+    </HBox>
 
-  <HBox AnchorPane.topAnchor="250" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="1000.0" maxWidth="10" style="-fx-background-color: lightgrey;">
-    <VBox spacing="10" style="-fx-padding: 20 0 0 30;">
-      <Label text="Username"/>
-      <TextField fx:id="usernameEntry"/>
-      <Label text="Password"/>
-      <TextField fx:id="passwordEntry"/>
-      <Button fx:id="signinRegister" maxWidth="150" maxHeight="10" text="SIGNIN / REGISTER" onAction="#signInRegisterBn" />
-    </VBox>
-  </HBox>
-
-  <HBox fx:id="HBoxDefult" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="700" AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="0.0" style="-fx-background-color: darkgray;">
-    <VBox>
-      <AnchorPane>
+    <!--This second Hbox controls the Top of the profile page -->
+    <HBox fx:id="HBoxDefult">
+      <VBox style="-fx-background-color: darkgray;" maxHeight="100" prefWidth="2400">
         <Label text="NOT SIGNED IN" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="50"/>
-      </AnchorPane>
-    </VBox>
+      </VBox>
+    </HBox>
   </HBox>
+
 
 </AnchorPane>
