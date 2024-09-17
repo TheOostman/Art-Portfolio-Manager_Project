@@ -40,9 +40,12 @@
           </AnchorPane>
         </VBox>
         <VBox style="-fx-background-color: #94908f; -fx-padding: 70 0 0 20;" prefHeight="1000">
-          <VBox style="-fx-background-color: white;" prefHeight="100" prefWidth="100" maxWidth="100">
-
-          </VBox>
+          <HBox spacing="10">
+            <Button prefWidth="200" prefHeight="200"/>
+            <Button prefWidth="200" prefHeight="200"/>
+            <Button prefWidth="200" prefHeight="200"/>
+            <Button prefWidth="200" prefHeight="200"/>
+          </HBox>
         </VBox>
       </VBox>
     </HBox>
