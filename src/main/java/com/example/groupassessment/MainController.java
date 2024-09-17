@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 public class MainController {
     @FXML
@@ -44,7 +45,23 @@ public class MainController {
         System.out.println(passwordEntry);
     }
 
+    @FXML
+    public void initialize() {
+        // Iterate through all the HBox elements in the VBox
+        for (int i = 0; i < design1RootBox.getChildren().size(); i++) {
+            HBox hbox = (HBox) design1RootBox.getChildren().get(i);
 
+            // Iterate through all the buttons in each HBox
+            for (int j = 0; j < hbox.getChildren().size(); j++) {
+                Button button = (Button) hbox.getChildren().get(j);
+
+                // Assign the same event handler to each button
+                button.setOnAction(event -> {
+                    System.out.println("Hello from " + button.getId());  // Prints "Hello" and the button ID
+                });
+            }
+        }
+    }
 
 }
 
