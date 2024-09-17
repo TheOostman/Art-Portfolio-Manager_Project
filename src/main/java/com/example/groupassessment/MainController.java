@@ -1,11 +1,13 @@
 package com.example.groupassessment;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+
 
 public class MainController {
     @FXML
@@ -23,8 +25,9 @@ public class MainController {
 
 
     public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
-    String basicUsername = "username1";             //Test data, this can be deleted
-    String basicPassword = "123";                   //Test data, this can be deleted
+    public String basicUsername = "username1";             //Test data, this can be deleted
+    public String basicPassword = "123";                   //Test data, this can be deleted
+    public int designNumber = 1;
 
 
     @FXML
@@ -45,9 +48,7 @@ public class MainController {
         System.out.println(passwordEntry);
     }
 
-    @FXML
-    public void initialize() {
-        // Iterate through all the HBox elements in the VBox
+    public void watchingDesign1(){
         for (int i = 0; i < design1RootBox.getChildren().size(); i++) {
             HBox hbox = (HBox) design1RootBox.getChildren().get(i);
 
@@ -58,9 +59,23 @@ public class MainController {
                 // Assign the same event handler to each button
                 button.setOnAction(event -> {
                     System.out.println("Hello from " + button.getId());  // Prints "Hello" and the button ID
+
                 });
             }
         }
+    }
+
+    @FXML
+    public void initialize() {
+        // Iterate through all the HBox elements in the VBox
+        if (designNumber == 1){
+            watchingDesign1();
+        } else if (designNumber == 2) {
+            System.out.println("design 2");             //DELETE THIS !!!
+
+        }
+
+
     }
 
 }
