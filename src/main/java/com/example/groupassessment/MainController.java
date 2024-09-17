@@ -14,17 +14,21 @@ public class MainController {
     private TextField usernameEntry;
     @FXML
     private TextField passwordEntry;
+    @FXML
+    private Label usernameText;
 
 
     public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
     String basicUsername = "username1";             //Test data, this can be deleted
     String basicPassword = "123";                   //Test data, this can be deleted
 
+
     @FXML
     protected void viewProfileClick() {
 
         if (isLoggedIn){
             System.out.println(basicUsername);
+            usernameText.setText(basicUsername);    //change this !!!
         }
         else{
             profileButton.setText("SIGNIN FIRST");
