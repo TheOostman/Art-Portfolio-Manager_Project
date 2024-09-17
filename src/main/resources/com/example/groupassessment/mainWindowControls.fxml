@@ -39,7 +39,7 @@
             <Label fx:id="usernameText" text="NOT SIGNED IN" style="-fx-font-size: 24px; -fx-font-weight: bold;" AnchorPane.topAnchor="35" AnchorPane.leftAnchor="50"/>
           </AnchorPane>
         </VBox>
-        <VBox style="-fx-background-color: #94908f; -fx-padding: 70 0 0 20;" prefHeight="1000">
+        <VBox style="-fx-background-color: #94908f; -fx-padding: 70 0 0 20;" prefHeight="1000" prefWidth="1800" maxWidth="1800">
           <HBox spacing="10">
             <Button prefWidth="200" prefHeight="200"/>
             <Button prefWidth="200" prefHeight="200"/>
