@@ -13,6 +13,7 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("mainWindowControls.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         stage.setTitle("Art Portfolio Manager");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

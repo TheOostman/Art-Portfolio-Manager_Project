@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.MainController" style="-fx-background-color: gray">
 
   <!--
@@ -39,14 +40,40 @@
             <Label fx:id="usernameText" text="NOT SIGNED IN" style="-fx-font-size: 24px; -fx-font-weight: bold;" AnchorPane.topAnchor="35" AnchorPane.leftAnchor="50"/>
           </AnchorPane>
         </VBox>
-        <VBox style="-fx-background-color: #94908f; -fx-padding: 70 0 0 20;" prefHeight="1000" prefWidth="1800" maxWidth="1800">
-          <HBox spacing="10">
-            <Button prefWidth="200" prefHeight="200"/>
-            <Button prefWidth="200" prefHeight="200"/>
-            <Button prefWidth="200" prefHeight="200"/>
-            <Button prefWidth="200" prefHeight="200"/>
-          </HBox>
-        </VBox>
+        <ScrollPane style="-fx-background-color: #94908f;" prefHeight="700" prefWidth="200" maxWidth="1000">
+          <VBox fx:id="design1RootBox" style="-fx-padding: 20 0 0 50; -fx-background-color: #94908f;" spacing="10" prefWidth="985" maxWidth="1000">
+            <HBox spacing="15">
+              <Button fx:id="boxA1" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxA2" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxA3" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxA4" prefWidth="200" prefHeight="200"/>
+            </HBox>
+            <HBox spacing="15">
+              <Button fx:id="boxB1" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxB2" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxB3" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxB4" prefWidth="200" prefHeight="200"/>
+            </HBox>
+            <HBox spacing="15">
+              <Button fx:id="boxC1" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxC2" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxC3" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxC4" prefWidth="200" prefHeight="200"/>
+            </HBox>
+            <HBox spacing="15">
+              <Button fx:id="boxD1" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxD2" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxD3" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxD4" prefWidth="200" prefHeight="200"/>
+            </HBox>
+            <HBox spacing="15" prefHeight="220">
+              <Button fx:id="boxE1" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxE2" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxE3" prefWidth="200" prefHeight="200"/>
+              <Button fx:id="boxE4" prefWidth="200" prefHeight="200"/>
+            </HBox>
+          </VBox>
+        </ScrollPane>
       </VBox>
     </HBox>
 

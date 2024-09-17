@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 public class MainController {
     @FXML
@@ -16,6 +17,8 @@ public class MainController {
     private TextField passwordEntry;
     @FXML
     private Label usernameText;
+    @FXML
+    private VBox design1RootBox;
 
 
     public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
@@ -40,6 +43,8 @@ public class MainController {
         System.out.println(usernameEntry);
         System.out.println(passwordEntry);
     }
+
+
 
 }
 
