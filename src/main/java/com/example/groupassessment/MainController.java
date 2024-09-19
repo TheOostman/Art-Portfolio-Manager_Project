@@ -59,7 +59,7 @@ public class MainController {
                 // Assign the same event handler to each button
                 button.setOnAction(event -> {
                     System.out.println("Hello from " + button.getId());  // Prints "Hello" and the button ID
-
+                //asd
                 });
             }
         }
@@ -77,6 +77,8 @@ public class MainController {
 
 
     }
+
+
 
 }
 
