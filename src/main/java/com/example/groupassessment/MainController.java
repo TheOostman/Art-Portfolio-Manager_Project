@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import javafx.scene.layout.HBox;
 
 public class MainController {
     @FXML
@@ -18,9 +19,11 @@ public class MainController {
     private TextField passwordEntry;
 
 
+
     public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
-    public String basicUsername = "username1";             //Test data, this can be deleted
+    public String basicUsername = "123";             //Test data, this can be deleted
     public String basicPassword = "123";                   //Test data, this can be deleted
+
 
     @FXML
     protected void viewProfileClick() {
@@ -69,6 +72,8 @@ public class MainController {
     private void registerInfo() {
 
     }
+
+
 
 
 

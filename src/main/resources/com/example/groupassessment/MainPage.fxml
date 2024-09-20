@@ -11,18 +11,15 @@
 <?import javafx.scene.control.TextField?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.MainController" style="-fx-background-color: gray">
 
-  <HBox>
-    <VBox>
+  <VBox>
+    <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
       <AnchorPane>
-        <VBox>
-          <HBox style="-fx-background-color: lightgrey;" prefHeight="100">
-
-          </HBox>
-        </VBox>
+        <Label text="Username" style="-fx-font-size: 30px;" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50"/>
+        <Button text="| | |" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15"/>
       </AnchorPane>
-    </VBox>
+    </HBox>
+  </VBox>
 
-  </HBox>
 
 
 </AnchorPane>
