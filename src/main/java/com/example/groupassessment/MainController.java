@@ -19,24 +19,31 @@ public class MainController {
 
 
     public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
-    String basicUsername = "username1";             //Test data, this can be deleted
-    String basicPassword = "123";                   //Test data, this can be deleted
+    public String basicUsername = "username1";             //Test data, this can be deleted
+    public String basicPassword = "123";                   //Test data, this can be deleted
 
     @FXML
     protected void viewProfileClick() {
 
-        if (isLoggedIn){
-            System.out.println(basicUsername);
-        }
-        else{
-            profileButton.setText("SIGNIN FIRST");
-        }
     }
 
     @FXML
     protected void signInBn() {
-        System.out.println(usernameEntry);
-        System.out.println(passwordEntry);
+        String enteredUsername = usernameEntry.getText();
+        String enteredPassword = passwordEntry.getText();
+        if (enteredUsername.equals(basicUsername)){
+            if (enteredPassword.equals(basicPassword)){
+                System.out.println("Test Dummy Account" + " " + enteredUsername);
+            }
+            else{
+                System.out.println("Failed Login on " + " " + enteredUsername);
+            }
+
+        }
+        else{
+            System.out.println("Failed Login on " + " " + enteredUsername);
+        }
+
     }
 
     @FXML
