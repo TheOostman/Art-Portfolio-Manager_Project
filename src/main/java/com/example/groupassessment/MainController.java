@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+import java.io.IOException;
 
 public class MainController {
     @FXML
@@ -38,8 +40,18 @@ public class MainController {
     }
 
     @FXML
-    protected void registerPageBn() {
-        System.out.println("GOING TO REGISTER PAGE DESIGN");
+    private void toRegisterPageBn(ActionEvent event) throws IOException {
+        MainApplication.changeScene("RegisterPage.fxml");
+    }
+
+    @FXML
+    private void toSignInBn(ActionEvent event) throws IOException {
+        MainApplication.changeScene("LoginPage.fxml");
+    }
+
+    @FXML
+    private void registerInfo() {
+
     }
 
 
