@@ -27,6 +27,10 @@ public class MainController {
 
     }
 
+    public void changeToMain() throws IOException{
+        MainApplication.changeScene("MainPage.fxml");
+    }
+
     @FXML
     protected void signInBn() {
         String enteredUsername = usernameEntry.getText();
@@ -34,6 +38,11 @@ public class MainController {
         if (enteredUsername.equals(basicUsername)){
             if (enteredPassword.equals(basicPassword)){
                 System.out.println("Test Dummy Account" + " " + enteredUsername);
+                try {
+                    changeToMain();
+                } catch (IOException e) {
+                    System.out.println("Error happened at changing to main page");
+                }
             }
             else{
                 System.out.println("Failed Login on " + " " + enteredUsername);
