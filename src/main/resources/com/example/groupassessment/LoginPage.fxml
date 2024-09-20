@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.MainController" style="-fx-background-color: gray">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.LoginController" style="-fx-background-color: gray">
 
   <HBox>
     <VBox>
@@ -24,11 +24,11 @@
             <Button text="REGISTER PAGE" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#toRegisterPageBn"/>
           </HBox>
         </VBox>
-        <VBox AnchorPane.topAnchor="227" AnchorPane.leftAnchor="413">
+        <VBox AnchorPane.topAnchor="227" AnchorPane.leftAnchor="410">
           <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
         </VBox>
-        <VBox AnchorPane.topAnchor="225" AnchorPane.leftAnchor="415">
-          <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-text-fill: blue;"/>
+        <VBox AnchorPane.topAnchor="225" AnchorPane.leftAnchor="412">
+          <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-text-fill: #FF6600;"/>
         </VBox>
       </AnchorPane>
     </VBox>

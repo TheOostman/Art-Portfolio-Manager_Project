@@ -32,7 +32,7 @@
           <Label text="REGISTER PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
         </VBox>
         <VBox AnchorPane.topAnchor="225" AnchorPane.leftAnchor="390">
-          <Label text="REGISTER PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-text-fill: blue;"/>
+          <Label text="REGISTER PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-text-fill: #FF6600;"/>
         </VBox>
       </AnchorPane>
     </VBox>

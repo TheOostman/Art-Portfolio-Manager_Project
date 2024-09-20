@@ -10,17 +10,11 @@ import java.io.Console;
 import java.io.IOException;
 import javafx.scene.layout.HBox;
 
-public class MainController {
-    @FXML
-    private Button profileButton;
-    //@FXML
-    //private Button signinRegister;
+public class LoginController {
     @FXML
     private TextField usernameEntry;
     @FXML
     private TextField passwordEntry;
-    @FXML
-    private Label noImagesSelfProfile;
 
 
     // THIS SECTION IS DUMMY STATS AND CAN BE DELETED
@@ -29,12 +23,6 @@ public class MainController {
     public String basicPassword = "123";                   //Test data, this can be deleted
     //----------------------------------
 
-
-
-    @FXML
-    protected void viewProfileClick() {
-
-    }
 
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
@@ -68,25 +56,6 @@ public class MainController {
     private void toRegisterPageBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("RegisterPage.fxml");
     }
-
-    @FXML
-    private void toSignInBn(ActionEvent event) throws IOException {
-        MainApplication.changeScene("LoginPage.fxml");
-    }
-
-    @FXML
-    private void registerInfo() {
-
-    }
-
-    @FXML
-    private void dropDownBn(ActionEvent event){
-        System.out.println("menu button pressed");
-    }
-
-
-
-
 
 }
 
