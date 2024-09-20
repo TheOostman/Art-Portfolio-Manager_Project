@@ -10,8 +10,10 @@ import java.io.IOException;
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("mainWindowControls.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("LoginPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
+        scene.getRoot().setStyle("-fx-background-color: #91A3B0;");
+        stage.setResizable(false);
         stage.setTitle("Art Portfolio Manager");
         stage.setScene(scene);
         stage.show();
