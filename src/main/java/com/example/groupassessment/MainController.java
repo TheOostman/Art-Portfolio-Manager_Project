@@ -32,10 +32,17 @@ public class MainController {
     }
 
     @FXML
-    protected void signInRegisterBn() {
+    protected void signInBn() {
         System.out.println(usernameEntry);
         System.out.println(passwordEntry);
     }
+
+    @FXML
+    protected void registerPageBn() {
+        System.out.println("GOING TO REGISTER PAGE DESIGN");
+    }
+
+
 
 }
 
