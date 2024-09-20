@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.MainController" style="-fx-background-color: gray">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.RegisterController" style="-fx-background-color: gray">
 
   <HBox>
     <VBox>
