@@ -9,18 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.groupassessment.MainPageController" style="-fx-background-color: gray">
-  <AnchorPane>  <!-- THIS IS THE SIDE BAR -->
-    <VBox fx:id="sideBar" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="800.0" prefWidth="200" prefHeight="1000" style="-fx-padding: 120 0 0 10; -fx-background-color: #A9A9A9;" visible="false">
-      <AnchorPane>
-        <Label AnchorPane.leftAnchor="55" style="-fx-font-weight: bold; -fx-font-size: 24px;" >MENU</Label>
-        <Button AnchorPane.topAnchor="60" AnchorPane.leftAnchor="20" text="EDIT PROFILE" prefWidth="150"/>
-        <Button AnchorPane.topAnchor="90" AnchorPane.leftAnchor="20" text="SEARCH FOR PROFILE" prefWidth="150"/>
-        <Button AnchorPane.topAnchor="120" AnchorPane.leftAnchor="20" text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
-      </AnchorPane>
-
-    </VBox>
-  </AnchorPane>
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.groupassessment.MainPageController" style="-fx-background-color: gray">
   <VBox> <!-- This is the main design items -->
     <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
       <AnchorPane>
@@ -39,6 +29,22 @@
       </AnchorPane>
     </HBox>
   </VBox>
+  <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000" style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false">
+    <AnchorPane>
+      <VBox>
+        <AnchorPane>
+          <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="60" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+        </AnchorPane>
+        <VBox style="-fx-padding: 40 0 0 0;">
+          <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
+          <Button text="EDIT PROFILE" prefWidth="150"/>
+          <Button text="SEARCH FOR PROFILE" prefWidth="150"/>
+          <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
+        </VBox>
+      </VBox>
+    </AnchorPane>
+  </VBox>
 
 
-</AnchorPane>
+
+</StackPane>

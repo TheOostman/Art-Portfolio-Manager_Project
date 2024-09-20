@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
@@ -59,11 +60,13 @@ public class MainPageController {
             sideBar.setVisible(false);
         } else {
             sideBar.setVisible(true);
+            sideBar.toFront();
             transition.setToX(0);  // Slide in to show
         }
         transition.play();
         isSideBarVisible = !isSideBarVisible;
     }
+
 
     @FXML
     public void initialize() {
@@ -74,6 +77,7 @@ public class MainPageController {
         else{
             noImagesSelfProfile.setText("There is no images, please add some");
         }
+        sideBar.setVisible(false);
     }
 
 
