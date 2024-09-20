@@ -29,8 +29,6 @@ public class MainController {
     public String basicPassword = "123";                   //Test data, this can be deleted
     //----------------------------------
 
-
-
     @FXML
     protected void viewProfileClick() {
 
