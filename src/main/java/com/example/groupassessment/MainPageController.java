@@ -40,6 +40,8 @@ public class MainPageController {
     @FXML
     private VBox picA1, picA2, picA3, picB1, picB2, picB3, picC1, picC2, picC3;
     private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewB1, imageViewB2, imageViewB3, imageViewC1, imageViewC2, imageViewC3;
+    @FXML
+    private VBox DefultA1, DefultA2, DefultA3, DefultB1, DefultB2, DefultB3, DefultC1, DefultC2, DefultC3;
 
     private boolean isSideBarVisible = false;
     private boolean isProfileEditorVisible = false;
@@ -227,13 +229,60 @@ public class MainPageController {
         }
     }
 
+    public void profileHasPic(){
+        imageViewA1 = new ImageView();
+        DefultA1.getChildren().add(imageViewA1);
+        loadSavedImage("A1", imageViewA1);
+
+        imageViewA2 = new ImageView();
+        DefultA2.getChildren().add(imageViewA2);
+        loadSavedImage("A2", imageViewA2);
+
+        imageViewA3 = new ImageView();
+        DefultA3.getChildren().add(imageViewA3);
+        loadSavedImage("A3", imageViewA3);
+
+        imageViewB1 = new ImageView();
+        DefultB1.getChildren().add(imageViewB1);
+        loadSavedImage("B1", imageViewB1);
+
+        imageViewB2 = new ImageView();
+        DefultB2.getChildren().add(imageViewB2);
+        loadSavedImage("B2", imageViewB2);
+
+        imageViewB3 = new ImageView();
+        DefultB3.getChildren().add(imageViewB3);
+        loadSavedImage("B3", imageViewB3);
+
+        imageViewC1 = new ImageView();
+        DefultC1.getChildren().add(imageViewC1);
+        loadSavedImage("C1", imageViewC1);
+
+        imageViewC2 = new ImageView();
+        DefultC2.getChildren().add(imageViewC2);
+        loadSavedImage("C2", imageViewC2);
+
+        imageViewC3 = new ImageView();
+        DefultC3.getChildren().add(imageViewC3);
+        loadSavedImage("C3", imageViewC3);
+    }
 
     @FXML
     public void initialize() {
-        
+
         hasPictures = false;
+
+        // Directory where images are saved
+        File dir = new File("saved_images");
+
+        if (checkForSavedImage("A1") || checkForSavedImage("A2") || checkForSavedImage("A3") ||
+                checkForSavedImage("B1") || checkForSavedImage("B2") || checkForSavedImage("B3") ||
+                checkForSavedImage("C1") || checkForSavedImage("C2") || checkForSavedImage("C3")) {
+            hasPictures = true;
+        }
         if (hasPictures == true) {
-            noImagesSelfProfile.setText("");
+            noImagesSelfProfile.setText("HAS PICTURES");
+            profileHasPic();
         }
         else{
             noImagesSelfProfile.setText("There is no images, please add some");
@@ -281,11 +330,13 @@ public class MainPageController {
         editPageEditor.setVisible(false);
     }
 
+    private boolean checkForSavedImage(String imageId) {
+        File dir = new File("saved_images");
+        File file = new File(dir, imageId + ".png"); // Assuming PNG format by default
 
-
-
-
-
+        // Return true if the image file exists
+        return file.exists();
+    }
 
 }
 
