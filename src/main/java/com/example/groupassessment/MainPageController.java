@@ -36,10 +36,10 @@ public class MainPageController {
     @FXML
     private VBox sideBar;
     @FXML
-    private HBox editPageEditor;
+    private VBox editPageEditor;
     @FXML
-    private VBox picA1, picA2;
-    private ImageView imageViewA1, imageViewA2;
+    private VBox picA1, picA2, picA3, picB1, picB2, picB3, picC1, picC2, picC3;
+    private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewB1, imageViewB2, imageViewB3, imageViewC1, imageViewC2, imageViewC3;
 
     private boolean isSideBarVisible = false;
     private boolean isProfileEditorVisible = false;
@@ -111,6 +111,42 @@ public class MainPageController {
         selectAndSaveImagePath(imageViewA2, picA2, "A2");
     }
 
+    @FXML
+    public void openImageSelectorForPicA3() {
+        selectAndSaveImagePath(imageViewA3, picA3, "A3");
+    }
+
+    @FXML
+    public void openImageSelectorForPicB1() {
+        selectAndSaveImagePath(imageViewB1, picB1, "B1");
+    }
+
+    @FXML
+    public void openImageSelectorForPicB2() {
+        selectAndSaveImagePath(imageViewB2, picB2, "B2");
+    }
+
+    @FXML
+    public void openImageSelectorForPicB3() {
+        selectAndSaveImagePath(imageViewB3, picB3, "B3");
+    }
+
+    @FXML
+    public void openImageSelectorForPicC1() {
+        selectAndSaveImagePath(imageViewC1, picC1, "C1");
+    }
+
+    @FXML
+    public void openImageSelectorForPicC2() {
+        selectAndSaveImagePath(imageViewC2, picC2, "C2");
+    }
+
+    @FXML
+    public void openImageSelectorForPicC3() {
+        selectAndSaveImagePath(imageViewC3, picC3, "C3");
+    }
+
+
     private void selectAndSaveImagePath(ImageView imageView, VBox vBox, String imageId) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
@@ -128,11 +164,12 @@ public class MainPageController {
                 // Copy the image file to a specific directory
                 saveImageFile(selectedFile, imageId);
 
+
                 // Adjust VBox size
                 imageView.setFitWidth(150);
                 imageView.setFitHeight(150);
-                vBox.setPrefWidth(imageView.getFitWidth() + 20);
-                vBox.setPrefHeight(imageView.getFitHeight() + 20);
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -181,6 +218,8 @@ public class MainPageController {
             try (FileInputStream input = new FileInputStream(file)) {
                 Image image = new Image(input);
                 imageView.setImage(image);
+                imageView.setFitWidth(150);
+                imageView.setFitHeight(150);
                 System.out.println("Loaded saved image: " + file.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -191,6 +230,7 @@ public class MainPageController {
 
     @FXML
     public void initialize() {
+        
         hasPictures = false;
         if (hasPictures == true) {
             noImagesSelfProfile.setText("");
@@ -209,7 +249,33 @@ public class MainPageController {
         picA2.getChildren().add(imageViewA2);
         loadSavedImage("A2", imageViewA2);
 
+        imageViewA3 = new ImageView();
+        picA3.getChildren().add(imageViewA3);
+        loadSavedImage("A3", imageViewA3);
 
+        imageViewB1 = new ImageView();
+        picB1.getChildren().add(imageViewB1);
+        loadSavedImage("B1", imageViewB1);
+
+        imageViewB2 = new ImageView();
+        picB2.getChildren().add(imageViewB2);
+        loadSavedImage("B2", imageViewB2);
+
+        imageViewB3 = new ImageView();
+        picB3.getChildren().add(imageViewB3);
+        loadSavedImage("B3", imageViewB3);
+
+        imageViewC1 = new ImageView();
+        picC1.getChildren().add(imageViewC1);
+        loadSavedImage("C1", imageViewC1);
+
+        imageViewC2 = new ImageView();
+        picC2.getChildren().add(imageViewC2);
+        loadSavedImage("C2", imageViewC2);
+
+        imageViewC3 = new ImageView();
+        picC3.getChildren().add(imageViewC3);
+        loadSavedImage("C3", imageViewC3);
 
         sideBar.setVisible(false);
         editPageEditor.setVisible(false);

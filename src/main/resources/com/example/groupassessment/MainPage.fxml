@@ -43,24 +43,93 @@
       </VBox>
     </AnchorPane>
   </VBox>
-  <HBox visible="false" fx:id="editPageEditor">
-    <HBox style="-fx-padding: 200 0 0 75" spacing="20">
+
+  <VBox>
+    <AnchorPane>
+      <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+    </AnchorPane>
+    <HBox style="-fx-padding: 120 0 0 75" spacing="20">
       <VBox>
-        <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
-          <!-- VBox for displaying A1 image -->
-        </VBox>
+        <VBox fx:id="DefultA1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultA2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultA3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+    </HBox>
+    <HBox style="-fx-padding: 50 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="DefultB1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultB2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultB3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+    </HBox>
+    <HBox style="-fx-padding: 50 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="DefultC1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultC2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultC3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+    </HBox>
+  </VBox>
+
+  <VBox visible="false" fx:id="editPageEditor">
+    <AnchorPane>
+      <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+    </AnchorPane>
+    <HBox style="-fx-padding: 120 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
         <Button text="Select Image" onAction="#openImageSelectorForPicA1"/>
       </VBox>
       <VBox>
-        <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
-        </VBox>
+        <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
         <Button text="Select Image" onAction="#openImageSelectorForPicA2"/>
       </VBox>
-
+      <VBox>
+        <VBox fx:id="picA3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicA3"/>
+      </VBox>
     </HBox>
-    <AnchorPane>
-      <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="347" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
-    </AnchorPane>
+    <HBox style="-fx-padding: 25 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="picB1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicB1"/>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picB2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicB2"/>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picB3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicB3"/>
+      </VBox>
+    </HBox>
+    <HBox style="-fx-padding: 25 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="picC1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicC1"/>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picC2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicC2"/>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picC3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicC3"/>
+      </VBox>
+    </HBox>
 
-  </HBox>
+
+  </VBox>
 </StackPane>
