@@ -94,13 +94,18 @@ public class MainPageController {
     public void editPage(ActionEvent action){
         if (isProfileEditorVisible) {
             editPageEditor.setVisible(false);
+            try{
+                changeToMain();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
         } else {
             editPageEditor.setVisible(true);
             editPageEditor.toFront();
         }
         sideBar.setVisible(false);
         isProfileEditorVisible = !isProfileEditorVisible;
-        System.out.println("asd");
     }
 
     @FXML
