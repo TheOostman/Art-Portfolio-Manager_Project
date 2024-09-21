@@ -23,6 +23,13 @@ public class LoginController {
     public String basicPassword = "123";                   //Test data, this can be deleted
     //----------------------------------
 
+    //Search for login info
+    //Confirm there is info
+    //If info correct move to changeToMain()
+    //Keep Login Info
+
+
+
 
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
