@@ -44,16 +44,23 @@
     </AnchorPane>
   </VBox>
   <HBox visible="false" fx:id="editPageEditor">
-    <HBox style="-fx-padding: 200 0 0 75">
-      <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
-        <!-- VBox for displaying A1 image -->
+    <HBox style="-fx-padding: 200 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <!-- VBox for displaying A1 image -->
+        </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicA1"/>
       </VBox>
-      <Button text="Select Image" onAction="#openImageSelectorForPicA1"/>
-      <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+      <VBox>
+        <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+        </VBox>
+        <Button text="Select Image" onAction="#openImageSelectorForPicA2"/>
+      </VBox>
 
-      </VBox>
-      <Button text="Select Image" onAction="#openImageSelectorForPicA2"/>
     </HBox>
+    <AnchorPane>
+      <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="347" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+    </AnchorPane>
 
   </HBox>
 </StackPane>

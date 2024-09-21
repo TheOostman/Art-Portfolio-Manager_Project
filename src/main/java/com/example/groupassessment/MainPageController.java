@@ -17,6 +17,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.scene.image.ImageView;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 import java.io.IOException;
 
@@ -95,15 +103,15 @@ public class MainPageController {
 
     @FXML
     public void openImageSelectorForPicA1() {
-        selectImageForVBox(imageViewA1, picA1);
-    }
-    @FXML
-    public void openImageSelectorForPicA2() {
-        selectImageForVBox(imageViewA2, picA2);
+        selectAndSaveImagePath(imageViewA1, picA1, "A1");
     }
 
-    // Helper method to select and display image in VBox
-    private void selectImageForVBox(ImageView imageView, VBox vBox) {
+    @FXML
+    public void openImageSelectorForPicA2() {
+        selectAndSaveImagePath(imageViewA2, picA2, "A2");
+    }
+
+    private void selectAndSaveImagePath(ImageView imageView, VBox vBox, String imageId) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         fileChooser.getExtensionFilters().addAll(
@@ -111,17 +119,69 @@ public class MainPageController {
         );
 
         File selectedFile = fileChooser.showOpenDialog(vBox.getScene().getWindow());
-
         if (selectedFile != null) {
-            try (FileInputStream input = new FileInputStream(selectedFile)) {
-                Image image = new Image(input);
+            try {
+                // Load and display the image
+                Image image = new Image(new FileInputStream(selectedFile));
                 imageView.setImage(image);
 
-                // Adjust VBox size slightly larger than the image
+                // Copy the image file to a specific directory
+                saveImageFile(selectedFile, imageId);
+
+                // Adjust VBox size
                 imageView.setFitWidth(150);
                 imageView.setFitHeight(150);
                 vBox.setPrefWidth(imageView.getFitWidth() + 20);
                 vBox.setPrefHeight(imageView.getFitHeight() + 20);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Method to copy the image file to a dedicated location (A1 or A2 folder)
+    private void saveImageFile(File selectedFile, String imageId) {
+        File dir = new File("saved_images"); // Directory for storing images
+        if (!dir.exists()) {
+            dir.mkdirs(); // Create directory if it doesn't exist
+        }
+
+        File outputFile = new File(dir, imageId + getFileExtension(selectedFile.getName())); // Save with original extension
+        try (FileInputStream fis = new FileInputStream(selectedFile);
+             FileOutputStream fos = new FileOutputStream(outputFile)) {
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
+            }
+            System.out.println("Image saved to: " + outputFile.getAbsolutePath());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Helper method to get the file extension (like .png or .jpg)
+    private String getFileExtension(String fileName) {
+        int index = fileName.lastIndexOf(".");
+        if (index > 0) {
+            return fileName.substring(index);
+        } else {
+            return ".png"; // Default to PNG
+        }
+    }
+
+    // Method to load the saved image during login
+    private void loadSavedImage(String imageId, ImageView imageView) {
+        File dir = new File("saved_images");
+        File file = new File(dir, imageId + ".png"); // Load PNG file by default
+
+        if (file.exists()) {
+            try (FileInputStream input = new FileInputStream(file)) {
+                Image image = new Image(input);
+                imageView.setImage(image);
+                System.out.println("Loaded saved image: " + file.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -143,9 +203,11 @@ public class MainPageController {
 
         imageViewA1 = new ImageView();
         picA1.getChildren().add(imageViewA1);
+        loadSavedImage("A1", imageViewA1);
 
         imageViewA2 = new ImageView();
         picA2.getChildren().add(imageViewA2);
+        loadSavedImage("A2", imageViewA2);
 
 
 
@@ -160,6 +222,5 @@ public class MainPageController {
 
 
 }
-
 
 
