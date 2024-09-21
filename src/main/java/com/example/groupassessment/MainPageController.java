@@ -19,8 +19,11 @@ public class MainPageController {
     private Label noImagesSelfProfile;
     @FXML
     private VBox sideBar;
+    @FXML
+    private VBox editPageEditor;
 
     private boolean isSideBarVisible = false;
+    private boolean isProfileEditorVisible = false;
 
 
     // -------------------------------
@@ -74,6 +77,13 @@ public class MainPageController {
 
     @FXML
     public void editPage(ActionEvent action){
+        if (isProfileEditorVisible) {
+            editPageEditor.setVisible(false);
+        } else {
+            editPageEditor.setVisible(true);
+            editPageEditor.toFront();
+        }
+        isProfileEditorVisible = !isProfileEditorVisible;
         System.out.println("asd");
     }
 
@@ -88,6 +98,7 @@ public class MainPageController {
             noImagesSelfProfile.setText("There is no images, please add some");
         }
         sideBar.setVisible(false);
+        editPageEditor.setVisible(false);
     }
 
 

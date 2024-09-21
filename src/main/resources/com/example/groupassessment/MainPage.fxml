@@ -44,7 +44,11 @@
       </VBox>
     </AnchorPane>
   </VBox>
+  <VBox visible="false" fx:id="editPageEditor">
+    <AnchorPane>
+      <VBox AnchorPane.topAnchor="100" AnchorPane.leftAnchor="100" style="-fx-background-color: white;" prefWidth="500" prefHeight="500">
 
-
-
+      </VBox>
+    </AnchorPane>
+  </VBox>
 </StackPane>
