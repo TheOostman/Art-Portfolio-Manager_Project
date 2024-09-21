@@ -4,12 +4,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-
-
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
+
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.groupassessment.MainPageController" style="-fx-background-color: gray">
   <VBox> <!-- This is the main design items -->
     <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
@@ -44,11 +43,17 @@
       </VBox>
     </AnchorPane>
   </VBox>
-  <VBox visible="false" fx:id="editPageEditor">
-    <AnchorPane>
-      <VBox AnchorPane.topAnchor="100" AnchorPane.leftAnchor="100" style="-fx-background-color: white;" prefWidth="500" prefHeight="500">
+  <HBox visible="false" fx:id="editPageEditor">
+    <HBox style="-fx-padding: 200 0 0 75">
+      <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+        <!-- VBox for displaying A1 image -->
+      </VBox>
+      <Button text="Select Image" onAction="#openImageSelectorForPicA1"/>
+      <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
 
       </VBox>
-    </AnchorPane>
-  </VBox>
+      <Button text="Select Image" onAction="#openImageSelectorForPicA2"/>
+    </HBox>
+
+  </HBox>
 </StackPane>

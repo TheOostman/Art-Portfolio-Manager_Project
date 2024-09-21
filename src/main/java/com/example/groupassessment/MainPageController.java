@@ -2,25 +2,36 @@ package com.example.groupassessment;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
+import javafx.stage.FileChooser;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
+
+
 public class MainPageController {
-    @FXML
-    private Button profileButton;
     @FXML
     private Label noImagesSelfProfile;
     @FXML
     private VBox sideBar;
     @FXML
-    private VBox editPageEditor;
+    private HBox editPageEditor;
+    @FXML
+    private VBox picA1, picA2;
+    private ImageView imageViewA1, imageViewA2;
 
     private boolean isSideBarVisible = false;
     private boolean isProfileEditorVisible = false;
@@ -34,12 +45,6 @@ public class MainPageController {
     public boolean hasPictures;
     //----------------------------------
 
-
-
-    @FXML
-    protected void viewProfileClick() {
-
-    }
 
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
@@ -83,8 +88,44 @@ public class MainPageController {
             editPageEditor.setVisible(true);
             editPageEditor.toFront();
         }
+        sideBar.setVisible(false);
         isProfileEditorVisible = !isProfileEditorVisible;
         System.out.println("asd");
+    }
+
+    @FXML
+    public void openImageSelectorForPicA1() {
+        selectImageForVBox(imageViewA1, picA1);
+    }
+    @FXML
+    public void openImageSelectorForPicA2() {
+        selectImageForVBox(imageViewA2, picA2);
+    }
+
+    // Helper method to select and display image in VBox
+    private void selectImageForVBox(ImageView imageView, VBox vBox) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(vBox.getScene().getWindow());
+
+        if (selectedFile != null) {
+            try (FileInputStream input = new FileInputStream(selectedFile)) {
+                Image image = new Image(input);
+                imageView.setImage(image);
+
+                // Adjust VBox size slightly larger than the image
+                imageView.setFitWidth(150);
+                imageView.setFitHeight(150);
+                vBox.setPrefWidth(imageView.getFitWidth() + 20);
+                vBox.setPrefHeight(imageView.getFitHeight() + 20);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
@@ -99,10 +140,26 @@ public class MainPageController {
         }
         sideBar.setVisible(false);
         editPageEditor.setVisible(false);
+
+        imageViewA1 = new ImageView();
+        picA1.getChildren().add(imageViewA1);
+
+        imageViewA2 = new ImageView();
+        picA2.getChildren().add(imageViewA2);
+
+
+
+        sideBar.setVisible(false);
+        editPageEditor.setVisible(false);
     }
 
 
 
 
+
+
+
 }
+
+
 
