@@ -72,6 +72,11 @@ public class MainPageController {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
 
+    @FXML
+    public void editPage(ActionEvent action){
+        System.out.println("asd");
+    }
+
 
     @FXML
     public void initialize() {

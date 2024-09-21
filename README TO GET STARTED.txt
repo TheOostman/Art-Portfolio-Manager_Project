@@ -38,7 +38,7 @@ WHERE TO START????
 3. if fails to connect or errors happen follow the below script
 
     git init //initialises entry
-    git commit -m "first commit - your name //tells the server you are joining.
+    git commit -m "first commit - `qyour name //tells the server you are joining.
     git branch -M main //depending on if you want to enter the main branch (recommended if its the first time joining)
     git remote add origin https://github.com/TheOostman/Art-Portfolio-Manager_Project.git //double checks to ensure connection
     git push -u origin main //pushes content

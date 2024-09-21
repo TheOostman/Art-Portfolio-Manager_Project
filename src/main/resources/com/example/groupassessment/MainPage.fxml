@@ -37,7 +37,7 @@
         </AnchorPane>
         <VBox style="-fx-padding: 40 0 0 0;">
           <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
-          <Button text="EDIT PROFILE" prefWidth="150"/>
+          <Button text="EDIT PROFILE" prefWidth="150" onAction="#editPage"/>
           <Button text="SEARCH FOR PROFILE" prefWidth="150" onAction="#toSearchPage"/>
           <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
         </VBox>

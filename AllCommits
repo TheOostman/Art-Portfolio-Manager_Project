@@ -1,4 +1,22 @@
-[33mcommit 06785f58a359184f785e60c1b32a21c90810513b[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m, [m[1;32mBackup[m[33m)[m
+[33mcommit 1af0cd78b5372696366232de94ed4dd4550893cf[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 14:18:15 2024 +1000
+
+    test - Ethan
+
+[33mcommit 66e325c945f51abe1cda2d9e84c2dc6d1f92d900[m
+Author: Srimanjary <106217384+Srimanjary@users.noreply.github.com>
+Date:   Fri Sep 20 13:49:15 2024 +1000
+
+    Add files via upload
+
+[33mcommit 948ecf4c2e6f4988e7fb7126d963446c8fe3380e[m[33m ([m[1;32mLoginRegister[m[33m, [m[1;32mDatabase_Development[m[33m)[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 00:17:51 2024 +1000
+
+    commit log by Ethan  - Ethan
+
+[33mcommit 06785f58a359184f785e60c1b32a21c90810513b[m
 Author: TheOostman <ethan.oosthuiz3n@gmail.com>
 Date:   Thu Sep 19 10:37:27 2024 +1000
 
@@ -46,7 +64,7 @@ Date:   Tue Sep 17 18:03:45 2024 +1000
 
     Updated Design  - Ethan
 
-[33mcommit 84dc23ec48ffb414c78b2e67dcc30b175f5a99b0[m[33m ([m[1;31morigin/Design1[m[33m)[m
+[33mcommit 84dc23ec48ffb414c78b2e67dcc30b175f5a99b0[m
 Author: TheOostman <ethan.oosthuiz3n@gmail.com>
 Date:   Tue Sep 17 17:24:09 2024 +1000
 
