@@ -17,16 +17,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.scene.image.ImageView;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import java.io.FileInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
-import java.io.IOException;
 
 
 
@@ -45,6 +38,7 @@ public class MainPageController {
 
     private boolean isSideBarVisible = false;
     private boolean isProfileEditorVisible = false;
+    public boolean hasPictures;
 
 
     // -------------------------------
@@ -52,7 +46,7 @@ public class MainPageController {
     public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
     public String basicUsername = "123";             //Test data, this can be deleted
     public String basicPassword = "123";                   //Test data, this can be deleted
-    public boolean hasPictures;
+
     //----------------------------------
 
 
@@ -102,6 +96,7 @@ public class MainPageController {
 
         } else {
             editPageEditor.setVisible(true);
+            noImagesSelfProfile.setText(" ");
             editPageEditor.toFront();
         }
         sideBar.setVisible(false);
