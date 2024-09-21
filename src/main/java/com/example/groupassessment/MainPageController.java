@@ -148,6 +148,102 @@ public class MainPageController {
         selectAndSaveImagePath(imageViewC3, picC3, "C3");
     }
 
+    @FXML
+    public void deletePicA1(){
+        deletePic("A1");
+    }
+    @FXML
+    public void deletePicA2(){
+        deletePic("A2");
+    }
+    @FXML
+    public void deletePicA3(){
+        deletePic("A3");
+    }
+    @FXML
+    public void deletePicB1(){
+        deletePic("B1");
+    }
+    @FXML
+    public void deletePicB2(){
+        deletePic("B2");
+    }
+    @FXML
+    public void deletePicB3(){
+        deletePic("B3");
+    }
+    @FXML
+    public void deletePicC1(){
+        deletePic("C1");
+    }
+    @FXML
+    public void deletePicC2(){
+        deletePic("C2");
+    }
+    @FXML
+    public void deletePicC3(){
+        deletePic("C3");
+    }
+
+    public void deletePic(String picID) {
+        // Directory where images are saved
+        File dir = new File("saved_images");
+
+        // Construct the file path for the image to be deleted (assuming PNG format)
+        File file = new File(dir, picID + ".png");
+
+        // Check if the file exists
+        if (file.exists()) {
+            // Attempt to delete the file
+            boolean deleted = file.delete();
+            if (deleted) {
+                System.out.println("Deleted image: " + file.getAbsolutePath());
+
+                // Clear the corresponding ImageView after deletion
+                clearImageView(picID);
+            } else {
+                System.out.println("Failed to delete image: " + file.getAbsolutePath());
+            }
+        } else {
+            System.out.println("No image found for " + picID);
+        }
+    }
+
+    // Helper method to clear the ImageView after deletion
+    private void clearImageView(String picID) {
+        // Clear the image from the corresponding ImageView based on the picID
+        switch (picID) {
+            case "A1":
+                imageViewA1.setImage(null);
+                break;
+            case "A2":
+                imageViewA2.setImage(null);
+                break;
+            case "A3":
+                imageViewA3.setImage(null);
+                break;
+            case "B1":
+                imageViewB1.setImage(null);
+                break;
+            case "B2":
+                imageViewB2.setImage(null);
+                break;
+            case "B3":
+                imageViewB3.setImage(null);
+                break;
+            case "C1":
+                imageViewC1.setImage(null);
+                break;
+            case "C2":
+                imageViewC2.setImage(null);
+                break;
+            case "C3":
+                imageViewC3.setImage(null);
+                break;
+            default:
+                System.out.println("Invalid picID: " + picID);
+        }
+    }
 
     private void selectAndSaveImagePath(ImageView imageView, VBox vBox, String imageId) {
         FileChooser fileChooser = new FileChooser();
@@ -281,7 +377,6 @@ public class MainPageController {
             hasPictures = true;
         }
         if (hasPictures == true) {
-            noImagesSelfProfile.setText("HAS PICTURES");
             profileHasPic();
         }
         else{

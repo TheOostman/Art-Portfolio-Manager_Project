@@ -24,7 +24,7 @@
     </HBox>
     <HBox>
       <AnchorPane>
-        <Label fx:id="noImagesSelfProfile" text="place holder" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="375" /> <!-- if the user has no images uploaded -->
+        <Label fx:id="noImagesSelfProfile" text=" " AnchorPane.topAnchor="200" AnchorPane.leftAnchor="375" /> <!-- if the user has no images uploaded -->
       </AnchorPane>
     </HBox>
   </VBox>
@@ -90,43 +90,70 @@
     <HBox style="-fx-padding: 120 0 0 75" spacing="20">
       <VBox>
         <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicA1"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA1"/>
+          <Button text="Delete" onAction="#deletePicA1"/>
+        </HBox>
       </VBox>
       <VBox>
         <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicA2"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA2"/>
+          <Button text="Delete" onAction="#deletePicA2"/>
+        </HBox>
       </VBox>
       <VBox>
         <VBox fx:id="picA3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicA3"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA3"/>
+          <Button text="Delete" onAction="#deletePicA3"/>
+        </HBox>
       </VBox>
     </HBox>
     <HBox style="-fx-padding: 25 0 0 75" spacing="20">
       <VBox>
         <VBox fx:id="picB1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicB1"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB1"/>
+          <Button text="Delete" onAction="#deletePicB1"/>
+        </HBox>
       </VBox>
       <VBox>
         <VBox fx:id="picB2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicB2"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB2"/>
+          <Button text="Delete" onAction="#deletePicB2"/>
+        </HBox>
       </VBox>
       <VBox>
         <VBox fx:id="picB3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicB3"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB3"/>
+          <Button text="Delete" onAction="#deletePicB3"/>
+        </HBox>
       </VBox>
     </HBox>
     <HBox style="-fx-padding: 25 0 0 75" spacing="20">
       <VBox>
         <VBox fx:id="picC1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicC1"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicC1"/>
+          <Button text="Delete" onAction="#deletePicC1"/>
+        </HBox>
       </VBox>
       <VBox>
         <VBox fx:id="picC2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicC2"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicC2"/>
+          <Button text="Delete" onAction="#deletePicC2"/>
+        </HBox>
       </VBox>
       <VBox>
         <VBox fx:id="picC3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <Button text="Select Image" onAction="#openImageSelectorForPicC3"/>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicC3"/>
+          <Button text="Delete" onAction="#deletePicC3"/>
+        </HBox>
       </VBox>
     </HBox>
 
