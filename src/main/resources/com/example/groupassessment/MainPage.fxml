@@ -48,7 +48,7 @@
     <AnchorPane>
       <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
     </AnchorPane>
-    <HBox style="-fx-padding: 120 0 0 75" spacing="20">
+    <HBox style="-fx-padding: 150 0 0 75" spacing="20">
       <VBox>
         <VBox fx:id="DefultA1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
       </VBox>
@@ -57,6 +57,12 @@
       </VBox>
       <VBox>
         <VBox fx:id="DefultA3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultA4" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultA5" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
       </VBox>
     </HBox>
     <HBox style="-fx-padding: 50 0 0 75" spacing="20">
@@ -69,16 +75,11 @@
       <VBox>
         <VBox fx:id="DefultB3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
       </VBox>
-    </HBox>
-    <HBox style="-fx-padding: 50 0 0 75" spacing="20">
       <VBox>
-        <VBox fx:id="DefultC1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultB4" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultC2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-      </VBox>
-      <VBox>
-        <VBox fx:id="DefultC3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultB5" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
       </VBox>
     </HBox>
   </VBox>
@@ -87,7 +88,7 @@
     <AnchorPane>
       <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
     </AnchorPane>
-    <HBox style="-fx-padding: 120 0 0 75" spacing="20">
+    <HBox style="-fx-padding: 150 0 0 75" spacing="20">
       <VBox>
         <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
         <HBox>
@@ -107,6 +108,20 @@
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicA3"/>
           <Button text="Delete" onAction="#deletePicA3"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picA4" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA4"/>
+          <Button text="Delete" onAction="#deletePicA4"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picA5" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA5"/>
+          <Button text="Delete" onAction="#deletePicA5"/>
         </HBox>
       </VBox>
     </HBox>
@@ -132,30 +147,28 @@
           <Button text="Delete" onAction="#deletePicB3"/>
         </HBox>
       </VBox>
+      <VBox>
+        <VBox fx:id="picB4" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB4"/>
+          <Button text="Delete" onAction="#deletePicB4"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picB5" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB5"/>
+          <Button text="Delete" onAction="#deletePicB5"/>
+        </HBox>
+      </VBox>
+
     </HBox>
-    <HBox style="-fx-padding: 25 0 0 75" spacing="20">
-      <VBox>
-        <VBox fx:id="picC1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <HBox>
-          <Button text="Select Image" onAction="#openImageSelectorForPicC1"/>
-          <Button text="Delete" onAction="#deletePicC1"/>
-        </HBox>
-      </VBox>
-      <VBox>
-        <VBox fx:id="picC2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <HBox>
-          <Button text="Select Image" onAction="#openImageSelectorForPicC2"/>
-          <Button text="Delete" onAction="#deletePicC2"/>
-        </HBox>
-      </VBox>
-      <VBox>
-        <VBox fx:id="picC3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
-        <HBox>
-          <Button text="Select Image" onAction="#openImageSelectorForPicC3"/>
-          <Button text="Delete" onAction="#deletePicC3"/>
-        </HBox>
-      </VBox>
-    </HBox>
+    <VBox>
+      <AnchorPane>
+        <Button text="FINISH" onAction="#changeToMain" AnchorPane.leftAnchor="380" AnchorPane.topAnchor="100" prefWidth="200"/>
+      </AnchorPane>
+    </VBox>
+
 
 
   </VBox>

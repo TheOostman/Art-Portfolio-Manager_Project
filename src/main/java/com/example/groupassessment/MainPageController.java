@@ -31,10 +31,10 @@ public class MainPageController {
     @FXML
     private VBox editPageEditor;
     @FXML
-    private VBox picA1, picA2, picA3, picB1, picB2, picB3, picC1, picC2, picC3;
-    private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewB1, imageViewB2, imageViewB3, imageViewC1, imageViewC2, imageViewC3;
+    private VBox picA1, picA2, picA3, picA4, picA5, picB1, picB2, picB3, picB4, picB5;
+    private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewA4, imageViewA5, imageViewB1, imageViewB2, imageViewB3, imageViewB4, imageViewB5;
     @FXML
-    private VBox DefultA1, DefultA2, DefultA3, DefultB1, DefultB2, DefultB3, DefultC1, DefultC2, DefultC3;
+    private VBox DefultA1, DefultA2, DefultA3, DefultA4, DefultA5, DefultB1, DefultB2, DefultB3, DefultB4, DefultB5;
 
     private boolean isSideBarVisible = false;
     private boolean isProfileEditorVisible = false;
@@ -119,6 +119,16 @@ public class MainPageController {
     }
 
     @FXML
+    public void openImageSelectorForPicA4() {
+        selectAndSaveImagePath(imageViewA4, picA4, "A4");
+    }
+
+    @FXML
+    public void openImageSelectorForPicA5() {
+        selectAndSaveImagePath(imageViewA5, picA5, "A5");
+    }
+
+    @FXML
     public void openImageSelectorForPicB1() {
         selectAndSaveImagePath(imageViewB1, picB1, "B1");
     }
@@ -134,18 +144,13 @@ public class MainPageController {
     }
 
     @FXML
-    public void openImageSelectorForPicC1() {
-        selectAndSaveImagePath(imageViewC1, picC1, "C1");
+    public void openImageSelectorForPicB4() {
+        selectAndSaveImagePath(imageViewB4, picB4, "B4");
     }
 
     @FXML
-    public void openImageSelectorForPicC2() {
-        selectAndSaveImagePath(imageViewC2, picC2, "C2");
-    }
-
-    @FXML
-    public void openImageSelectorForPicC3() {
-        selectAndSaveImagePath(imageViewC3, picC3, "C3");
+    public void openImageSelectorForPicB5() {
+        selectAndSaveImagePath(imageViewB5, picB5, "B5");
     }
 
     @FXML
@@ -161,6 +166,14 @@ public class MainPageController {
         deletePic("A3");
     }
     @FXML
+    public void deletePicA4(){
+        deletePic("A4");
+    }
+    @FXML
+    public void deletePicA5(){
+        deletePic("A5");
+    }
+    @FXML
     public void deletePicB1(){
         deletePic("B1");
     }
@@ -173,17 +186,14 @@ public class MainPageController {
         deletePic("B3");
     }
     @FXML
-    public void deletePicC1(){
-        deletePic("C1");
+    public void deletePicB4(){
+        deletePic("B4");
     }
     @FXML
-    public void deletePicC2(){
-        deletePic("C2");
+    public void deletePicB5(){
+        deletePic("B5");
     }
-    @FXML
-    public void deletePicC3(){
-        deletePic("C3");
-    }
+
 
     public void deletePic(String picID) {
         // Directory where images are saved
@@ -222,6 +232,12 @@ public class MainPageController {
             case "A3":
                 imageViewA3.setImage(null);
                 break;
+            case "A4":
+                imageViewA4.setImage(null);
+                break;
+            case "A5":
+                imageViewA5.setImage(null);
+                break;
             case "B1":
                 imageViewB1.setImage(null);
                 break;
@@ -231,14 +247,11 @@ public class MainPageController {
             case "B3":
                 imageViewB3.setImage(null);
                 break;
-            case "C1":
-                imageViewC1.setImage(null);
+            case "B4":
+                imageViewB4.setImage(null);
                 break;
-            case "C2":
-                imageViewC2.setImage(null);
-                break;
-            case "C3":
-                imageViewC3.setImage(null);
+            case "B5":
+                imageViewB5.setImage(null);
                 break;
             default:
                 System.out.println("Invalid picID: " + picID);
@@ -338,6 +351,14 @@ public class MainPageController {
         DefultA3.getChildren().add(imageViewA3);
         loadSavedImage("A3", imageViewA3);
 
+        imageViewA4 = new ImageView();
+        DefultA4.getChildren().add(imageViewA4);
+        loadSavedImage("A4", imageViewA4);
+
+        imageViewA5 = new ImageView();
+        DefultA5.getChildren().add(imageViewA5);
+        loadSavedImage("A5", imageViewA5);
+
         imageViewB1 = new ImageView();
         DefultB1.getChildren().add(imageViewB1);
         loadSavedImage("B1", imageViewB1);
@@ -350,17 +371,14 @@ public class MainPageController {
         DefultB3.getChildren().add(imageViewB3);
         loadSavedImage("B3", imageViewB3);
 
-        imageViewC1 = new ImageView();
-        DefultC1.getChildren().add(imageViewC1);
-        loadSavedImage("C1", imageViewC1);
+        imageViewB4 = new ImageView();
+        DefultB4.getChildren().add(imageViewB4);
+        loadSavedImage("B4", imageViewB4);
 
-        imageViewC2 = new ImageView();
-        DefultC2.getChildren().add(imageViewC2);
-        loadSavedImage("C2", imageViewC2);
+        imageViewB5 = new ImageView();
+        DefultB5.getChildren().add(imageViewB5);
+        loadSavedImage("B5", imageViewB5);
 
-        imageViewC3 = new ImageView();
-        DefultC3.getChildren().add(imageViewC3);
-        loadSavedImage("C3", imageViewC3);
     }
 
     @FXML
@@ -371,9 +389,8 @@ public class MainPageController {
         // Directory where images are saved
         File dir = new File("saved_images");
 
-        if (checkForSavedImage("A1") || checkForSavedImage("A2") || checkForSavedImage("A3") ||
-                checkForSavedImage("B1") || checkForSavedImage("B2") || checkForSavedImage("B3") ||
-                checkForSavedImage("C1") || checkForSavedImage("C2") || checkForSavedImage("C3")) {
+        if (checkForSavedImage("A1") || checkForSavedImage("A2") || checkForSavedImage("A3") || checkForSavedImage("A4") || checkForSavedImage("A5") ||
+                checkForSavedImage("B1") || checkForSavedImage("B2") || checkForSavedImage("B3") || checkForSavedImage("B4") || checkForSavedImage("B5")) {
             hasPictures = true;
         }
         if (hasPictures == true) {
@@ -397,6 +414,14 @@ public class MainPageController {
         picA3.getChildren().add(imageViewA3);
         loadSavedImage("A3", imageViewA3);
 
+        imageViewA4 = new ImageView();
+        picA4.getChildren().add(imageViewA4);
+        loadSavedImage("A4", imageViewA4);
+
+        imageViewA5 = new ImageView();
+        picA5.getChildren().add(imageViewA5);
+        loadSavedImage("A5", imageViewA5);
+
         imageViewB1 = new ImageView();
         picB1.getChildren().add(imageViewB1);
         loadSavedImage("B1", imageViewB1);
@@ -409,17 +434,14 @@ public class MainPageController {
         picB3.getChildren().add(imageViewB3);
         loadSavedImage("B3", imageViewB3);
 
-        imageViewC1 = new ImageView();
-        picC1.getChildren().add(imageViewC1);
-        loadSavedImage("C1", imageViewC1);
+        imageViewB4 = new ImageView();
+        picB4.getChildren().add(imageViewB4);
+        loadSavedImage("B4", imageViewB4);
 
-        imageViewC2 = new ImageView();
-        picC2.getChildren().add(imageViewC2);
-        loadSavedImage("C2", imageViewC2);
+        imageViewB5 = new ImageView();
+        picB5.getChildren().add(imageViewB5);
+        loadSavedImage("B5", imageViewB5);
 
-        imageViewC3 = new ImageView();
-        picC3.getChildren().add(imageViewC3);
-        loadSavedImage("C3", imageViewC3);
 
         sideBar.setVisible(false);
         editPageEditor.setVisible(false);
