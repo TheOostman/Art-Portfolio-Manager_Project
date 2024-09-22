@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 import java.io.IOException;
 
@@ -13,6 +16,10 @@ public class RegisterController {
     private TextField usernameEntry;
     @FXML
     private TextField passwordEntry;
+    @FXML
+    private TextField emailAddressEntry;
+    @FXML
+    private TextField roleEntry;
 
 
 
@@ -42,10 +49,48 @@ public class RegisterController {
         MainApplication.changeScene("LoginPage.fxml");
     }
 
+    private void checkUserFolderExists() {
+        File dir = new File("Users");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+    }
+
+    private void saveUserInfo(String username, String password, String emailAddress, String role) {
+        checkUserFolderExists();
+
+        // Create a folder for the user
+        File userDir = new File("Users", username);
+        if (!userDir.exists()) {
+            userDir.mkdirs();
+        }
+
+        // Save user info in a file named info.txt inside the user's folder
+        File infoFile = new File(userDir, "info.txt");
+        try (PrintWriter writer = new PrintWriter(new FileWriter(infoFile))) {
+            writer.println("Username: " + username);
+            writer.println("Password: " + password);
+            writer.println("Email: " + emailAddress);
+            writer.println("Role: " + role);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void registerInfo() {
+        String username = usernameEntry.getText();
+        String password = passwordEntry.getText();
+        String emailAddress = emailAddressEntry.getText();
+        String role = roleEntry.getText();
 
+        saveUserInfo(username, password, emailAddress, role);
     }
+
+
+
+
+
 
 
 }
