@@ -28,9 +28,6 @@ public class LoginController {
     //If info correct move to changeToMain()
     //Keep Login Info
 
-
-
-
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
     }
