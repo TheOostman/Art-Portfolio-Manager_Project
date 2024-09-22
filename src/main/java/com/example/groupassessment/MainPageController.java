@@ -377,4 +377,5 @@ public class MainPageController {
         loadImageFromDatabase("B4", imageViewB4);
         loadImageFromDatabase("B5", imageViewB5);
     }
+
 }
