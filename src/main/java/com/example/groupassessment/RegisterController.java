@@ -5,6 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import java.io.IOException;
 
@@ -13,25 +20,10 @@ public class RegisterController {
     private TextField usernameEntry;
     @FXML
     private TextField passwordEntry;
-
-
-
-    //Entered Info Saved (Save the info into UserData file)
-    //Maybe make folder
-    //
-    // We also need ID for each person
-    // -How to do this-
-    // Count the amount of users stroed in file
-    // add 1 and make that the ID.                  (eg. files: adam, max. Thats 2 people. Therfore if adding another it will have id of 3.)
-    // ---------
-
-
-
-    // THIS SECTION IS DUMMY STATS AND CAN BE DELETED
-    public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
-    public String basicUsername = "123";             //Test data, this can be deleted
-    public String basicPassword = "123";                   //Test data, this can be deleted
-    //----------------------------------
+    @FXML
+    private TextField emailAddressEntry;
+    @FXML
+    private TextField roleEntry;
 
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
@@ -42,10 +34,42 @@ public class RegisterController {
         MainApplication.changeScene("LoginPage.fxml");
     }
 
+    // SQLite connection URL
+    private final String url = "jdbc:sqlite:users.db";
+
+    private void saveUserInfo(String username, String password, String email, String role) {
+        String sql = "INSERT INTO users(username, password, email, role) VALUES(?, ?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setString(3, email);
+            pstmt.setString(4, role);
+
+            pstmt.executeUpdate();
+            System.out.println("User registered successfully!");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @FXML
     private void registerInfo() {
+        String username = usernameEntry.getText();
+        String password = passwordEntry.getText();
+        String email = emailAddressEntry.getText();
+        String role = roleEntry.getText();
 
+        saveUserInfo(username, password, email, role);
     }
+
+
+
+
+
 
 
 }

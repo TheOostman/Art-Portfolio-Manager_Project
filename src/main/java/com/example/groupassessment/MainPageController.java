@@ -83,6 +83,7 @@ public class MainPageController {
     private void toSearchPage(ActionEvent event) throws IOException {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
+    
 
     @FXML
     public void editPage(ActionEvent action){
