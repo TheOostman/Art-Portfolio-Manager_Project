@@ -83,7 +83,7 @@ public class MainPageController {
     private void toSearchPage(ActionEvent event) throws IOException {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
-    
+
 
     @FXML
     public void editPage(ActionEvent action){
@@ -381,15 +381,10 @@ public class MainPageController {
     @FXML
     public void initialize() {
 
-        hasPictures = false;
+        hasPictures = true;
+        profileHasPic();
 
-        // Directory where images are saved
-        File dir = new File("saved_images");
 
-        if (checkForSavedImage("A1") || checkForSavedImage("A2") || checkForSavedImage("A3") || checkForSavedImage("A4") || checkForSavedImage("A5") ||
-                checkForSavedImage("B1") || checkForSavedImage("B2") || checkForSavedImage("B3") || checkForSavedImage("B4") || checkForSavedImage("B5")) {
-            hasPictures = true;
-        }
         if (hasPictures == true) {
             profileHasPic();
         }
@@ -442,14 +437,6 @@ public class MainPageController {
 
         sideBar.setVisible(false);
         editPageEditor.setVisible(false);
-    }
-
-    private boolean checkForSavedImage(String imageId) {
-        File dir = new File("saved_images");
-        File file = new File(dir, imageId + ".png");
-
-        // Return true if the image file exists
-        return file.exists();
     }
 
 }
