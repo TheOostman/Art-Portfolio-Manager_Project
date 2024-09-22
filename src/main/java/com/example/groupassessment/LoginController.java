@@ -11,6 +11,11 @@ import java.io.File;
 import java.io.Console;
 import java.io.IOException;
 import javafx.scene.layout.HBox;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginController {
     @FXML
@@ -18,20 +23,39 @@ public class LoginController {
     @FXML
     private TextField passwordEntry;
 
-
-    // THIS SECTION IS DUMMY STATS AND CAN BE DELETED
-    public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
-    public String basicUsername = "123";             //Test data, this can be deleted
-    public String basicPassword = "123";                   //Test data, this can be deleted
-    //----------------------------------
-
-    //Search for login info
-    //Confirm there is info
-    //If info correct move to changeToMain()
-    //Keep Login Info
-
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
+    }
+
+    @FXML
+    private void toRegisterPageBn(ActionEvent event) throws IOException {
+        MainApplication.changeScene("RegisterPage.fxml");
+    }
+
+    // SQLite connection URL
+    private final String url = "jdbc:sqlite:users.db";
+
+    // Verify the entered credentials by querying the database
+    private boolean verifyCredentials(String username, String password) {
+        String sql = "SELECT password FROM users WHERE username = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the username parameter
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String storedPassword = rs.getString("password");
+                return password.equals(storedPassword);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
     }
 
     @FXML
@@ -49,39 +73,6 @@ public class LoginController {
         } else {
             System.out.println("Failed login attempt for user: " + enteredUsername);
         }
-    }
-
-    private boolean verifyCredentials(String username, String password) {
-        File userDir = new File("Users", username); // Folder for the user
-        File infoFile = new File(userDir, "info.txt"); // File containing user info
-
-        if (infoFile.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(infoFile))) {
-                String line;
-                String savedPassword = null;
-
-                // Read the file line by line and extract the password
-                while ((line = reader.readLine()) != null) {
-                    if (line.startsWith("Password: ")) {
-                        savedPassword = line.substring(10); // Extract password value
-                    }
-                }
-
-                // Check if the entered password matches the saved password
-                return savedPassword != null && savedPassword.equals(password);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("No user found with username: " + username);
-        }
-        return false; // Return false if the file doesn't exist or passwords don't match
-    }
-
-    @FXML
-    private void toRegisterPageBn(ActionEvent event) throws IOException {
-        MainApplication.changeScene("RegisterPage.fxml");
     }
 
 }
