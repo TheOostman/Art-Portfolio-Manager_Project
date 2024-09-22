@@ -446,7 +446,7 @@ public class MainPageController {
 
     private boolean checkForSavedImage(String imageId) {
         File dir = new File("saved_images");
-        File file = new File(dir, imageId + ".png"); // Assuming PNG format by default
+        File file = new File(dir, imageId + ".png");
 
         // Return true if the image file exists
         return file.exists();
