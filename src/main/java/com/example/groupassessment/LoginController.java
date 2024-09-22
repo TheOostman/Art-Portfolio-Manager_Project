@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.Console;
 import java.io.IOException;
 import javafx.scene.layout.HBox;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,6 +23,14 @@ public class LoginController {
     private TextField usernameEntry;
     @FXML
     private TextField passwordEntry;
+
+    public void registerUser(String username, String password, Connection connection) throws SQLException {
+        String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, username);
+        statement.setString(2, password);
+        statement.executeUpdate();
+    }
 
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
@@ -74,6 +83,9 @@ public class LoginController {
             System.out.println("Failed login attempt for user: " + enteredUsername);
         }
     }
+
+
+
 
 }
 
