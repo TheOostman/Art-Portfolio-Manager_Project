@@ -13,14 +13,12 @@ import javafx.scene.layout.VBox;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 import javafx.stage.FileChooser;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+
+import java.io.*;
+
 import javafx.scene.image.ImageView;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import java.io.FileOutputStream;
-
 
 
 public class MainPageController {
@@ -32,9 +30,11 @@ public class MainPageController {
     private VBox editPageEditor;
     @FXML
     private VBox picA1, picA2, picA3, picA4, picA5, picB1, picB2, picB3, picB4, picB5;
-    private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewA4, imageViewA5, imageViewB1, imageViewB2, imageViewB3, imageViewB4, imageViewB5;
+
     @FXML
     private VBox DefultA1, DefultA2, DefultA3, DefultA4, DefultA5, DefultB1, DefultB2, DefultB3, DefultB4, DefultB5;
+    private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewA4, imageViewA5;
+    private ImageView imageViewB1, imageViewB2, imageViewB3, imageViewB4, imageViewB5;
 
     private boolean isSideBarVisible = false;
     private boolean isProfileEditorVisible = false;
@@ -340,46 +340,42 @@ public class MainPageController {
     }
 
     public void profileHasPic(){
-        imageViewA1 = new ImageView();
-        DefultA1.getChildren().add(imageViewA1);
-        loadSavedImage("A1", imageViewA1);
+        loadSavedImageFromDB("A1", DefultA1);
+        loadSavedImageFromDB("A2", DefultA2);
+        loadSavedImageFromDB("A3", DefultA3);
+        loadSavedImageFromDB("A4", DefultA4);
+        loadSavedImageFromDB("A5", DefultA5);
 
-        imageViewA2 = new ImageView();
-        DefultA2.getChildren().add(imageViewA2);
-        loadSavedImage("A2", imageViewA2);
+        loadSavedImageFromDB("B1", DefultB1);
+        loadSavedImageFromDB("B2", DefultB2);
+        loadSavedImageFromDB("B3", DefultB3);
+        loadSavedImageFromDB("B4", DefultB4);
+        loadSavedImageFromDB("B5", DefultB5);
 
-        imageViewA3 = new ImageView();
-        DefultA3.getChildren().add(imageViewA3);
-        loadSavedImage("A3", imageViewA3);
+    }
+    private void loadSavedImageFromDB(String imageId, VBox vbox) {
+        try {
+            // Retrieve image data from the database
+            byte[] imageData = DatabaseManager.getImageFromDatabase(imageId);
 
-        imageViewA4 = new ImageView();
-        DefultA4.getChildren().add(imageViewA4);
-        loadSavedImage("A4", imageViewA4);
+            if (imageData != null) {
+                // Convert byte array to InputStream and create an Image
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
 
-        imageViewA5 = new ImageView();
-        DefultA5.getChildren().add(imageViewA5);
-        loadSavedImage("A5", imageViewA5);
+                // Create an ImageView, set the image, and add to the VBox
+                ImageView imageView = new ImageView(image);
+                imageView.setFitWidth(150);
+                imageView.setFitHeight(150);
+                imageView.setPreserveRatio(true);
+                vbox.getChildren().add(imageView);
 
-        imageViewB1 = new ImageView();
-        DefultB1.getChildren().add(imageViewB1);
-        loadSavedImage("B1", imageViewB1);
-
-        imageViewB2 = new ImageView();
-        DefultB2.getChildren().add(imageViewB2);
-        loadSavedImage("B2", imageViewB2);
-
-        imageViewB3 = new ImageView();
-        DefultB3.getChildren().add(imageViewB3);
-        loadSavedImage("B3", imageViewB3);
-
-        imageViewB4 = new ImageView();
-        DefultB4.getChildren().add(imageViewB4);
-        loadSavedImage("B4", imageViewB4);
-
-        imageViewB5 = new ImageView();
-        DefultB5.getChildren().add(imageViewB5);
-        loadSavedImage("B5", imageViewB5);
-
+                // Set flag that pictures exist
+                hasPictures = true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading image for " + imageId + ": " + e.getMessage());
+        }
     }
 
     @FXML
@@ -450,7 +446,7 @@ public class MainPageController {
 
     private boolean checkForSavedImage(String imageId) {
         File dir = new File("saved_images");
-        File file = new File(dir, imageId + ".png"); // Assuming PNG format by default
+        File file = new File(dir, imageId + ".png");
 
         // Return true if the image file exists
         return file.exists();
