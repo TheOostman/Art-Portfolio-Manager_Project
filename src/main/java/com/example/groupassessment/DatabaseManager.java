@@ -10,10 +10,10 @@ public class DatabaseManager {
     // SQLite database URL
     private static final String url = "jdbc:sqlite:users.db";
 
-    // Method to connect to the database and create the users table
-    public static void createUsersTable() {
+    // Method to connect to the database and create the users and images tables
+    public static void createTables() {
         // SQL command to create the users table if it doesn't exist
-        String sql = "CREATE TABLE IF NOT EXISTS users (\n"
+        String usersTableSql = "CREATE TABLE IF NOT EXISTS users (\n"
                 + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + "    username TEXT UNIQUE NOT NULL,\n"
                 + "    password TEXT NOT NULL,\n"
@@ -21,13 +21,21 @@ public class DatabaseManager {
                 + "    role TEXT NOT NULL\n"
                 + ");";
 
-        // Establish connection and execute the SQL command
+        // SQL command to create the images table if it doesn't exist
+        String imagesTableSql = "CREATE TABLE IF NOT EXISTS images (\n"
+                + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + "    image_id TEXT UNIQUE NOT NULL,\n"
+                + "    image BLOB\n"
+                + ");";
+
+        // Establish connection and execute the SQL commands
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
 
-            // Execute the SQL command
-            stmt.execute(sql);
-            System.out.println("Users table created successfully.");
+            // Execute the SQL commands
+            stmt.execute(usersTableSql);
+            stmt.execute(imagesTableSql);
+            System.out.println("Users and Images tables created successfully.");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -35,7 +43,7 @@ public class DatabaseManager {
     }
 
     public static void main(String[] args) {
-        // Call the method to create the table
-        createUsersTable();
+        // Call the method to create the tables
+        createTables();
     }
 }

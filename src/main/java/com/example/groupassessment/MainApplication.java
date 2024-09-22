@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 import java.io.IOException;
 
-import static com.example.groupassessment.DatabaseManager.createUsersTable;
+import static com.example.groupassessment.DatabaseManager.createTables;
 
 public class MainApplication extends Application {
     private static Stage primaryStage;
@@ -36,7 +36,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
         scene.getRoot().setStyle("-fx-background-color: #91A3B0;");
         primaryStage.setScene(scene);
-        createUsersTable();
+        createTables();
     }
 
     public static void main(String[] args) {
