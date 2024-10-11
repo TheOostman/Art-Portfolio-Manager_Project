@@ -210,7 +210,6 @@ public class MainPageController {
             System.out.println("No image found for " + picID);
         }
     }
-
     // Helper method to clear the ImageView after deletion
     private void clearImageView(String picID) {
         // Clear the image from the corresponding ImageView based on the picID
@@ -249,6 +248,8 @@ public class MainPageController {
                 System.out.println("Invalid picID: " + picID);
         }
     }
+
+
     private void selectAndSaveImagePath(ImageView imageView, VBox vBox, String imageId) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
@@ -326,6 +327,50 @@ public class MainPageController {
         }
     }
 
+    public void finishButton() throws IOException{
+        try {
+            uploadImageFromImageView(imageViewA1, "A1");
+            uploadImageFromImageView(imageViewA2, "A2");
+            uploadImageFromImageView(imageViewA3, "A3");
+            uploadImageFromImageView(imageViewA4, "A4");
+            uploadImageFromImageView(imageViewA5, "A5");
+
+            uploadImageFromImageView(imageViewB1, "B1");
+            uploadImageFromImageView(imageViewB2, "B2");
+            uploadImageFromImageView(imageViewB3, "B3");
+            uploadImageFromImageView(imageViewB4, "B4");
+            uploadImageFromImageView(imageViewB5, "B5");
+
+            System.out.println("All images uploaded successfully!");
+        } catch (Exception e) {
+            System.out.println("Error uploading images: " + e.getMessage());
+        }
+
+        //MainApplication.changeScene("MainPage.fxml");
+    }
+    private void uploadImageFromImageView(ImageView imageView, String imageId) throws IOException, SQLException {
+        if (imageView != null && imageView.getImage() != null) {
+            // Convert ImageView's Image to a byte array
+            byte[] imageData = convertImageToByteArray(imageView);
+            if (imageData != null) {
+                uploadImage(imageData);
+            } else {
+                System.out.println("Error converting image for " + imageId);
+            }
+        }
+    }
+    private byte[] convertImageToByteArray(ImageView imageView) {
+        try {
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageView.getImage(), null);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", byteArrayOutputStream); // Use PNG format for simplicity
+            return byteArrayOutputStream.toByteArray();
+        } catch (IOException e) {
+            System.out.println("Error converting ImageView to byte array: " + e.getMessage());
+            return null;
+        }
+    }
+
     public void uploadImage(File file) {
         File UserDatafile = new File("src/main/resources/userData/UserData.txt");
         int userId = readUserIdFromFile(UserDatafile);
@@ -346,6 +391,7 @@ public class MainPageController {
             System.out.println("Error uploading image: " + e.getMessage());
         }
     }
+
     public void profileHasPic(){
         loadSavedImageFromDB("A1", DefultA1);
         loadSavedImageFromDB("A2", DefultA2);
@@ -478,5 +524,3 @@ public class MainPageController {
         return file.exists();
     }
 }
-
-

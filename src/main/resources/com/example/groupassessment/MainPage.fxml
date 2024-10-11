@@ -165,7 +165,7 @@
     </HBox>
     <VBox>
       <AnchorPane>
-        <Button text="FINISH" onAction="#changeToMain" AnchorPane.leftAnchor="380" AnchorPane.topAnchor="100" prefWidth="200"/>
+        <Button text="FINISH" onAction="#finishButton" AnchorPane.leftAnchor="380" AnchorPane.topAnchor="100" prefWidth="200"/>
       </AnchorPane>
     </VBox>
 
