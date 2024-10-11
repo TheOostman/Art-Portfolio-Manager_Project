@@ -13,6 +13,14 @@ import javafx.scene.layout.VBox;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 import javafx.stage.FileChooser;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.nio.file.Files;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
 
 import java.io.*;
 
@@ -58,12 +66,10 @@ public class MainPageController {
     private void toRegisterPageBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("RegisterPage.fxml");
     }
-
     @FXML
     private void toSignInBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("LoginPage.fxml");
     }
-
     @FXML
     private void dropDownBn(ActionEvent event) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(300), sideBar);
@@ -78,13 +84,10 @@ public class MainPageController {
         transition.play();
         isSideBarVisible = !isSideBarVisible;
     }
-
     @FXML
     private void toSearchPage(ActionEvent event) throws IOException {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
-    
-
     @FXML
     public void editPage(ActionEvent action){
         if (isProfileEditorVisible) {
@@ -103,52 +106,42 @@ public class MainPageController {
         sideBar.setVisible(false);
         isProfileEditorVisible = !isProfileEditorVisible;
     }
-
     @FXML
     public void openImageSelectorForPicA1() {
         selectAndSaveImagePath(imageViewA1, picA1, "A1");
     }
-
     @FXML
     public void openImageSelectorForPicA2() {
         selectAndSaveImagePath(imageViewA2, picA2, "A2");
     }
-
     @FXML
     public void openImageSelectorForPicA3() {
         selectAndSaveImagePath(imageViewA3, picA3, "A3");
     }
-
     @FXML
     public void openImageSelectorForPicA4() {
         selectAndSaveImagePath(imageViewA4, picA4, "A4");
     }
-
     @FXML
     public void openImageSelectorForPicA5() {
         selectAndSaveImagePath(imageViewA5, picA5, "A5");
     }
-
     @FXML
     public void openImageSelectorForPicB1() {
         selectAndSaveImagePath(imageViewB1, picB1, "B1");
     }
-
     @FXML
     public void openImageSelectorForPicB2() {
         selectAndSaveImagePath(imageViewB2, picB2, "B2");
     }
-
     @FXML
     public void openImageSelectorForPicB3() {
         selectAndSaveImagePath(imageViewB3, picB3, "B3");
     }
-
     @FXML
     public void openImageSelectorForPicB4() {
         selectAndSaveImagePath(imageViewB4, picB4, "B4");
     }
-
     @FXML
     public void openImageSelectorForPicB5() {
         selectAndSaveImagePath(imageViewB5, picB5, "B5");
@@ -194,8 +187,6 @@ public class MainPageController {
     public void deletePicB5(){
         deletePic("B5");
     }
-
-
     public void deletePic(String picID) {
         // Directory where images are saved
         File dir = new File("saved_images");
@@ -258,7 +249,6 @@ public class MainPageController {
                 System.out.println("Invalid picID: " + picID);
         }
     }
-
     private void selectAndSaveImagePath(ImageView imageView, VBox vBox, String imageId) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
@@ -287,7 +277,6 @@ public class MainPageController {
             }
         }
     }
-
     // Method to copy the image file to a dedicated location (A1 or A2 folder)
     private void saveImageFile(File selectedFile, String imageId) {
         File dir = new File("saved_images"); // Directory for storing images
@@ -310,7 +299,6 @@ public class MainPageController {
             e.printStackTrace();
         }
     }
-
     // Helper method to get the file extension (like .png or .jpg)
     private String getFileExtension(String fileName) {
         int index = fileName.lastIndexOf(".");
@@ -320,7 +308,6 @@ public class MainPageController {
             return ".png"; // Default to PNG
         }
     }
-
     // Method to load the saved image during login
     private void loadSavedImage(String imageId, ImageView imageView) {
         File dir = new File("saved_images");
@@ -339,6 +326,26 @@ public class MainPageController {
         }
     }
 
+    public void uploadImage(File file) {
+        File UserDatafile = new File("src/main/resources/userData/UserData.txt");
+        int userId = readUserIdFromFile(UserDatafile);
+        try {
+            // Convert image file to byte array
+            byte[] imageData = Files.readAllBytes(UserDatafile.toPath());
+            String imageId = UUID.randomUUID().toString(); // Generate a unique ID for the image
+
+            // Get connection from DatabaseManager
+            Connection conn = DatabaseManager.connect();
+
+            // Save image to the database
+            DatabaseManager dbManager = new DatabaseManager();
+            dbManager.saveImage(imageId, imageData, userId);
+
+            System.out.println("Image uploaded successfully!");
+        } catch (IOException | SQLException e) {
+            System.out.println("Error uploading image: " + e.getMessage());
+        }
+    }
     public void profileHasPic(){
         loadSavedImageFromDB("A1", DefultA1);
         loadSavedImageFromDB("A2", DefultA2);
@@ -376,6 +383,25 @@ public class MainPageController {
         } catch (Exception e) {
             System.out.println("Error loading image for " + imageId + ": " + e.getMessage());
         }
+    }
+    public static int readUserIdFromFile(File file) {
+        int userId = -1;  // Default value if no user ID is found
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String theLine;
+            while ((theLine = reader.readLine()) != null) {
+                if (theLine.startsWith("User ID:")) {
+                    String[] parts = theLine.split(":");
+                    if (parts.length == 2) {
+                        userId = Integer.parseInt(parts[1].trim());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+
+        return userId;
     }
 
     @FXML
@@ -451,7 +477,6 @@ public class MainPageController {
         // Return true if the image file exists
         return file.exists();
     }
-
 }
 
 

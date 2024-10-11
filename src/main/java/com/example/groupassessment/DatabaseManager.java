@@ -27,6 +27,7 @@ public class DatabaseManager {
         String imagesTableSql = "CREATE TABLE IF NOT EXISTS images (\n"
                 + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + "    image_id TEXT UNIQUE NOT NULL,\n"
+                + "    user_id INTEGER REFERENCES users(id),\n"
                 + "    image BLOB\n"
                 + ");";
 
@@ -49,7 +50,7 @@ public class DatabaseManager {
         createTables();
     }
 
-    private static Connection connect() {
+    public static Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:users.db";  // Adjust to your database path
         Connection conn = null;
@@ -59,6 +60,19 @@ public class DatabaseManager {
             System.out.println(e.getMessage());
         }
         return conn;
+    }
+
+    public void saveImage(String imageId, byte[] imageData, int userId) throws SQLException {
+        String sql = "INSERT INTO images (image_id, image, user_id) VALUES (?, ?, ?)";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, imageId);
+            pstmt.setBytes(2, imageData);
+            pstmt.setInt(3, userId); // associate the image with the user
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static byte[] getImageFromDatabase(String imageId) {
