@@ -72,6 +72,7 @@ public class LoginController {
         String enteredUsername = usernameEntry.getText();
         String enteredPassword = passwordEntry.getText();
 
+
         if (verifyCredentials(enteredUsername, enteredPassword)) {
             System.out.println("Login successful for user: " + enteredUsername);
             try {

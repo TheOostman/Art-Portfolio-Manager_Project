@@ -6,8 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
 public class SearchController {
     @FXML
@@ -15,10 +19,17 @@ public class SearchController {
     @FXML
     private TextField passwordEntry;
     @FXML
+    private TextField searchField;
+    @FXML
+    private ComboBox<String> filterByMedium;
+    @FXML
+    private ComboBox<String> filterByStyle;
+    @FXML
+    private DatePicker filterByDate;
+    @FXML
     private VBox sideBar;
 
     private boolean isSideBarVisible = false;
-
 
 
     // THIS SECTION IS DUMMY STATS AND CAN BE DELETED
@@ -27,7 +38,7 @@ public class SearchController {
     public String basicPassword = "123";                   //Test data, this can be deleted
     //----------------------------------
 
-    public void changeToMain() throws IOException{
+    public void changeToMain() throws IOException {
         MainApplication.changeScene("MainPage.fxml");
     }
 
@@ -59,8 +70,8 @@ public class SearchController {
     @FXML
     public void initialize() {
         sideBar.setVisible(false);
+        filterByMedium.getItems().addAll("Oil Painting", "Watercolor", "Sculpture", "Digital Art");
+        filterByStyle.getItems().addAll("Abstract", "Realism", "Impressionism");
     }
 
-
 }
-
