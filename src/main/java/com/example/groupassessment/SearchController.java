@@ -6,26 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
 
 public class SearchController {
     @FXML
     private TextField usernameEntry;
     @FXML
     private TextField passwordEntry;
-    @FXML
-    private TextField searchField;
-    @FXML
-    private ComboBox<String> filterByMedium;
-    @FXML
-    private ComboBox<String> filterByStyle;
-    @FXML
-    private DatePicker filterByDate;
     @FXML
     private VBox sideBar;
 
@@ -70,8 +58,5 @@ public class SearchController {
     @FXML
     public void initialize() {
         sideBar.setVisible(false);
-        filterByMedium.getItems().addAll("Oil Painting", "Watercolor", "Sculpture", "Digital Art");
-        filterByStyle.getItems().addAll("Abstract", "Realism", "Impressionism");
     }
-
 }

@@ -13,6 +13,7 @@
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.SearchController" style="-fx-background-color: gray">
   <VBox>
+    // search and sidebar
     <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
       <AnchorPane>
         <Label text="SEARCH" style="-fx-font-size: 30px;" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50"/>
@@ -32,7 +33,7 @@
       </VBox>
     </AnchorPane>
   </VBox>
-
+  // sidebar menu
   <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000" style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false">
     <AnchorPane>
       <VBox>
