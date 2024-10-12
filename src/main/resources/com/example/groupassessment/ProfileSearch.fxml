@@ -24,13 +24,13 @@
     <!-- search page -->
     <AnchorPane>
       <!-- Search Input -->
-      <TextField promptText="Search..." AnchorPane.topAnchor="198" AnchorPane.leftAnchor="90" prefWidth="300" />
+      <TextField promptText="Search..." AnchorPane.topAnchor="90" AnchorPane.leftAnchor="90" prefWidth="300" />
       <!-- Search and Filter Buttons -->
-      <Button text="SEARCH" AnchorPane.topAnchor="198" AnchorPane.leftAnchor="400"/>
-      <Button text="FILTER" AnchorPane.topAnchor="198" AnchorPane.leftAnchor="480"/>
+      <Button text="SEARCH" AnchorPane.topAnchor="90" AnchorPane.leftAnchor="400"/>
+      <Button text="FILTER" AnchorPane.topAnchor="90" AnchorPane.leftAnchor="480" onAction="#onFilterClick"/>
       <!-- Search Results Section -->
-      <Label text="SEARCH RESULTS"  style="-fx-font-size: 24px; -fx-font-weight: bold;" AnchorPane.topAnchor="100" AnchorPane.leftAnchor="390"/>
-      <VBox prefWidth="550" prefHeight="550" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 5;" AnchorPane.topAnchor="135" AnchorPane.leftAnchor="385">
+      <Label text="SEARCH RESULTS"  style="-fx-font-size: 24px; -fx-font-weight: bold;" AnchorPane.topAnchor="150" AnchorPane.leftAnchor="90"/>
+      <VBox prefWidth="700" prefHeight="400" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 5;" AnchorPane.topAnchor="250" AnchorPane.leftAnchor="90">
         <!-- This is where search results will be displayed -->
       </VBox>
     </AnchorPane>
