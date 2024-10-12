@@ -13,27 +13,30 @@
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.SearchController" style="-fx-background-color: gray">
   <VBox>
-    // search and sidebar
+    <!-- header -->
     <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
       <AnchorPane>
         <Label text="SEARCH" style="-fx-font-size: 30px;" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50"/>
         <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
       </AnchorPane>
     </HBox>
+
+    <!-- search page -->
     <AnchorPane>
-      <Label text="USERNAME:" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="20"/>
-      <TextField AnchorPane.topAnchor="198" AnchorPane.leftAnchor="90" />
-      <Label text="-- OR --" AnchorPane.topAnchor="235" AnchorPane.leftAnchor="125"/>
-      <Label text="USER ID:" AnchorPane.topAnchor="260" AnchorPane.leftAnchor="20"/>
-      <TextField AnchorPane.topAnchor="260" AnchorPane.leftAnchor="90" />
-      <Button text="SEARCH" AnchorPane.topAnchor="300" AnchorPane.leftAnchor="180" />
+      <!-- Search Input -->
+      <TextField promptText="Search..." AnchorPane.topAnchor="198" AnchorPane.leftAnchor="90" prefWidth="300" />
+      <!-- Search and Filter Buttons -->
+      <Button text="SEARCH" AnchorPane.topAnchor="198" AnchorPane.leftAnchor="400"/>
+      <Button text="FILTER" AnchorPane.topAnchor="198" AnchorPane.leftAnchor="480"/>
+      <!-- Search Results Section -->
       <Label text="SEARCH RESULTS"  style="-fx-font-size: 24px; -fx-font-weight: bold;" AnchorPane.topAnchor="100" AnchorPane.leftAnchor="390"/>
       <VBox prefWidth="550" prefHeight="550" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 5;" AnchorPane.topAnchor="135" AnchorPane.leftAnchor="385">
-        <!--  THIS IS WHERE WE PUT THE SEARCH RESULTS -->
+        <!-- This is where search results will be displayed -->
       </VBox>
     </AnchorPane>
   </VBox>
-  // sidebar menu
+
+  <!-- sidebar menu -->
   <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000" style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false">
     <AnchorPane>
       <VBox>
