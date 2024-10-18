@@ -113,6 +113,7 @@ public class LoginController {
                 changeToMain();
             } catch (IOException e) {
                 System.out.println("Error navigating to main page");
+
             }
         } else {
             System.out.println("Failed login attempt for user: " + enteredUsername);

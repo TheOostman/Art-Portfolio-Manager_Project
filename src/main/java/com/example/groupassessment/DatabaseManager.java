@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DatabaseManager {
 
@@ -77,6 +79,28 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+
+    public static Map<String, byte[]> getUserImages(int userId) throws SQLException {
+        Map<String, byte[]> userImages = new HashMap<>();
+
+        String sql = "SELECT image_id, image FROM images WHERE user_id = ?";
+        Connection conn = connect();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, userId);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            String imageId = rs.getString("image_id");
+            byte[] imageData = rs.getBytes("image");
+            userImages.put(imageId, imageData);
+        }
+
+        conn.close();
+        return userImages;
     }
 
     public static void main(String[] args) {
