@@ -6,6 +6,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritablePixelFormat;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -13,17 +15,17 @@ import javafx.scene.layout.VBox;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 import javafx.stage.FileChooser;
+
+import java.nio.ByteBuffer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.nio.file.Files;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
-
-
 import java.io.*;
-
 import javafx.scene.image.ImageView;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -348,24 +350,85 @@ public class MainPageController {
 
         //MainApplication.changeScene("MainPage.fxml");
     }
-    private void uploadImageFromImageView(ImageView imageView, String imageId) throws IOException, SQLException {
-        if (imageView != null && imageView.getImage() != null) {
-            // Convert ImageView's Image to a byte array
-            byte[] imageData = convertImageToByteArray(imageView);
-            if (imageData != null) {
-                uploadImage(imageData);
-            } else {
-                System.out.println("Error converting image for " + imageId);
+
+    public static byte[] convertFileToBytes(File file) throws IOException {
+        return Files.readAllBytes(file.toPath());
+    }
+
+    public int getUserIDFromDoc(){
+        String filePath = "src/main/resources/userData.txt";
+        int userId = -1; // Default value if not found
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("User ID: ")) {
+                    // Extract the number after "User ID: "
+                    userId = Integer.parseInt(line.substring(9).trim());
+                    break;
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return userId;
+    }
+
+    private void saveImageToDatabase(String imageId, File imageFile) throws IOException, SQLException {
+        // Convert the image file to byte[]
+        byte[] imageBytes = convertFileToBytes(imageFile);
+        LoginController loginController = new LoginController();
+
+        // Database connection and insertion logic
+        Connection conn = DatabaseManager.connect(); // Assuming you have a connect() method
+        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO images (image_id, user_id, image) VALUES (?, ?, ?)");
+
+        pstmt.setString(1, imageId);
+        int userId = getUserIDFromDoc();
+        pstmt.setBytes(3, imageBytes);  // Set the byte[] for the image
+
+        pstmt.executeUpdate();
+        conn.close();
+    }
+
+    private void uploadImageFromImageView(ImageView imageView, String imageId) throws IOException, SQLException {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(imageView.getScene().getWindow());
+
+        if (file != null) {
+            // Save the image to the database
+            saveImageToDatabase(imageId, file);
+
+            // Optionally, update the ImageView with the new image
+            Image image = new Image(file.toURI().toString());
+            imageView.setImage(image);
+        } else {
+            System.out.println("No file selected");
         }
     }
     private byte[] convertImageToByteArray(ImageView imageView) {
         try {
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageView.getImage(), null);
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", byteArrayOutputStream); // Use PNG format for simplicity
-            return byteArrayOutputStream.toByteArray();
-        } catch (IOException e) {
+            // Get the image from ImageView
+            javafx.scene.image.Image image = imageView.getImage();
+
+            // Create a PixelReader to read pixel data from the image
+            PixelReader pixelReader = image.getPixelReader();
+
+            // Define the width and height of the image
+            int width = (int) image.getWidth();
+            int height = (int) image.getHeight();
+
+            // Create a buffer to hold pixel data
+            ByteBuffer buffer = ByteBuffer.allocate(width * height * 4); // 4 bytes per pixel (RGBA)
+
+            // Read pixel data into the buffer
+            pixelReader.getPixels(0, 0, width, height, WritablePixelFormat.getByteBgraInstance(), buffer.array(), 0, width * 4);
+
+            // Convert the buffer to byte array and return it
+            return buffer.array();
+
+        } catch (Exception e) {
             System.out.println("Error converting ImageView to byte array: " + e.getMessage());
             return null;
         }
