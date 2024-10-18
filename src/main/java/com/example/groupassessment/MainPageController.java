@@ -66,10 +66,6 @@ public class MainPageController {
     }
 
     @FXML
-    private void toRegisterPageBn(ActionEvent event) throws IOException {
-        MainApplication.changeScene("RegisterPage.fxml");
-    }
-    @FXML
     private void toSignInBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("LoginPage.fxml");
     }
@@ -279,38 +275,7 @@ public class MainPageController {
             }
         }
     }
-    // Method to copy the image file to a dedicated location (A1 or A2 folder)
-    private void saveImageFile(File selectedFile, String imageId) {
-        File dir = new File("saved_images"); // Directory for storing images
-        if (!dir.exists()) {
-            dir.mkdirs(); // Create directory if it doesn't exist
-        }
-
-        File outputFile = new File(dir, imageId + getFileExtension(selectedFile.getName())); // Save with original extension
-        try (FileInputStream fis = new FileInputStream(selectedFile);
-             FileOutputStream fos = new FileOutputStream(outputFile)) {
-
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = fis.read(buffer)) > 0) {
-                fos.write(buffer, 0, length);
-            }
-            System.out.println("Image saved to: " + outputFile.getAbsolutePath());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     // Helper method to get the file extension (like .png or .jpg)
-    private String getFileExtension(String fileName) {
-        int index = fileName.lastIndexOf(".");
-        if (index > 0) {
-            return fileName.substring(index);
-        } else {
-            return ".png"; // Default to PNG
-        }
-    }
-    // Method to load the saved image during login
     private void loadSavedImage(String imageId, ImageView imageView) {
         File dir = new File("saved_images");
         File file = new File(dir, imageId + ".png"); // Load PNG file by default
@@ -333,15 +298,22 @@ public class MainPageController {
             String imageId = entry.getKey();
             Image image = entry.getValue();
 
-            // Convert the Image to byte array by wrapping it in an ImageView
-            ImageView imageView = new ImageView(image);
-            byte[] imageBytes = convertImageToByteArray(imageView.getImage());
+            // Convert the Image to byte array
+            byte[] imageBytes = convertImageToByteArray(image);
 
             // Assuming you have the userId available
             LoginController loginController = new LoginController();
             int userId = getUserIDFromDoc();
 
-            // Save image to the database
+            // Check if an image with the same imageId exists for the user, and delete it
+            DatabaseManager dbManager = new DatabaseManager();
+            boolean imageExists = dbManager.deleteExistingImage(imageId, userId);
+
+            if (imageExists) {
+                System.out.println("Existing image with imageId " + imageId + " was replaced.");
+            }
+
+            // Save the new image to the database
             saveImageToDatabase(imageId, imageBytes, userId);
         }
 
@@ -349,9 +321,6 @@ public class MainPageController {
         selectedImages.clear();
     }
 
-    public static byte[] convertFileToBytes(File file) throws IOException {
-        return Files.readAllBytes(file.toPath());
-    }
 
     private int getUserIDFromDoc() {
         int userId = -1;  // Default value if no user ID is found
@@ -382,40 +351,6 @@ public class MainPageController {
         return userId;
     }
 
-
-    private void saveImageToDatabase(String imageId, File imageFile) throws IOException, SQLException {
-        System.out.println("asd");
-        // Convert the image file to byte[]
-        byte[] imageBytes = convertFileToBytes(imageFile);
-        LoginController loginController = new LoginController();
-
-        // Database connection and insertion logic
-        Connection conn = DatabaseManager.connect(); // Assuming you have a connect() method
-        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO images (image_id, user_id, image) VALUES (?, ?, ?)");
-
-        pstmt.setString(1, imageId);
-        int userId = getUserIDFromDoc();
-        pstmt.setBytes(3, imageBytes);  // Set the byte[] for the image
-
-        pstmt.executeUpdate();
-        conn.close();
-    }
-
-    private void uploadImageFromImageView(ImageView imageView, String imageId) throws IOException, SQLException {
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(imageView.getScene().getWindow());
-
-        if (file != null) {
-            // Save the image to the database
-            saveImageToDatabase(imageId, file);
-
-            // Optionally, update the ImageView with the new image
-            Image image = new Image(file.toURI().toString());
-            imageView.setImage(image);
-        } else {
-            System.out.println("No file selected");
-        }
-    }
     private byte[] convertImageToByteArray(Image image) {
         try {
             // Convert the JavaFX Image to WritableImage
@@ -438,27 +373,6 @@ public class MainPageController {
         } catch (IOException e) {
             System.out.println("Error converting Image to byte array: " + e.getMessage());
             return null;
-        }
-    }
-
-    public void uploadImage(File file) {
-        File UserDatafile = new File("src/main/resources/userData/UserData.txt");
-        int userId = readUserIdFromFile(UserDatafile);
-        try {
-            // Convert image file to byte array
-            byte[] imageData = Files.readAllBytes(UserDatafile.toPath());
-            String imageId = UUID.randomUUID().toString(); // Generate a unique ID for the image
-
-            // Get connection from DatabaseManager
-            Connection conn = DatabaseManager.connect();
-
-            // Save image to the database
-            DatabaseManager dbManager = new DatabaseManager();
-            dbManager.saveImage(imageId, imageData, userId);
-
-            System.out.println("Image uploaded successfully!");
-        } catch (IOException | SQLException e) {
-            System.out.println("Error uploading image: " + e.getMessage());
         }
     }
 
@@ -517,25 +431,6 @@ public class MainPageController {
 
         pstmt.executeUpdate();
         conn.close();
-    }
-    public static int readUserIdFromFile(File file) {
-        int userId = -1;  // Default value if no user ID is found
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String theLine;
-            while ((theLine = reader.readLine()) != null) {
-                if (theLine.startsWith("User ID:")) {
-                    String[] parts = theLine.split(":");
-                    if (parts.length == 2) {
-                        userId = Integer.parseInt(parts[1].trim());
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
-        }
-
-        return userId;
     }
 
     @FXML

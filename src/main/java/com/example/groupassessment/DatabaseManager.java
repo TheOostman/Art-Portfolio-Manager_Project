@@ -12,6 +12,40 @@ public class DatabaseManager {
     // SQLite database URL
     private static final String url = "jdbc:sqlite:users.db";
 
+    public boolean deleteExistingImage(String imageId, int userId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connect();
+
+            // First, check if the image exists
+            String query = "SELECT COUNT(*) FROM images WHERE image_id = ? AND user_id = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, imageId);
+            pstmt.setInt(2, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                // Image exists, proceed to delete
+                String deleteSql = "DELETE FROM images WHERE image_id = ? AND user_id = ?";
+                pstmt = conn.prepareStatement(deleteSql);
+                pstmt.setString(1, imageId);
+                pstmt.setInt(2, userId);
+                pstmt.executeUpdate();
+                return true;  // Image was deleted
+            }
+
+            return false;  // Image does not exist
+        } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
     // Method to connect to the database and create the users and images tables
     public static void createTables() {
         // SQL command to create the users table if it doesn't exist
