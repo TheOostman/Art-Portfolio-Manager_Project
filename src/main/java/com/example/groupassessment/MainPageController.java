@@ -3,13 +3,12 @@ package com.example.groupassessment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritablePixelFormat;
+import javafx.scene.image.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.animation.TranslateTransition;
@@ -26,9 +25,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 import java.io.*;
-import javafx.scene.image.ImageView;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.util.Map;
+import java.util.HashMap;
+
 
 
 public class MainPageController {
@@ -59,7 +60,7 @@ public class MainPageController {
 
     //----------------------------------
 
-
+    private Map<String, Image> selectedImages = new HashMap<>();
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
     }
@@ -266,14 +267,12 @@ public class MainPageController {
                 Image image = new Image(new FileInputStream(selectedFile));
                 imageView.setImage(image);
 
-                // Copy the image file to a specific directory
-                saveImageFile(selectedFile, imageId);
-
+                // Store the selected image in the map instead of saving it to a directory
+                selectedImages.put(imageId, image);
 
                 // Adjust VBox size
                 imageView.setFitWidth(150);
                 imageView.setFitHeight(150);
-
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -329,53 +328,63 @@ public class MainPageController {
         }
     }
 
-    public void finishButton() throws IOException{
-        try {
-            uploadImageFromImageView(imageViewA1, "A1");
-            uploadImageFromImageView(imageViewA2, "A2");
-            uploadImageFromImageView(imageViewA3, "A3");
-            uploadImageFromImageView(imageViewA4, "A4");
-            uploadImageFromImageView(imageViewA5, "A5");
+    public void finishButton() throws SQLException, IOException {
+        for (Map.Entry<String, Image> entry : selectedImages.entrySet()) {
+            String imageId = entry.getKey();
+            Image image = entry.getValue();
 
-            uploadImageFromImageView(imageViewB1, "B1");
-            uploadImageFromImageView(imageViewB2, "B2");
-            uploadImageFromImageView(imageViewB3, "B3");
-            uploadImageFromImageView(imageViewB4, "B4");
-            uploadImageFromImageView(imageViewB5, "B5");
+            // Convert the Image to byte array by wrapping it in an ImageView
+            ImageView imageView = new ImageView(image);
+            byte[] imageBytes = convertImageToByteArray(imageView.getImage());
 
-            System.out.println("All images uploaded successfully!");
-        } catch (Exception e) {
-            System.out.println("Error uploading images: " + e.getMessage());
+            // Assuming you have the userId available
+            LoginController loginController = new LoginController();
+            int userId = getUserIDFromDoc();
+
+            // Save image to the database
+            saveImageToDatabase(imageId, imageBytes, userId);
         }
 
-        //MainApplication.changeScene("MainPage.fxml");
+        // Optionally, clear the map after saving
+        selectedImages.clear();
     }
 
     public static byte[] convertFileToBytes(File file) throws IOException {
         return Files.readAllBytes(file.toPath());
     }
 
-    public int getUserIDFromDoc(){
-        String filePath = "src/main/resources/userData.txt";
-        int userId = -1; // Default value if not found
+    private int getUserIDFromDoc() {
+        int userId = -1;  // Default value if no user ID is found
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try {
+            // Use the class loader to load the file from resources
+            InputStream inputStream = getClass().getResourceAsStream("/userData/UserData.txt");
+
+            if (inputStream == null) {
+                throw new FileNotFoundException("UserData.txt file not found in resources.");
+            }
+
+            // Read the user ID from the file
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
-            while ((line = br.readLine()) != null) {
-                if (line.startsWith("User ID: ")) {
-                    // Extract the number after "User ID: "
-                    userId = Integer.parseInt(line.substring(9).trim());
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("User ID:")) {
+                    userId = Integer.parseInt(line.split(":")[1].trim());
                     break;
                 }
             }
+
+            reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error reading UserData.txt: " + e.getMessage());
         }
 
         return userId;
     }
 
+
     private void saveImageToDatabase(String imageId, File imageFile) throws IOException, SQLException {
+        System.out.println("asd");
         // Convert the image file to byte[]
         byte[] imageBytes = convertFileToBytes(imageFile);
         LoginController loginController = new LoginController();
@@ -407,29 +416,27 @@ public class MainPageController {
             System.out.println("No file selected");
         }
     }
-    private byte[] convertImageToByteArray(ImageView imageView) {
+    private byte[] convertImageToByteArray(Image image) {
         try {
-            // Get the image from ImageView
-            javafx.scene.image.Image image = imageView.getImage();
+            // Convert the JavaFX Image to WritableImage
+            WritableImage writableImage = new WritableImage((int) image.getWidth(), (int) image.getHeight());
+            SnapshotParameters params = new SnapshotParameters();
 
-            // Create a PixelReader to read pixel data from the image
-            PixelReader pixelReader = image.getPixelReader();
+            // Draw the Image on the WritableImage
+            writableImage.getPixelWriter().setPixels(0, 0, (int) image.getWidth(), (int) image.getHeight(),
+                    image.getPixelReader(), 0, 0);
 
-            // Define the width and height of the image
-            int width = (int) image.getWidth();
-            int height = (int) image.getHeight();
+            // Use ByteArrayOutputStream to store the image data
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-            // Create a buffer to hold pixel data
-            ByteBuffer buffer = ByteBuffer.allocate(width * height * 4); // 4 bytes per pixel (RGBA)
+            // You can use ImageIO to write the image as PNG to the output stream
+            BufferedImage bufferedImage = new BufferedImage((int) writableImage.getWidth(), (int) writableImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            ImageIO.write(bufferedImage, "png", byteArrayOutputStream);  // Using PNG format
 
-            // Read pixel data into the buffer
-            pixelReader.getPixels(0, 0, width, height, WritablePixelFormat.getByteBgraInstance(), buffer.array(), 0, width * 4);
-
-            // Convert the buffer to byte array and return it
-            return buffer.array();
-
-        } catch (Exception e) {
-            System.out.println("Error converting ImageView to byte array: " + e.getMessage());
+            // Return byte array
+            return byteArrayOutputStream.toByteArray();
+        } catch (IOException e) {
+            System.out.println("Error converting Image to byte array: " + e.getMessage());
             return null;
         }
     }
@@ -455,6 +462,36 @@ public class MainPageController {
         }
     }
 
+    private void loadSavedImageFromDB(String imageId, VBox vBox) {
+        try {
+            // Connect to the database
+            Connection conn = DatabaseManager.connect();
+            String sql = "SELECT image FROM images WHERE image_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, imageId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                // Retrieve the image as a byte array
+                byte[] imageBytes = rs.getBytes("image");
+                if (imageBytes != null) {
+                    // Convert byte[] to Image
+                    Image image = new Image(new ByteArrayInputStream(imageBytes));
+
+                    // Create an ImageView and add it to the VBox
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitWidth(150); // Adjust size if needed
+                    imageView.setFitHeight(150);
+                    vBox.getChildren().add(imageView);
+                }
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Error loading image from database: " + e.getMessage());
+        }
+    }
+
     public void profileHasPic(){
         loadSavedImageFromDB("A1", DefultA1);
         loadSavedImageFromDB("A2", DefultA2);
@@ -469,29 +506,17 @@ public class MainPageController {
         loadSavedImageFromDB("B5", DefultB5);
 
     }
-    private void loadSavedImageFromDB(String imageId, VBox vbox) {
-        try {
-            // Retrieve image data from the database
-            byte[] imageData = DatabaseManager.getImageFromDatabase(imageId);
+    private void saveImageToDatabase(String imageId, byte[] imageBytes, int userId) throws SQLException {
+        Connection conn = DatabaseManager.connect();
+        String sql = "INSERT INTO images (image_id, user_id, image) VALUES (?, ?, ?)";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            if (imageData != null) {
-                // Convert byte array to InputStream and create an Image
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
+        pstmt.setString(1, imageId);
+        pstmt.setInt(2, userId);
+        pstmt.setBytes(3, imageBytes);  // Save the byte array
 
-                // Create an ImageView, set the image, and add to the VBox
-                ImageView imageView = new ImageView(image);
-                imageView.setFitWidth(150);
-                imageView.setFitHeight(150);
-                imageView.setPreserveRatio(true);
-                vbox.getChildren().add(imageView);
-
-                // Set flag that pictures exist
-                hasPictures = true;
-            }
-        } catch (Exception e) {
-            System.out.println("Error loading image for " + imageId + ": " + e.getMessage());
-        }
+        pstmt.executeUpdate();
+        conn.close();
     }
     public static int readUserIdFromFile(File file) {
         int userId = -1;  // Default value if no user ID is found
