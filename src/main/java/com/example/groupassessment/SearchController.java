@@ -58,13 +58,13 @@ public class SearchController {
         layout.setStyle("-fx-padding: 10;");
         // Create 3 Labels and 3 ComboBoxes with predefined options
         Label filterLabel1 = new Label("Art Medium:");
-        ComboBox<String> comboBox1 = createComboBoxWithOptions();
+        ComboBox<String> comboBox1 = comboBox1();
 
         Label filterLabel2 = new Label("Art Style:");
-        ComboBox<String> comboBox2 = createComboBoxWithOptions();
+        ComboBox<String> comboBox2 = comboBox2();
 
         Label filterLabel3 = new Label("Date Created:");
-        ComboBox<String> comboBox3 = createComboBoxWithOptions();
+        ComboBox<String> comboBox3 = comboBox3();
 
         // Create an "Apply" button to apply the filters
         Button applyButton = new Button("Apply");
@@ -90,15 +90,34 @@ public class SearchController {
         popupStage.showAndWait();  // Wait until the popup is closed
     }
 
-    // Helper method to create a ComboBox with some sample options
-    private ComboBox<String> createComboBoxWithOptions() {
+    // create Art medium options
+    private ComboBox<String> comboBox1() {
         ObservableList<String> options = FXCollections.observableArrayList(
-                "Option 1", "Option 2", "Option 3", "Option 4", "Option 5"
+                "Oil Painting", "Water Colours", "Photography", "Digital Art", "Painting", "Drawing", "Graphite"
         );
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.setValue("Select an option");  // Default value
         return comboBox;
     }
+    // create Art style options
+    private ComboBox<String> comboBox2() {
+        ObservableList<String> options = FXCollections.observableArrayList(
+                "Pop Art", "Realism", "Impression", "Abstract", "Surrealism", "Expressionism"
+        );
+        ComboBox<String> comboBox = new ComboBox<>(options);
+        comboBox.setValue("Select an option");  // Default value
+        return comboBox;
+    }
+    // create date created options
+    private ComboBox<String> comboBox3() {
+        ObservableList<String> options = FXCollections.observableArrayList(
+                "01", "02", "03", "04", "05", "06", "07"
+        );
+        ComboBox<String> comboBox = new ComboBox<>(options);
+        comboBox.setValue("Select an option");  // Default value
+        return comboBox;
+    }
+
 
     @FXML
     private void registerInfo() {
