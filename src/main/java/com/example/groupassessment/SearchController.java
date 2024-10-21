@@ -117,26 +117,32 @@ public class SearchController {
         comboBox.setValue("Select an option");  // Default value
         return comboBox;
     }
-    // create date created options
+    // create month options
+// Month selection options (from 01 to 12)
     private ComboBox<String> comboBox3() {
-        ObservableList<String> options = FXCollections.observableArrayList(
-                "01", "02", "03", "04", "05", "06", "07"
-        );
+        ObservableList<String> options = FXCollections.observableArrayList();
+
+        // Generate months from 01 to 12
+        for (int month = 1; month <= 12; month++) {
+            options.add(String.format("%02d", month));  // Format month as "01", "02", ..., "12"
+        }
+
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.setValue("Month");  // Default value
         return comboBox;
     }
-    // create date created options
+
+    // create year options
     private ComboBox<String> comboBox4() {
-        ObservableList<String> options = FXCollections.observableArrayList(
-                "01", "02", "03", "04", "05", "06", "07"
-        );
+        ObservableList<String> options = FXCollections.observableArrayList();
+                // Generate years from 2001 to 2024
+        for (int year = 2001; year <= 2024; year++) {
+            options.add(String.valueOf(year));
+        }
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.setValue("Year");  // Default value
         return comboBox;
     }
-
-
 
     @FXML
     private void registerInfo() {
