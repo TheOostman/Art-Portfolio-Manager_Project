@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
 import javafx.collections.FXCollections;
@@ -56,7 +57,8 @@ public class SearchController {
         // Create the layout for the popup
         VBox layout = new VBox(15);
         layout.setStyle("-fx-padding: 10;");
-        // Create 3 Labels and 3 ComboBoxes with predefined options
+
+        // Create Labels and ComboBoxes for the filters
         Label filterLabel1 = new Label("Art Medium:");
         ComboBox<String> comboBox1 = comboBox1();
 
@@ -64,7 +66,12 @@ public class SearchController {
         ComboBox<String> comboBox2 = comboBox2();
 
         Label filterLabel3 = new Label("Date Created:");
-        ComboBox<String> comboBox3 = comboBox3();
+        ComboBox<String> comboBox3 = comboBox3();  // Month selection
+        ComboBox<String> comboBox4 = comboBox4();  // Year selection
+
+        // Create HBox to display month and year ComboBoxes side by side
+        HBox dateHBox = new HBox(10);  // Horizontal box with spacing
+        dateHBox.getChildren().addAll(comboBox3, comboBox4);  // Add month and year ComboBoxes side by side
 
         // Create an "Apply" button to apply the filters
         Button applyButton = new Button("Apply");
@@ -73,16 +80,18 @@ public class SearchController {
             String selectedFilter1 = comboBox1.getValue();
             String selectedFilter2 = comboBox2.getValue();
             String selectedFilter3 = comboBox3.getValue();
+            String selectedFilter4 = comboBox4.getValue();
 
             System.out.println("Selected Filter 1: " + selectedFilter1);
             System.out.println("Selected Filter 2: " + selectedFilter2);
             System.out.println("Selected Filter 3: " + selectedFilter3);
+            System.out.println("Selected Filter 4: " + selectedFilter4);
 
             popupStage.close();  // Close the popup after applying the filter
         });
 
         // Add the components to the layout
-        layout.getChildren().addAll(filterLabel1, comboBox1, filterLabel2, comboBox2, filterLabel3, comboBox3, applyButton);
+        layout.getChildren().addAll(filterLabel1, comboBox1, filterLabel2, comboBox2, filterLabel3, dateHBox, applyButton);
 
         // Set the scene and show the popup
         Scene scene = new Scene(layout, 300, 250);
@@ -114,9 +123,19 @@ public class SearchController {
                 "01", "02", "03", "04", "05", "06", "07"
         );
         ComboBox<String> comboBox = new ComboBox<>(options);
-        comboBox.setValue("Select an option");  // Default value
+        comboBox.setValue("Month");  // Default value
         return comboBox;
     }
+    // create date created options
+    private ComboBox<String> comboBox4() {
+        ObservableList<String> options = FXCollections.observableArrayList(
+                "01", "02", "03", "04", "05", "06", "07"
+        );
+        ComboBox<String> comboBox = new ComboBox<>(options);
+        comboBox.setValue("Year");  // Default value
+        return comboBox;
+    }
+
 
 
     @FXML
