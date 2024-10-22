@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javafx.scene.control.ListView;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -41,33 +42,38 @@ public class SearchController {
     @FXML
     private TextField searchField;  // For searching usernames
     @FXML
-    private VBox resultsContainer;        // To display the search results
+    private ListView<String> resultsListView;  // To display and select the search results
 
     // This list is just for example purposes. change to get info from database
     private List<String> usernames = List.of("john_doe", "jane_smith", "mark_twain", "mary_jane", "jason_bourne", "johnathan_doe");
 
     @FXML
     private void searchUsername() {
-        String searchText = searchField.getText().toLowerCase(); // Get the search text from the TextField
-        resultsContainer.getChildren().clear(); // Clear previous search results
+        String searchText = searchField.getText().toLowerCase();  // Get the search text from the TextField
+        List<String> matchedUsernames = new ArrayList<>();
 
         // Filter usernames based on search input
-        List<String> matchedUsernames = new ArrayList<>();
         for (String username : usernames) {
             if (username.toLowerCase().contains(searchText)) {
                 matchedUsernames.add(username);
             }
         }
 
-        // Display the matched usernames in the resultsBox
-        if (matchedUsernames.isEmpty()) {
-            resultsContainer.getChildren().add(new Label("No results found."));
-        } else {
-            for (String username : matchedUsernames) {
-                Label resultLabel = new Label(username);
-                resultLabel.setStyle("-fx-font-size: 18px;");
-                resultsContainer.getChildren().add(resultLabel);
-            }
+        // Update the ListView with search results
+        ObservableList<String> searchResults = FXCollections.observableArrayList(matchedUsernames);
+        resultsListView.setItems(searchResults);
+
+        // Optional: Clear any previous selection when new search results are shown
+        resultsListView.getSelectionModel().clearSelection();
+    }
+
+    // This method can be called to get the selected username(s)
+    @FXML
+    private void handleSelection() {
+        String selectedUsername = resultsListView.getSelectionModel().getSelectedItem(); // Get the selected item
+        if (selectedUsername != null) {
+            System.out.println("Selected Username: " + selectedUsername);
+            // You can further handle the selected user here, e.g., open a profile page
         }
     }
 
