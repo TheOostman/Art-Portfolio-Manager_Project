@@ -18,25 +18,24 @@
 
     <!-- ImageView to display the logo above the login box -->
     <ImageView fitWidth="200" preserveRatio="true">
-      <!-- Specify the image source -->
-      <Image url="@Image/PotfolioLogo.png"/> <!-- Ensure the path is correct -->
+      <Image url="@Image/PotfolioLogo.png"/>
     </ImageView>
 
-    <!-- VBox to arrange login form elements vertically -->
+    <!-- login elements -->
     <VBox spacing="10" alignment="CENTER" prefWidth="400" minWidth="300" maxWidth="400" style="-fx-background-color: #D7F6FD; -fx-padding: 20; -fx-border-radius: 20; -fx-background-radius: 10;">
 
-      <!-- Label for the login page title -->
+      <!-- login page title -->
       <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
 
-      <!-- Label for username entry -->
+      <!-- username entry -->
       <Label text="Username"/>
       <TextField fx:id="usernameEntry" prefWidth="200" maxWidth="200"/>
 
-      <!-- Label for password entry -->
+      <!-- password entry -->
       <Label text="Password"/>
       <TextField fx:id="passwordEntry" prefWidth="200" maxWidth="200"/>
 
-      <!-- Buttons arranged horizontally, centered -->
+      <!-- Buttons -->
       <HBox spacing="10" alignment="CENTER">
         <Button fx:id="Signin" maxWidth="150" prefWidth="100" maxHeight="10" text="SIGN IN" onAction="#signInBn" />
         <Button text="REGISTER PAGE" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#toRegisterPageBn"/>

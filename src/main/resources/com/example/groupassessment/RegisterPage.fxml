@@ -14,7 +14,7 @@
   <HBox>
     <VBox>
       <AnchorPane>
-        <VBox spacing="10" prefWidth="400" prefHeight="400" style="-fx-padding: 90 0 0 50; -fx-background-color: lightblue;" AnchorPane.leftAnchor="300" AnchorPane.topAnchor="200">
+        <VBox spacing="10" prefWidth="400" prefHeight="400" style="-fx-padding: 90 0 20 50; -fx-background-color: #D7F6FD; -fx-border-radius: 20; -fx-background-radius: 10;" AnchorPane.leftAnchor="300" AnchorPane.topAnchor="200">
           <Label text="Username"/>
           <TextField fx:id="usernameEntry" prefWidth="200" maxWidth="200"/>
           <Label text="Password"/>
@@ -30,9 +30,6 @@
         </VBox>
         <VBox AnchorPane.topAnchor="227" AnchorPane.leftAnchor="388">
           <Label text="REGISTER PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
-        </VBox>
-        <VBox AnchorPane.topAnchor="225" AnchorPane.leftAnchor="390">
-          <Label text="REGISTER PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-text-fill: #FF6600;"/>
         </VBox>
       </AnchorPane>
     </VBox>
