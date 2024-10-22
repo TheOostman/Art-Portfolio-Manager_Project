@@ -4,17 +4,29 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-
-
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<!-- Root AnchorPane container for the login page -->
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.LoginController" style="-fx-background-color: gray">
 
+  <!-- Horizontal Box to align elements horizontally -->
   <HBox>
     <VBox>
+      <!-- Nested AnchorPane to organize components -->
       <AnchorPane>
+        <!-- VBox to arrange elements vertically with specified spacing and dimensions -->
         <VBox spacing="10" prefWidth="400" prefHeight="400" style="-fx-padding: 130 0 0 100; -fx-background-color: lightblue;" AnchorPane.leftAnchor="300" AnchorPane.topAnchor="200">
+
+          <!-- ImageView to display the logo above the login box -->
+          <ImageView fitWidth="200" preserveRatio="true">
+            <!-- Specify the image source -->
+            <Image url="@Image/PotfolioLogo.png"/> <!-- Ensure the path is correct -->
+          </ImageView>
+
+          <!-- Label for username entry -->
           <Label text="Username"/>
           <TextField fx:id="usernameEntry" prefWidth="200" maxWidth="200"/>
           <Label text="Password"/>

@@ -144,6 +144,8 @@ public class SearchController {
         return comboBox;
     }
 
+
+
     @FXML
     private void registerInfo() {
 
