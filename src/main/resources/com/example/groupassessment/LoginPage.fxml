@@ -22,11 +22,11 @@
     </ImageView>
 
     <!-- login elements -->
-    <VBox spacing="10" alignment="CENTER" prefWidth="400" minWidth="300" maxWidth="400" style="-fx-background-color: #D7F6FD; -fx-padding: 20; -fx-border-radius: 20; -fx-background-radius: 10;">
-
+    <VBox spacing="10" prefWidth="400" minWidth="300" maxWidth="400" style="-fx-background-color: #D7F6FD; -fx-padding: 20; -fx-background-radius: 10;">
       <!-- login page title -->
-      <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
-
+      <VBox alignment="CENTER" AnchorPane.topAnchor="227" AnchorPane.leftAnchor="388">
+        <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
+      </VBox>
       <!-- username entry -->
       <Label text="Username"/>
       <TextField fx:id="usernameEntry" prefWidth="200" maxWidth="200"/>
@@ -42,6 +42,7 @@
       </HBox>
 
     </VBox>
+
 
   </VBox>
 

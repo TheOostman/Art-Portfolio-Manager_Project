@@ -17,6 +17,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import java.io.IOException;
 
 public class SearchController {
@@ -29,12 +32,44 @@ public class SearchController {
 
     private boolean isSideBarVisible = false;
 
-
     // THIS SECTION IS DUMMY STATS AND CAN BE DELETED
     public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
     public String basicUsername = "123";             //Test data, this can be deleted
     public String basicPassword = "123";                   //Test data, this can be deleted
     //----------------------------------
+
+    @FXML
+    private TextField searchField;  // For searching usernames
+    @FXML
+    private VBox resultsContainer;        // To display the search results
+
+    // This list is just for example purposes. change to get info from database
+    private List<String> usernames = List.of("john_doe", "jane_smith", "mark_twain", "mary_jane", "jason_bourne", "johnathan_doe");
+
+    @FXML
+    private void searchUsername() {
+        String searchText = searchField.getText().toLowerCase(); // Get the search text from the TextField
+        resultsContainer.getChildren().clear(); // Clear previous search results
+
+        // Filter usernames based on search input
+        List<String> matchedUsernames = new ArrayList<>();
+        for (String username : usernames) {
+            if (username.toLowerCase().contains(searchText)) {
+                matchedUsernames.add(username);
+            }
+        }
+
+        // Display the matched usernames in the resultsBox
+        if (matchedUsernames.isEmpty()) {
+            resultsContainer.getChildren().add(new Label("No results found."));
+        } else {
+            for (String username : matchedUsernames) {
+                Label resultLabel = new Label(username);
+                resultLabel.setStyle("-fx-font-size: 18px;");
+                resultsContainer.getChildren().add(resultLabel);
+            }
+        }
+    }
 
     public void changeToMain() throws IOException {
         MainApplication.changeScene("MainPage.fxml");
@@ -105,7 +140,7 @@ public class SearchController {
                 "Oil Painting", "Water Colours", "Photography", "Digital Art", "Painting", "Drawing", "Graphite"
         );
         ComboBox<String> comboBox = new ComboBox<>(options);
-        comboBox.setValue("Select an option");  // Default value
+        comboBox.setValue("Select an option");
         return comboBox;
     }
     // create Art style options
@@ -114,24 +149,20 @@ public class SearchController {
                 "Pop Art", "Realism", "Impression", "Abstract", "Surrealism", "Expressionism"
         );
         ComboBox<String> comboBox = new ComboBox<>(options);
-        comboBox.setValue("Select an option");  // Default value
+        comboBox.setValue("Select an option");
         return comboBox;
     }
     // create month options
-// Month selection options (from 01 to 12)
     private ComboBox<String> comboBox3() {
         ObservableList<String> options = FXCollections.observableArrayList();
-
-        // Generate months from 01 to 12
         for (int month = 1; month <= 12; month++) {
-            options.add(String.format("%02d", month));  // Format month as "01", "02", ..., "12"
+            options.add(String.format("%02d", month));
         }
 
         ComboBox<String> comboBox = new ComboBox<>(options);
-        comboBox.setValue("Month");  // Default value
+        comboBox.setValue("Month");
         return comboBox;
     }
-
     // create year options
     private ComboBox<String> comboBox4() {
         ObservableList<String> options = FXCollections.observableArrayList();
@@ -140,11 +171,9 @@ public class SearchController {
             options.add(String.valueOf(year));
         }
         ComboBox<String> comboBox = new ComboBox<>(options);
-        comboBox.setValue("Year");  // Default value
+        comboBox.setValue("Year");
         return comboBox;
     }
-
-
 
     @FXML
     private void registerInfo() {

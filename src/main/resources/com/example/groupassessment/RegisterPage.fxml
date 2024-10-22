@@ -14,20 +14,27 @@
   <HBox>
     <VBox>
       <AnchorPane>
-        <VBox spacing="10" prefWidth="400" prefHeight="400" style="-fx-padding: 90 0 20 50; -fx-background-color: #D7F6FD; -fx-border-radius: 20; -fx-background-radius: 10;" AnchorPane.leftAnchor="300" AnchorPane.topAnchor="200">
+        <!-- register elements -->
+        <VBox spacing="10" prefWidth="400" prefHeight="400" style="-fx-padding: 90 0 20 50; -fx-background-color: #D7F6FD;-fx-background-radius: 10;" AnchorPane.leftAnchor="300" AnchorPane.topAnchor="200">
+          <!-- create username -->
           <Label text="Username"/>
           <TextField fx:id="usernameEntry" prefWidth="200" maxWidth="200"/>
+          <!-- create password -->
           <Label text="Password"/>
           <TextField fx:id="passwordEntry" prefWidth="200" maxWidth="200"/>
+          <!-- add email -->
           <Label text="Email Address"/>
           <TextField fx:id="emailAddressEntry" prefWidth="200" maxWidth="200"/>
+          <!-- choose role -->
           <Label text="Your Role"/>
           <TextField fx:id="roleEntry" prefWidth="200" maxWidth="200"/>
+          <!-- Buttons -->
           <HBox>
-            <Button maxWidth="150" prefWidth="100" maxHeight="10" text="SIGN IN PAGE" onAction="#toSignInBn" />
+            <Button text="SIGN IN PAGE" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#toSignInBn" />
             <Button text="REGISTER" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#registerInfo"/>
           </HBox>
         </VBox>
+        <!-- Page title -->
         <VBox AnchorPane.topAnchor="227" AnchorPane.leftAnchor="388">
           <Label text="REGISTER PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
         </VBox>
@@ -35,6 +42,5 @@
     </VBox>
 
   </HBox>
-
 
 </AnchorPane>
