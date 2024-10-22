@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,40 +13,37 @@
 <!-- Root AnchorPane container for the login page -->
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.LoginController" style="-fx-background-color: gray">
 
-  <!-- Horizontal Box to align elements horizontally -->
-  <HBox>
-    <VBox>
-      <!-- Nested AnchorPane to organize components -->
-      <AnchorPane>
-        <!-- VBox to arrange elements vertically with specified spacing and dimensions -->
-        <VBox spacing="10" prefWidth="400" prefHeight="400" style="-fx-padding: 130 0 0 100; -fx-background-color: lightblue;" AnchorPane.leftAnchor="300" AnchorPane.topAnchor="200">
+  <!-- VBox to align all elements vertically, centered horizontally and vertically -->
+  <VBox alignment="CENTER" spacing="20" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
 
-          <!-- ImageView to display the logo above the login box -->
-          <ImageView fitWidth="200" preserveRatio="true">
-            <!-- Specify the image source -->
-            <Image url="@Image/PotfolioLogo.png"/> <!-- Ensure the path is correct -->
-          </ImageView>
+    <!-- ImageView to display the logo above the login box -->
+    <ImageView fitWidth="200" preserveRatio="true">
+      <!-- Specify the image source -->
+      <Image url="@Image/PotfolioLogo.png"/> <!-- Ensure the path is correct -->
+    </ImageView>
 
-          <!-- Label for username entry -->
-          <Label text="Username"/>
-          <TextField fx:id="usernameEntry" prefWidth="200" maxWidth="200"/>
-          <Label text="Password"/>
-          <TextField fx:id="passwordEntry" prefWidth="200" maxWidth="200"/>
-          <HBox>
-            <Button fx:id="Signin" maxWidth="150" prefWidth="100" maxHeight="10" text="SIGN IN" onAction="#signInBn" />
-            <Button text="REGISTER PAGE" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#toRegisterPageBn"/>
-          </HBox>
-        </VBox>
-        <VBox AnchorPane.topAnchor="227" AnchorPane.leftAnchor="410">
-          <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
-        </VBox>
-        <VBox AnchorPane.topAnchor="225" AnchorPane.leftAnchor="412">
-          <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-text-fill: #FF6600;"/>
-        </VBox>
-      </AnchorPane>
+    <!-- VBox to arrange login form elements vertically -->
+    <VBox spacing="10" alignment="CENTER" prefWidth="400" minWidth="300" maxWidth="400" style="-fx-background-color: #D7F6FD; -fx-padding: 20; -fx-border-radius: 20; -fx-background-radius: 10;">
+
+      <!-- Label for the login page title -->
+      <Label text="LOGIN PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
+
+      <!-- Label for username entry -->
+      <Label text="Username"/>
+      <TextField fx:id="usernameEntry" prefWidth="200" maxWidth="200"/>
+
+      <!-- Label for password entry -->
+      <Label text="Password"/>
+      <TextField fx:id="passwordEntry" prefWidth="200" maxWidth="200"/>
+
+      <!-- Buttons arranged horizontally, centered -->
+      <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="Signin" maxWidth="150" prefWidth="100" maxHeight="10" text="SIGN IN" onAction="#signInBn" />
+        <Button text="REGISTER PAGE" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#toRegisterPageBn"/>
+      </HBox>
+
     </VBox>
 
-  </HBox>
-
+  </VBox>
 
 </AnchorPane>
