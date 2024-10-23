@@ -74,7 +74,12 @@ public class SearchController {
         if (selectedUsername != null) {
             System.out.println("Selected Username: " + selectedUsername);
             // You can further handle the selected user here, e.g., open a profile page
+          //  toViewProfile(selectedUsername);
         }
+    }
+
+    public void toViewProfile() throws IOException {
+        MainApplication.changeScene("ViewProfilePage.fxml");
     }
 
     public void changeToMain() throws IOException {
