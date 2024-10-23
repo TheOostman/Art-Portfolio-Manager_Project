@@ -24,9 +24,9 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("LoginPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
         scene.getRoot().setStyle("-fx-background-color: #ffffff;");
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Art Portfolio Manager");
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setScene(scene);
         stage.show();
     }

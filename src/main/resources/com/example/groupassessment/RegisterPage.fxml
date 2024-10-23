@@ -5,10 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.RegisterController" style="-fx-background-color: gray">
 
   <HBox>
@@ -27,7 +28,8 @@
           <TextField fx:id="emailAddressEntry" prefWidth="200" maxWidth="200"/>
           <!-- choose role -->
           <Label text="Your Role"/>
-          <TextField fx:id="roleEntry" prefWidth="200" maxWidth="200"/>
+          <ComboBox fx:id="roleComboBox" layoutX="150" layoutY="180" prefWidth="150" />
+
           <!-- Buttons -->
           <HBox>
             <Button text="SIGN IN PAGE" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#toSignInBn" />

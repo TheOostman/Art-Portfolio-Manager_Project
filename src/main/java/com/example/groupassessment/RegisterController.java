@@ -1,8 +1,11 @@
 package com.example.groupassessment;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.io.PrintWriter;
@@ -23,7 +26,17 @@ public class RegisterController {
     @FXML
     private TextField emailAddressEntry;
     @FXML
-    private TextField roleEntry;
+    private ComboBox<String> roleComboBox;
+
+    @FXML
+    public void initialize() {
+        // Set up ComboBox with role options
+        ObservableList<String> roles = FXCollections.observableArrayList(
+                "Artist", "Recruiter", "Community Member"
+        );
+        roleComboBox.setItems(roles);
+        roleComboBox.setValue("Select a role");
+    }
 
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
@@ -61,16 +74,15 @@ public class RegisterController {
         String username = usernameEntry.getText();
         String password = passwordEntry.getText();
         String email = emailAddressEntry.getText();
-        String role = roleEntry.getText();
+        String role = roleComboBox.getValue();
+
+        if (role == null || role.equals("Select a role")) {
+            System.out.println("Please select a valid role.");
+            return;
+        }
 
         saveUserInfo(username, password, email, role);
     }
-
-
-
-
-
-
 
 }
 
