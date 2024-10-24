@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.image.ImageView?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.groupassessment.MainPageController" style="-fx-background-color: gray">
   <VBox> <!-- This is the main design items -->
     <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
@@ -50,10 +51,14 @@
     </AnchorPane>
     <HBox style="-fx-padding: 150 0 0 75" spacing="20">
       <VBox>
-        <VBox fx:id="DefultA1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA1" fitWidth="150" fitHeight="150" preserveRatio="true"/>
+        </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultA2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA2" fitWidth="150" fitHeight="150" preserveRatio="true"/>
+        </VBox>
       </VBox>
       <VBox>
         <VBox fx:id="DefultA3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>

@@ -1,11 +1,21 @@
 package com.example.groupassessment;
 
+import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import javafx.scene.image.Image;
+import java.io.ByteArrayInputStream;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +57,25 @@ public class DatabaseManager {
             }
         }
     }
+    public Map<String, byte[]> getUserImagesByLocation(int userID) {
+        Map<String, byte[]> userImages = new HashMap<>();
+        String query = "SELECT image_id, image FROM images WHERE user_id = ?";
+
+        try (Connection conn = connect(); PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, userID);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                String imageId = rs.getString("image_id");
+                byte[] imageData = rs.getBytes("image");
+                userImages.put(imageId, imageData);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userImages;
+    }
 
     // Method to connect to the database and create the users and images tables
     public static void createTables() {
@@ -83,23 +112,31 @@ public class DatabaseManager {
 
 
 
-    public static Map<String, byte[]> getUserImages(int userId) throws SQLException {
-        Map<String, byte[]> userImages = new HashMap<>();
+    // Retrieve user images as a Map with JavaFX Image
+    public Map<String, Image> getUserImages(int userID) {
+        Map<String, Image> userImages = new HashMap<>();
+        String query = "SELECT image_id, image FROM images WHERE user_id = ?";
 
-        String sql = "SELECT image_id, image FROM images WHERE user_id = ?";
-        Connection conn = connect();
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, userId);
+        try (Connection conn = connect(); PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, userID);
+            ResultSet rs = statement.executeQuery();
 
-        ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String imageId = rs.getString("image_id");
+                byte[] imageData = rs.getBytes("image");
 
-        while (rs.next()) {
-            String imageId = rs.getString("image_id");
-            byte[] imageData = rs.getBytes("image");
-            userImages.put(imageId, imageData);
+                if (imageData != null) {
+                    // Convert byte array to InputStream
+                    ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                    // Create JavaFX Image object
+                    Image image = new Image(bis);
+                    userImages.put(imageId, image);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        conn.close();
         return userImages;
     }
 
@@ -133,21 +170,32 @@ public class DatabaseManager {
         }
     }
 
-    public static byte[] getImageFromDatabase(String imageId) {
-        String query = "SELECT image FROM images WHERE image_id = ?";
-        try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+    public Map<String, File> getUserImagesAsFiles(int userID) {
+        Map<String, File> userImages = new HashMap<>();
+        System.out.println("Database UserID: "+userID);
+        String query = "SELECT image_id, image FROM images WHERE user_id = ?";
 
-            pstmt.setString(1, imageId);
-            ResultSet rs = pstmt.executeQuery();
+        try (Connection conn = connect(); PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, userID);
+            ResultSet rs = statement.executeQuery();
 
-            // If an image exists, return it as a byte array
-            if (rs.next()) {
-                return rs.getBytes("image");
+            while (rs.next()) {
+                String imageId = rs.getString("image_id");
+                byte[] imageData = rs.getBytes("image");
+
+                if (imageData != null) {
+                    String validPrefix = imageId.length() < 3 ? imageId + "_x" : imageId; // Ensure prefix is >= 3 characters
+                    File imageFile = File.createTempFile(validPrefix, ".png"); // Create a temporary file for each image
+                    try (FileOutputStream fos = new FileOutputStream(imageFile)) {
+                        fos.write(imageData);
+                    }
+                    userImages.put(imageId, imageFile);
+                }
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
         }
-        return null;  // No image found
+
+        return userImages;
     }
 }

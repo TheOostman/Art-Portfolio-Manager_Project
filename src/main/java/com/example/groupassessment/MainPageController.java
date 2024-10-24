@@ -29,6 +29,12 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.util.Map;
 import java.util.HashMap;
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
+import java.util.Map;
 
 
 
@@ -44,13 +50,21 @@ public class MainPageController {
 
     @FXML
     private VBox DefultA1, DefultA2, DefultA3, DefultA4, DefultA5, DefultB1, DefultB2, DefultB3, DefultB4, DefultB5;
+    @FXML
     private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewA4, imageViewA5;
     private ImageView imageViewB1, imageViewB2, imageViewB3, imageViewB4, imageViewB5;
+
+    private int userID; // This should be set with the logged-in user's ID
+    private DatabaseManager databaseManager;
 
     private boolean isSideBarVisible = false;
     private boolean isProfileEditorVisible = false;
     public boolean hasPictures;
 
+    public MainPageController() {
+        // Initialize the database manager
+        this.databaseManager = new DatabaseManager();
+    }
 
     // -------------------------------
     // THIS SECTION IS DUMMY STATS AND CAN BE DELETED
@@ -248,7 +262,6 @@ public class MainPageController {
         }
     }
 
-
     private void selectAndSaveImagePath(ImageView imageView, VBox vBox, String imageId) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
@@ -320,7 +333,6 @@ public class MainPageController {
         // Optionally, clear the map after saving
         selectedImages.clear();
     }
-
 
     private int getUserIDFromDoc() {
         int userId = -1;  // Default value if no user ID is found
@@ -432,148 +444,74 @@ public class MainPageController {
         pstmt.executeUpdate();
         conn.close();
     }
-    public void loadUserImages() throws SQLException {
-        LoginController loginController = new LoginController();
-        int userId = getUserIDFromDoc();  // Retrieve the logged-in user's ID
 
-        // Retrieve the images associated with the logged-in user
-        DatabaseManager dbManager = new DatabaseManager();
-        Map<String, byte[]> userImages = dbManager.getUserImages(userId);
-
-        // Display images in their respective ImageView based on imageId (e.g., A1, A2, B1, etc.)
-        for (Map.Entry<String, byte[]> entry : userImages.entrySet()) {
-            String imageId = entry.getKey();
-            byte[] imageData = entry.getValue();
-
-            if (imageData != null && imageData.length > 0) {
-                // Convert the byte array into an Image object
-                Image image = new Image(new ByteArrayInputStream(imageData));
-
-                // Display the image in the corresponding ImageView and add it to the VBox
-                switch (imageId) {
-                    case "A1":
-                        imageViewA1 = new ImageView(image);  // Create a new ImageView with the image
-                        DefultA1.getChildren().clear();  // Clear the VBox
-                        DefultA1.getChildren().add(imageViewA1);  // Add the ImageView to the VBox
-                        break;
-                    case "A2":
-                        imageViewA2 = new ImageView(image);
-                        DefultA2.getChildren().clear();
-                        DefultA2.getChildren().add(imageViewA2);
-                        break;
-                    case "A3":
-                        imageViewA3 = new ImageView(image);
-                        DefultA3.getChildren().clear();
-                        DefultA3.getChildren().add(imageViewA3);
-                        break;
-                    case "A4":
-                        imageViewA4 = new ImageView(image);
-                        DefultA4.getChildren().clear();
-                        DefultA4.getChildren().add(imageViewA4);
-                        break;
-                    case "A5":
-                        imageViewA5 = new ImageView(image);
-                        DefultA5.getChildren().clear();
-                        DefultA5.getChildren().add(imageViewA5);
-                        break;
-                    case "B1":
-                        imageViewB1 = new ImageView(image);
-                        DefultB1.getChildren().clear();
-                        DefultB1.getChildren().add(imageViewB1);
-                        break;
-                    case "B2":
-                        imageViewB2 = new ImageView(image);
-                        DefultB2.getChildren().clear();
-                        DefultB2.getChildren().add(imageViewB2);
-                        break;
-                    case "B3":
-                        imageViewB3 = new ImageView(image);
-                        DefultB3.getChildren().clear();
-                        DefultB3.getChildren().add(imageViewB3);
-                        break;
-                    case "B4":
-                        imageViewB4 = new ImageView(image);
-                        DefultB4.getChildren().clear();
-                        DefultB4.getChildren().add(imageViewB4);
-                        break;
-                    case "B5":
-                        imageViewB5 = new ImageView(image);
-                        DefultB5.getChildren().clear();
-                        DefultB5.getChildren().add(imageViewB5);
-                        break;
-                    default:
-                        System.out.println("Unknown imageId: " + imageId);
-                }
-            }
-        }
-    }
 
     @FXML
     public void initialize() {
-
-        hasPictures = false;
-
-        // Directory where images are saved
-        File dir = new File("saved_images");
-
-        if (checkForSavedImage("A1") || checkForSavedImage("A2") || checkForSavedImage("A3") || checkForSavedImage("A4") || checkForSavedImage("A5") ||
-                checkForSavedImage("B1") || checkForSavedImage("B2") || checkForSavedImage("B3") || checkForSavedImage("B4") || checkForSavedImage("B5")) {
-            hasPictures = true;
-        }
-        if (hasPictures == true) {
-            //profileHasPic();
-        }
-        else{
-            noImagesSelfProfile.setText("There is no images, please add some");
-        }
         sideBar.setVisible(false);
         editPageEditor.setVisible(false);
+        System.out.println("Initializing MainPage...");
+        System.out.println("imageViewA1: " + (imageViewA1 != null ? "Initialized" : "Null"));
+        System.out.println("imageViewA2: " + (imageViewA2 != null ? "Initialized" : "Null"));
+        userID = getUserIDFromDoc();
+        System.out.println("Initializing MainPage...");
 
-        imageViewA1 = new ImageView();
-        picA1.getChildren().add(imageViewA1);
-        loadSavedImage("A1", imageViewA1);
+        try {
+            // Fetch images from the database as JavaFX Image objects
+            Map<String, Image> userImages = databaseManager.getUserImages(userID);
 
-        imageViewA2 = new ImageView();
-        picA2.getChildren().add(imageViewA2);
-        loadSavedImage("A2", imageViewA2);
+            // Set images for each ImageView if available
+            if (imageViewA1 != null && userImages.containsKey("A1")) {
+                imageViewA1.setImage(userImages.get("A1"));
+                imageViewA1.setVisible(true);
+                DefultA1.setVisible(false);
+            } else {
+                imageViewA1.setVisible(false);
+                DefultA1.setVisible(true);
+            }
 
-        imageViewA3 = new ImageView();
-        picA3.getChildren().add(imageViewA3);
-        loadSavedImage("A3", imageViewA3);
+            if (imageViewA2 != null && userImages.containsKey("A2")) {
+                imageViewA2.setImage(userImages.get("A2"));
+                imageViewA2.setVisible(true);
+                DefultA2.setVisible(false);
+            } else {
+                imageViewA2.setVisible(false);
+                DefultA2.setVisible(true);
+            }
 
-        imageViewA4 = new ImageView();
-        picA4.getChildren().add(imageViewA4);
-        loadSavedImage("A4", imageViewA4);
-
-        imageViewA5 = new ImageView();
-        picA5.getChildren().add(imageViewA5);
-        loadSavedImage("A5", imageViewA5);
-
-        imageViewB1 = new ImageView();
-        picB1.getChildren().add(imageViewB1);
-        loadSavedImage("B1", imageViewB1);
-
-        imageViewB2 = new ImageView();
-        picB2.getChildren().add(imageViewB2);
-        loadSavedImage("B2", imageViewB2);
-
-        imageViewB3 = new ImageView();
-        picB3.getChildren().add(imageViewB3);
-        loadSavedImage("B3", imageViewB3);
-
-        imageViewB4 = new ImageView();
-        picB4.getChildren().add(imageViewB4);
-        loadSavedImage("B4", imageViewB4);
-
-        imageViewB5 = new ImageView();
-        picB5.getChildren().add(imageViewB5);
-        loadSavedImage("B5", imageViewB5);
-
-
-        sideBar.setVisible(false);
-        editPageEditor.setVisible(false);
+            // Repeat for other ImageViews...
+            System.out.println("Images loaded successfully.");
+        } catch (Exception e) {
+            System.out.println("Error during initialization: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+    private void setImageView(String location, File imageFile, ImageView imageView, VBox defaultBox) {
+        if (imageView == null) {
+            System.out.println("ImageView for location " + location + " is null. Please check the FXML file.");
+            return;
+        }
 
+        if (imageFile != null && imageFile.exists()) {
+            try {
+                Image image = new Image(imageFile.toURI().toString());
+                imageView.setImage(image);
+
+                // Show the image and hide the default box
+                imageView.setVisible(true);
+                defaultBox.setVisible(false);
+            } catch (Exception e) {
+                System.out.println("Error loading image for " + location + ": " + e.getMessage());
+                e.printStackTrace();
+                imageView.setVisible(false);
+                defaultBox.setVisible(true);
+            }
+        } else {
+            // No image found, show the default box
+            imageView.setVisible(false);
+            defaultBox.setVisible(true);
+        }
+    }
 
 
     private boolean checkForSavedImage(String imageId) {
