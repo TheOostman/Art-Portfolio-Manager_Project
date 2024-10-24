@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import java.io.IOException;
 
+
 public class SearchController {
     @FXML
     private TextField usernameEntry;
@@ -92,7 +93,11 @@ public class SearchController {
     }
 
     @FXML
-    private void onFilterClick() {
+    private void ViewProfilePage(ActionEvent event) throws IOException {
+        MainApplication.changeScene("ViewProfilePage.fxml");
+    }
+
+    public void onFilterClick() {
         // Create a new Stage (window)
         Stage popupStage = new Stage();
 

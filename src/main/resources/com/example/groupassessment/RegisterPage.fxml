@@ -31,13 +31,14 @@
           <ComboBox fx:id="roleComboBox" layoutX="150" layoutY="180" prefWidth="150" />
 
           <!-- Buttons -->
-          <HBox>
-            <Button text="SIGN IN PAGE" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#toSignInBn" />
+          <HBox spacing="10">
             <Button text="REGISTER" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#registerInfo"/>
+            <Button text="SIGN IN PAGE" maxWidth="150" prefWidth="100" maxHeight="10" onAction="#toSignInBn" />
           </HBox>
         </VBox>
+
         <!-- Page title -->
-        <VBox AnchorPane.topAnchor="227" AnchorPane.leftAnchor="388">
+        <VBox  AnchorPane.topAnchor="227" AnchorPane.leftAnchor="388">
           <Label text="REGISTER PAGE" style="-fx-font-weight: bold; -fx-font-size: 30px;"/>
         </VBox>
       </AnchorPane>

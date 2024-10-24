@@ -17,7 +17,7 @@
   <VBox alignment="CENTER" spacing="20" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
 
     <!-- ImageView to display the logo above the login box -->
-    <ImageView fitWidth="200" preserveRatio="true">
+    <ImageView fitWidth="300" preserveRatio="true">
       <Image url="@Image/PotfolioLogo.png"/>
     </ImageView>
 
