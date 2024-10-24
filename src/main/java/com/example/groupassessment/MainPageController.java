@@ -3,6 +3,7 @@ package com.example.groupassessment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,8 +12,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.animation.TranslateTransition;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.stage.FileChooser;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+
 
 import java.io.*;
 
@@ -450,6 +458,36 @@ public class MainPageController {
 
         // Return true if the image file exists
         return file.exists();
+    }
+
+    // pop up view image
+    private void OpenImage(Image image, String title, String comments) {
+        //stage
+        Stage imageStage = new Stage();
+        imageStage.setTitle("Image Title");
+
+        ImageView fullImageView = new ImageView(image);
+        fullImageView.setPreserveRatio(true);
+
+        // title form database
+        Label titleLabel = new Label("Title: " + title);
+        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        //comments
+        TextArea commentsArea = new TextArea(comments);
+        commentsArea.setWrapText(true);
+        commentsArea.setEditable(false);
+        // need to be able to write in comments
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(15));
+        layout.getChildren().addAll(fullImageView, titleLabel, commentsArea);
+
+        Scene scene = new Scene(layout, 500, 500);
+
+        imageStage.setScene(scene);
+        imageStage.initModality(Modality.APPLICATION_MODAL);
+        imageStage.showAndWait();
+
     }
 
 }
