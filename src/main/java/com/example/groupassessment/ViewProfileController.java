@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 public class ViewProfileController {
     @FXML
     private TextField usernameEntry;
@@ -23,6 +25,20 @@ public class ViewProfileController {
     public String basicPassword = "123";                   //Test data, this can be deleted
     //----------------------------------
 
+    public void changeToMain() throws IOException{
+        MainApplication.changeScene("MainPage.fxml");
+    }
+
+    @FXML
+    private void toRegisterPageBn(ActionEvent event) throws IOException {
+        MainApplication.changeScene("RegisterPage.fxml");
+    }
+
+    @FXML
+    private void toSignInBn(ActionEvent event) throws IOException {
+        MainApplication.changeScene("LoginPage.fxml");
+    }
+
     @FXML
     private void dropDownBn(ActionEvent event) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(300), sideBar);
@@ -36,5 +52,10 @@ public class ViewProfileController {
         }
         transition.play();
         isSideBarVisible = !isSideBarVisible;
+    }
+
+    @FXML
+    private void toSearchPage(ActionEvent event) throws IOException {
+        MainApplication.changeScene("ProfileSearch.fxml");
     }
 }
