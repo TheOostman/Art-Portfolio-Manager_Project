@@ -9,14 +9,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 
-
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.SearchController" style="-fx-background-color: gray">
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.SearchController">
   <VBox>
     <!-- header -->
-    <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
+    <HBox style="-fx-background-color: #D7F6FD;" prefHeight="100" maxHeight="100" prefWidth="1000">
       <AnchorPane>
+        <!-- ImageView to display in corner-->
+        <ImageView fitWidth="200" preserveRatio="true">
+          <Image url="@Image/CornerDesign.png"/>
+        </ImageView>
         <Label text="SEARCH" style="-fx-font-size: 30px;" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50"/>
         <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
       </AnchorPane>
