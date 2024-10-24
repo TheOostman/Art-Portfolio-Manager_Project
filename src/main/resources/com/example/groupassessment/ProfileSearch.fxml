@@ -11,20 +11,20 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-
+<?import javafx.scene.layout.Pane?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.SearchController">
   <VBox>
     <!-- header -->
-    <HBox style="-fx-background-color: #D7F6FD;" prefHeight="100" maxHeight="100" prefWidth="1000">
-      <AnchorPane>
+    <HBox alignment="CENTER" style="-fx-background-color: #D7F6FD;" prefHeight="100" maxHeight="100" prefWidth="1000">
         <!-- ImageView to display in corner-->
-        <ImageView fitWidth="200" preserveRatio="true">
+        <ImageView fitWidth="100" preserveRatio="true">
           <Image url="@Image/CornerDesign.png"/>
         </ImageView>
-        <Label text="SEARCH" style="-fx-font-size: 30px;" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50"/>
-        <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
-      </AnchorPane>
+
+        <Label text="SEARCH" style="-fx-font-size: 30px;"/>
+      <Pane HBox.hgrow="ALWAYS"/>
+        <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" onAction="#dropDownBn"/>
     </HBox>
 
     <!-- search page -->
@@ -54,6 +54,7 @@
           <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
           <Button text="MY PROFILE" prefWidth="150" onAction="#changeToMain"/>
           <Button text="INBOX" prefWidth="150" onAction="#changeToMain"/>
+          <Button text="view profile test" prefWidth="150" onAction="#ViewProfilePage"/>
           <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
         </VBox>
       </VBox>
