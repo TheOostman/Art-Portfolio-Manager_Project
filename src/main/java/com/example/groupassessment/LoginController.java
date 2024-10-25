@@ -5,11 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
-import java.io.Console;
-import java.io.IOException;
+
+import java.io.*;
+
 import javafx.scene.layout.HBox;
 
 import java.sql.Connection;
@@ -67,6 +65,29 @@ public class LoginController {
         return false;
     }
 
+    public int getUserId(String username) {
+        String sql = "SELECT id FROM users WHERE username = ?";
+        int userId = -1; // Default value if user is not found
+
+        try (Connection conn = DatabaseManager.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the username in the query
+            pstmt.setString(1, username);
+
+            // Execute the query and retrieve the userId
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                userId = rs.getInt("id");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return userId;
+    }
+
     @FXML
     protected void signInBn() {
         String enteredUsername = usernameEntry.getText();
@@ -76,9 +97,24 @@ public class LoginController {
         if (verifyCredentials(enteredUsername, enteredPassword)) {
             System.out.println("Login successful for user: " + enteredUsername);
             try {
-                changeToMain(); // Navigate to the main page
+                File dir = new File("src/main/resources/userData");
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File outputFile = new File(dir, "UserData.txt");
+                int userId = getUserId(enteredUsername);
+
+                try (FileWriter writer = new FileWriter(outputFile)) {
+                    writer.write("User ID: " + userId);
+                    System.out.println("User ID saved to: " + outputFile.getAbsolutePath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                changeToMain();
             } catch (IOException e) {
                 System.out.println("Error navigating to main page");
+
             }
         } else {
             System.out.println("Failed login attempt for user: " + enteredUsername);
