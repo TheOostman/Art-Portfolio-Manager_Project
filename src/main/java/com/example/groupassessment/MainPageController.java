@@ -33,7 +33,10 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Map;
 
 
@@ -121,43 +124,53 @@ public class MainPageController {
     }
     @FXML
     public void openImageSelectorForPicA1() {
-        selectAndSaveImagePath(imageViewA1, picA1, "A1");
+        //selectAndSaveImagePath(imageViewA1, picA1, "A1");
+        onSaveImageClick("A1");
     }
     @FXML
     public void openImageSelectorForPicA2() {
-        selectAndSaveImagePath(imageViewA2, picA2, "A2");
+        //selectAndSaveImagePath(imageViewA2, picA2, "A2");
+        onSaveImageClick("A2");
     }
     @FXML
     public void openImageSelectorForPicA3() {
-        selectAndSaveImagePath(imageViewA3, picA3, "A3");
+        //selectAndSaveImagePath(imageViewA3, picA3, "A3");
+        onSaveImageClick("A3");
     }
     @FXML
     public void openImageSelectorForPicA4() {
-        selectAndSaveImagePath(imageViewA4, picA4, "A4");
+        //selectAndSaveImagePath(imageViewA4, picA4, "A4");
+        onSaveImageClick("A4");
     }
     @FXML
     public void openImageSelectorForPicA5() {
-        selectAndSaveImagePath(imageViewA5, picA5, "A5");
+        //selectAndSaveImagePath(imageViewA5, picA5, "A5");
+        onSaveImageClick("A5");
     }
     @FXML
     public void openImageSelectorForPicB1() {
-        selectAndSaveImagePath(imageViewB1, picB1, "B1");
+        //selectAndSaveImagePath(imageViewB1, picB1, "B1");
+        onSaveImageClick("B1");
     }
     @FXML
     public void openImageSelectorForPicB2() {
-        selectAndSaveImagePath(imageViewB2, picB2, "B2");
+        //selectAndSaveImagePath(imageViewB2, picB2, "B2");
+        onSaveImageClick("B2");
     }
     @FXML
     public void openImageSelectorForPicB3() {
-        selectAndSaveImagePath(imageViewB3, picB3, "B3");
+        //selectAndSaveImagePath(imageViewB3, picB3, "B3");
+        onSaveImageClick("B3");
     }
     @FXML
     public void openImageSelectorForPicB4() {
-        selectAndSaveImagePath(imageViewB4, picB4, "B4");
+        //selectAndSaveImagePath(imageViewB4, picB4, "B4");
+        onSaveImageClick("B4");
     }
     @FXML
     public void openImageSelectorForPicB5() {
-        selectAndSaveImagePath(imageViewB5, picB5, "B5");
+        //selectAndSaveImagePath(imageViewB5, picB5, "B5");
+        onSaveImageClick("B5");
     }
 
     @FXML
@@ -261,7 +274,6 @@ public class MainPageController {
                 System.out.println("Invalid picID: " + picID);
         }
     }
-
     private void selectAndSaveImagePath(ImageView imageView, VBox vBox, String imageId) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
@@ -305,35 +317,10 @@ public class MainPageController {
             }
         }
     }
-
+    @FXML
     public void finishButton() throws SQLException, IOException {
-        for (Map.Entry<String, Image> entry : selectedImages.entrySet()) {
-            String imageId = entry.getKey();
-            Image image = entry.getValue();
-
-            // Convert the Image to byte array
-            byte[] imageBytes = convertImageToByteArray(image);
-
-            // Assuming you have the userId available
-            LoginController loginController = new LoginController();
-            int userId = getUserIDFromDoc();
-
-            // Check if an image with the same imageId exists for the user, and delete it
-            DatabaseManager dbManager = new DatabaseManager();
-            boolean imageExists = dbManager.deleteExistingImage(imageId, userId);
-
-            if (imageExists) {
-                System.out.println("Existing image with imageId " + imageId + " was replaced.");
-            }
-
-            // Save the new image to the database
-            saveImageToDatabase(imageId, imageBytes, userId);
-        }
-
-        // Optionally, clear the map after saving
-        selectedImages.clear();
+        //onSaveImageClick();
     }
-
     private int getUserIDFromDoc() {
         int userId = -1;  // Default value if no user ID is found
 
@@ -363,47 +350,43 @@ public class MainPageController {
         return userId;
     }
 
-    private byte[] convertImageToByteArray(Image image) {
-        if (image == null) {
-            return null;
-        }
-
-        // Get image dimensions
-        int width = (int) image.getWidth();
-        int height = (int) image.getHeight();
-
-        // Prepare a ByteArrayOutputStream to hold the image bytes
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-        try {
-            // Get PixelReader from the image
-            PixelReader pixelReader = image.getPixelReader();
-
-            // Prepare a byte buffer to store pixel data
-            byte[] buffer = new byte[width * height * 4];  // Assuming 4 bytes per pixel (RGBA)
-            WritablePixelFormat<ByteBuffer> format = WritablePixelFormat.getByteBgraInstance();
-
-            // Read pixel data into the buffer
-            pixelReader.getPixels(0, 0, width, height, format, buffer, 0, width * 4);
-
-            // Write the buffer to the ByteArrayOutputStream
-            byteArrayOutputStream.write(buffer);
-
-            // Return byte array
-            return byteArrayOutputStream.toByteArray();
-
+    private byte[] convertImageFileToByteArray(File file) {
+        try (FileInputStream fis = new FileInputStream(file);
+             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+            return baos.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                byteArrayOutputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return null;
         }
-
-        return null;
     }
+    private void onSaveImageClick(String InputimageID) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+
+        File file = fileChooser.showOpenDialog(null); // Assuming you use a JavaFX window reference here
+        if (file != null) {
+            byte[] imageData = convertImageFileToByteArray(file);
+            if (imageData != null) {
+                int userId = getUserIDFromDoc(); // Replace with your user ID logic
+                DatabaseManager dbManager = new DatabaseManager();
+                String imageId = InputimageID;
+                dbManager.saveImage(userId, imageId, imageData);
+                System.out.println("Image saved successfully.");
+            } else {
+                System.out.println("Failed to convert image to byte array.");
+            }
+        } else {
+            System.out.println("No image selected.");
+        }
+    }
+
+
 
     private void loadSavedImageFromDB(String imageId, ImageView imageView, int userId) {
         try {
@@ -430,8 +413,6 @@ public class MainPageController {
             e.printStackTrace();
         }
     }
-
-
     private void saveImageToDatabase(String imageId, byte[] imageBytes, int userId) throws SQLException {
         Connection conn = DatabaseManager.connect();
         String sql = "INSERT INTO images (image_id, user_id, image) VALUES (?, ?, ?)";
@@ -444,8 +425,6 @@ public class MainPageController {
         pstmt.executeUpdate();
         conn.close();
     }
-
-
     @FXML
     public void initialize() {
         sideBar.setVisible(false);
@@ -512,8 +491,6 @@ public class MainPageController {
             defaultBox.setVisible(true);
         }
     }
-
-
     private boolean checkForSavedImage(String imageId) {
         File dir = new File("saved_images");
         File file = new File(dir, imageId + ".png");

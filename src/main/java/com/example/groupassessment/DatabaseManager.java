@@ -157,14 +157,14 @@ public class DatabaseManager {
         return conn;
     }
 
-    public void saveImage(String imageId, byte[] imageData, int userId) throws SQLException {
-        String sql = "INSERT INTO images (image_id, image, user_id) VALUES (?, ?, ?)";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, imageId);
-            pstmt.setBytes(2, imageData);
-            pstmt.setInt(3, userId); // associate the image with the user
+    public void saveImage(int userId, String imageId, byte[] imageData) {
+        String query = "INSERT INTO images (user_id, image_id, image) VALUES (?, ?, ?)";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            pstmt.setString(2, imageId);
+            pstmt.setBytes(3, imageData); // Set the byte array as a BLOB
             pstmt.executeUpdate();
+            System.out.println("Image saved successfully for user: " + userId);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
