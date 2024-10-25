@@ -113,12 +113,12 @@ public class DatabaseManager {
 
 
     // Retrieve user images as a Map with JavaFX Image
-    public Map<String, Image> getUserImages(int userID) {
-        Map<String, Image> userImages = new HashMap<>();
+    public Map<String, byte[]> getUserImages(int userId) {
+        Map<String, byte[]> userImages = new HashMap<>();
         String query = "SELECT image_id, image FROM images WHERE user_id = ?";
 
         try (Connection conn = connect(); PreparedStatement statement = conn.prepareStatement(query)) {
-            statement.setInt(1, userID);
+            statement.setInt(1, userId);
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
@@ -126,11 +126,7 @@ public class DatabaseManager {
                 byte[] imageData = rs.getBytes("image");
 
                 if (imageData != null) {
-                    // Convert byte array to InputStream
-                    ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                    // Create JavaFX Image object
-                    Image image = new Image(bis);
-                    userImages.put(imageId, image);
+                    userImages.put(imageId, imageData);
                 }
             }
         } catch (SQLException e) {

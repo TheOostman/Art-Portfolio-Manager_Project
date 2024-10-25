@@ -55,6 +55,7 @@ public class MainPageController {
     private VBox DefultA1, DefultA2, DefultA3, DefultA4, DefultA5, DefultB1, DefultB2, DefultB3, DefultB4, DefultB5;
     @FXML
     private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewA4, imageViewA5;
+    @FXML
     private ImageView imageViewB1, imageViewB2, imageViewB3, imageViewB4, imageViewB5;
 
     private int userID; // This should be set with the logged-in user's ID
@@ -385,7 +386,76 @@ public class MainPageController {
             System.out.println("No image selected.");
         }
     }
+    public void loadUserImages(int userId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        Map<String, byte[]> userImages = dbManager.getUserImages(userId);
 
+        for (Map.Entry<String, byte[]> entry : userImages.entrySet()) {
+            String imageId = entry.getKey();
+            byte[] imageData = entry.getValue();
+
+            if (imageId.equals("A1")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewA1.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A1")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewA1.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A2")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewA2.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A3")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewA3.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A4")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewA4.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A5")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewA5.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B1")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewA1.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B1")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewB1.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B2")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewB2.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B3")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewB3.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B4")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewB4.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B5")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                imageViewB5.setImage(image); // Set the image to ImageView
+            }
+        }
+    }
 
 
     private void loadSavedImageFromDB(String imageId, ImageView imageView, int userId) {
@@ -434,36 +504,7 @@ public class MainPageController {
         System.out.println("imageViewA2: " + (imageViewA2 != null ? "Initialized" : "Null"));
         userID = getUserIDFromDoc();
         System.out.println("Initializing MainPage...");
-
-        try {
-            // Fetch images from the database as JavaFX Image objects
-            Map<String, Image> userImages = databaseManager.getUserImages(userID);
-
-            // Set images for each ImageView if available
-            if (imageViewA1 != null && userImages.containsKey("A1")) {
-                imageViewA1.setImage(userImages.get("A1"));
-                imageViewA1.setVisible(true);
-                DefultA1.setVisible(false);
-            } else {
-                imageViewA1.setVisible(false);
-                DefultA1.setVisible(true);
-            }
-
-            if (imageViewA2 != null && userImages.containsKey("A2")) {
-                imageViewA2.setImage(userImages.get("A2"));
-                imageViewA2.setVisible(true);
-                DefultA2.setVisible(false);
-            } else {
-                imageViewA2.setVisible(false);
-                DefultA2.setVisible(true);
-            }
-
-            // Repeat for other ImageViews...
-            System.out.println("Images loaded successfully.");
-        } catch (Exception e) {
-            System.out.println("Error during initialization: " + e.getMessage());
-            e.printStackTrace();
-        }
+        loadUserImages(userID);
     }
     private void setImageView(String location, File imageFile, ImageView imageView, VBox defaultBox) {
         if (imageView == null) {

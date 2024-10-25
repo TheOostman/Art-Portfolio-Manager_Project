@@ -52,39 +52,55 @@
     <HBox style="-fx-padding: 150 0 0 75" spacing="20">
       <VBox>
         <VBox fx:id="DefultA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
-          <ImageView fx:id="imageViewA1" fitWidth="150" fitHeight="150" preserveRatio="true"/>
+          <ImageView fx:id="imageViewA1" fitHeight="150" fitWidth="150" />
         </VBox>
       </VBox>
       <VBox>
         <VBox fx:id="DefultA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
-          <ImageView fx:id="imageViewA2" fitWidth="150" fitHeight="150" preserveRatio="true"/>
+          <ImageView fx:id="imageViewA2" fitHeight="150" fitWidth="150" />
         </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultA3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultA3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA3" fitHeight="150" fitWidth="150" />
+        </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultA4" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultA4" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA4" fitHeight="150" fitWidth="150" />
+        </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultA5" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultA5" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA5" fitHeight="150" fitWidth="150" />
+        </VBox>
       </VBox>
     </HBox>
     <HBox style="-fx-padding: 50 0 0 75" spacing="20">
       <VBox>
-        <VBox fx:id="DefultB1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultB1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB1" fitHeight="150" fitWidth="150" />
+        </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultB2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultB2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB2" fitHeight="150" fitWidth="150" />
+        </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultB3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultB3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB3" fitHeight="150" fitWidth="150" />
+        </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultB4" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultB4" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB4" fitHeight="150" fitWidth="150" />
+        </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultB5" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="DefultB5" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB5" fitHeight="150" fitWidth="150" />
+        </VBox>
       </VBox>
     </HBox>
   </VBox>
