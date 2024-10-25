@@ -1,6 +1,5 @@
 package com.example.groupassessment;
 
-// JavaFX imports
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,14 +20,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-// Java standard library imports
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-// External library imports
 import javax.imageio.ImageIO;
 
 public class MainPageController {
@@ -507,65 +504,52 @@ public class MainPageController {
             String imageId = entry.getKey();
             byte[] imageData = entry.getValue();
 
-            if (imageId.equals("A1")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewA1.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("A1")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewA1.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("A2")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewA2.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("A3")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewA3.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("A4")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewA4.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("A5")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewA5.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("B1")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewA1.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("B1")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewB1.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("B2")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewB2.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("B3")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewB3.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("B4")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewB4.setImage(image); // Set the image to ImageView
-            }
-            if (imageId.equals("B5")) { // Replace with the appropriate logic to identify ImageViews
-                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-                Image image = new Image(bis);
-                imageViewB5.setImage(image); // Set the image to ImageView
+            // Convert byte array to Image
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+            Image image = new Image(bis);
+
+            // Set image and add click event to open it in a pop-up
+            switch (imageId) {
+                case "A1":
+                    imageViewA1.setImage(image);
+                    imageViewA1.setOnMouseClicked(e -> OpenImage(image, "Image A1", "Comments for Image A1"));
+                    break;
+                case "A2":
+                    imageViewA2.setImage(image);
+                    imageViewA2.setOnMouseClicked(e -> OpenImage(image, "Image A2", "Comments for Image A2"));
+                    break;
+                case "A3":
+                    imageViewA3.setImage(image);
+                    imageViewA3.setOnMouseClicked(e -> OpenImage(image, "Image A3", "Comments for Image A3"));
+                    break;
+                case "A4":
+                    imageViewA4.setImage(image);
+                    imageViewA4.setOnMouseClicked(e -> OpenImage(image, "Image A4", "Comments for Image A4"));
+                    break;
+                case "A5":
+                    imageViewA5.setImage(image);
+                    imageViewA5.setOnMouseClicked(e -> OpenImage(image, "Image A5", "Comments for Image A5"));
+                    break;
+                case "B1":
+                    imageViewB1.setImage(image);
+                    imageViewB1.setOnMouseClicked(e -> OpenImage(image, "Image B1", "Comments for Image B1"));
+                    break;
+                case "B2":
+                    imageViewB2.setImage(image);
+                    imageViewB2.setOnMouseClicked(e -> OpenImage(image, "Image B2", "Comments for Image B2"));
+                    break;
+                case "B3":
+                    imageViewB3.setImage(image);
+                    imageViewB3.setOnMouseClicked(e -> OpenImage(image, "Image B3", "Comments for Image B3"));
+                    break;
+                case "B4":
+                    imageViewB4.setImage(image);
+                    imageViewB4.setOnMouseClicked(e -> OpenImage(image, "Image B4", "Comments for Image B4"));
+                    break;
+                case "B5":
+                    imageViewB5.setImage(image);
+                    imageViewB5.setOnMouseClicked(e -> OpenImage(image, "Image B5", "Comments for Image B5"));
+                    break;
             }
         }
     }
@@ -600,34 +584,29 @@ public class MainPageController {
         }
 
     }
-    // pop up view image
+    // pop-up view image
     private void OpenImage(Image image, String title, String comments) {
-        //stage
         Stage imageStage = new Stage();
-        imageStage.setTitle("Image Title");
+        imageStage.setTitle(title);
 
         ImageView fullImageView = new ImageView(image);
         fullImageView.setPreserveRatio(true);
 
-        // title form database
-        //Label titleLabel = new Label("Title: " + title);
-        //titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        Label titleLabel = new Label("Title: " + title);
+        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-        //comments
-        //TextArea commentsArea = new TextArea(comments);
-        //commentsArea.setWrapText(true);
-        //commentsArea.setEditable(false);
-        // need to be able to write in comments
+        TextArea commentsArea = new TextArea(comments);
+        commentsArea.setWrapText(true);
+        commentsArea.setEditable(true); // Allow the user to write comments
+
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(15));
-        layout.getChildren().addAll(fullImageView);
+        layout.getChildren().addAll(titleLabel, fullImageView, commentsArea);
 
         Scene scene = new Scene(layout, 500, 500);
-
         imageStage.setScene(scene);
         imageStage.initModality(Modality.APPLICATION_MODAL);
         imageStage.showAndWait();
-
     }
 
 }
