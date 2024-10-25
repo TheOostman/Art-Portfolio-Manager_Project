@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.image.ImageView?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.groupassessment.MainPageController" style="-fx-background-color: gray">
+  <VBox> <!-- This is the main design items -->
+    <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
+      <AnchorPane>
+        <Label fx:id="usernameText" text="Username" style="-fx-font-size: 30px;" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50"/>
+        <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+      </AnchorPane>
+    </HBox>
+    <HBox>
+      <AnchorPane>
+        <Label text="Portfolio Showcase" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="350" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+      </AnchorPane>
+    </HBox>
+    <HBox>
+      <AnchorPane>
+        <Label fx:id="noImagesSelfProfile" text=" " AnchorPane.topAnchor="200" AnchorPane.leftAnchor="375" /> <!-- if the user has no images uploaded -->
+      </AnchorPane>
+    </HBox>
+  </VBox>
+  <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000" style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false">
+    <AnchorPane>
+      <VBox>
+        <AnchorPane>
+          <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="60" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+        </AnchorPane>
+        <VBox style="-fx-padding: 40 0 0 0;">
+          <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
+          <Button text="EDIT PROFILE" prefWidth="150" onAction="#editPage"/>
+          <Button text="SEARCH FOR PROFILE" prefWidth="150" onAction="#toSearchPage"/>
+          <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
+        </VBox>
+      </VBox>
+    </AnchorPane>
+  </VBox>
+
+  <VBox>
+    <AnchorPane>
+      <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+    </AnchorPane>
+    <HBox style="-fx-padding: 150 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="DefultA1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA1" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultA2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA2" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultA3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA3" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultA4" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA4" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultA5" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewA5" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+    </HBox>
+    <HBox style="-fx-padding: 50 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="DefultB1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB1" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultB2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB2" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultB3" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB3" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultB4" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB4" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="DefultB5" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="imageViewB5" fitHeight="150" fitWidth="150" />
+        </VBox>
+      </VBox>
+    </HBox>
+  </VBox>
+
+  <VBox visible="false" fx:id="editPageEditor">
+    <AnchorPane>
+      <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+    </AnchorPane>
+    <HBox style="-fx-padding: 150 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA1" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA1"/>
+          <Button text="Delete" onAction="#deletePicA1"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA2" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA2"/>
+          <Button text="Delete" onAction="#deletePicA2"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picA3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA3" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA3"/>
+          <Button text="Delete" onAction="#deletePicA3"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picA4" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA4" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA4"/>
+          <Button text="Delete" onAction="#deletePicA4"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picA5" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA5" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicA5"/>
+          <Button text="Delete" onAction="#deletePicA5"/>
+        </HBox>
+      </VBox>
+    </HBox>
+    <HBox style="-fx-padding: 25 0 0 75" spacing="20">
+      <VBox>
+        <VBox fx:id="picB1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB1" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB1"/>
+          <Button text="Delete" onAction="#deletePicB1"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picB2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB2" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB2"/>
+          <Button text="Delete" onAction="#deletePicB2"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picB3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB3" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB3"/>
+          <Button text="Delete" onAction="#deletePicB3"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picB4" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB4" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB4"/>
+          <Button text="Delete" onAction="#deletePicB4"/>
+        </HBox>
+      </VBox>
+      <VBox>
+        <VBox fx:id="picB5" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB5" fitWidth="150" fitHeight="150" />
+        </VBox>
+        <HBox>
+          <Button text="Select Image" onAction="#openImageSelectorForPicB5"/>
+          <Button text="Delete" onAction="#deletePicB5"/>
+        </HBox>
+      </VBox>
+
+    </HBox>
+    <VBox>
+      <AnchorPane>
+        <Button text="FINISH" onAction="#finishButton" AnchorPane.leftAnchor="380" AnchorPane.topAnchor="100" prefWidth="200"/>
+      </AnchorPane>
+    </VBox>
+
+
+
+  </VBox>
+</StackPane>
