@@ -67,7 +67,7 @@ public class SearchController {
         // Optional: Clear any previous selection when new search results are shown
         resultsListView.getSelectionModel().clearSelection();
     }
-// hi
+
     // This method can be called to get the selected username(s)
     @FXML
     private void handleSelection() {
