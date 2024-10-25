@@ -79,6 +79,12 @@ public class SearchController {
         }
     }
 
+    // Page Changes
+    @FXML
+    private void toSignInBn(ActionEvent event) throws IOException {
+        MainApplication.changeScene("LoginPage.fxml");
+    }
+
     public void toViewProfile() throws IOException {
         MainApplication.changeScene("ViewProfilePage.fxml");
     }
@@ -87,29 +93,20 @@ public class SearchController {
         MainApplication.changeScene("MainPage.fxml");
     }
 
-    @FXML
-    private void toSignInBn(ActionEvent event) throws IOException {
-        MainApplication.changeScene("LoginPage.fxml");
-    }
-
-    @FXML
-    private void ViewProfilePage(ActionEvent event) throws IOException {
-        MainApplication.changeScene("ViewProfilePage.fxml");
-    }
-
+    // Filter button
     public void onFilterClick() {
-        // Create a new Stage (window)
+        // new Stage (window)
         Stage popupStage = new Stage();
+        popupStage.setTitle("Filter Options");
 
         // Set the window to be modal, so it blocks interaction with the main window
         popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.setTitle("Filter Options");
 
         // Create the layout for the popup
-        VBox layout = new VBox(15);
-        layout.setStyle("-fx-padding: 10;");
+        VBox layout = new VBox(10);
+        layout.setStyle("-fx-padding: 10; -fx-background-color: #D7F6FD; -fx-border-color: transparent;");
 
-        // Create Labels and ComboBoxes for the filters
+        // filter labels
         Label filterLabel1 = new Label("Art Medium:");
         ComboBox<String> comboBox1 = comboBox1();
 
@@ -117,14 +114,12 @@ public class SearchController {
         ComboBox<String> comboBox2 = comboBox2();
 
         Label filterLabel3 = new Label("Date Created:");
-        ComboBox<String> comboBox3 = comboBox3();  // Month selection
-        ComboBox<String> comboBox4 = comboBox4();  // Year selection
+        ComboBox<String> comboBox3 = comboBox3();  // Month
+        ComboBox<String> comboBox4 = comboBox4();  // Year
+        HBox dateHBox = new HBox(10);
+        dateHBox.getChildren().addAll(comboBox3, comboBox4);
 
-        // Create HBox to display month and year ComboBoxes side by side
-        HBox dateHBox = new HBox(10);  // Horizontal box with spacing
-        dateHBox.getChildren().addAll(comboBox3, comboBox4);  // Add month and year ComboBoxes side by side
-
-        // Create an "Apply" button to apply the filters
+        // "Apply" button
         Button applyButton = new Button("Apply");
         applyButton.setOnAction(e -> {
             // Logic to apply the filter (for now, just close the popup)
@@ -141,13 +136,13 @@ public class SearchController {
             popupStage.close();  // Close the popup after applying the filter
         });
 
-        // Add the components to the layout
+        // components
         layout.getChildren().addAll(filterLabel1, comboBox1, filterLabel2, comboBox2, filterLabel3, dateHBox, applyButton);
 
-        // Set the scene and show the popup
-        Scene scene = new Scene(layout, 300, 250);
+        // show the popup
+        Scene scene = new Scene(layout, 300, 300);
         popupStage.setScene(scene);
-        popupStage.showAndWait();  // Wait until the popup is closed
+        popupStage.showAndWait();
     }
 
     // create Art medium options
