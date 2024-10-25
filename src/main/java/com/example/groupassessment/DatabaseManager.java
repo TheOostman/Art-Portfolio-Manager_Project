@@ -158,15 +158,25 @@ public class DatabaseManager {
     }
 
     public void saveImage(int userId, String imageId, byte[] imageData) {
-        String query = "INSERT INTO images (user_id, image_id, image) VALUES (?, ?, ?)";
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setInt(1, userId);
-            pstmt.setString(2, imageId);
-            pstmt.setBytes(3, imageData); // Set the byte array as a BLOB
-            pstmt.executeUpdate();
-            System.out.println("Image saved successfully for user: " + userId);
+        try {
+            // First, delete the existing image if it exists
+            if (deleteExistingImage(imageId, userId)) {
+                System.out.println("Previous image deleted successfully.");
+            }
+
+            // Insert the new image
+            String query = "INSERT INTO images (user_id, image_id, image) VALUES (?, ?, ?)";
+            try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+                pstmt.setInt(1, userId);
+                pstmt.setString(2, imageId);
+                pstmt.setBytes(3, imageData);
+                pstmt.executeUpdate();
+                System.out.println("New image saved successfully for user: " + userId);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error while deleting existing image: " + e.getMessage());
         }
     }
 
