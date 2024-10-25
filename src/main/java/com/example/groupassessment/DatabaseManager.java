@@ -135,6 +135,29 @@ public class DatabaseManager {
 
         return userImages;
     }
+    public Map<String, byte[]> getUserImagesForEditPage(int userId, String imageID) {
+        Map<String, byte[]> userImagesEditPage = new HashMap<>();
+        String query = "SELECT image_id, image FROM images WHERE user_id = ? AND image_id = ?";
+
+        try (Connection conn = connect(); PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            statement.setString(2, imageID);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                String imageId = rs.getString("image_id");
+                byte[] imageData = rs.getBytes("image");
+
+                if (imageData != null) {
+                    userImagesEditPage.put(imageId, imageData);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userImagesEditPage;
+    }
 
     public static void main(String[] args) {
         // Call the method to create the tables

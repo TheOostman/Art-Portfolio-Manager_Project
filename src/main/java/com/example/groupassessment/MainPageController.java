@@ -57,6 +57,10 @@ public class MainPageController {
     private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewA4, imageViewA5;
     @FXML
     private ImageView imageViewB1, imageViewB2, imageViewB3, imageViewB4, imageViewB5;
+    @FXML
+    private ImageView selectedImageViewA1, selectedImageViewA2, selectedImageViewA3, selectedImageViewA4, selectedImageViewA5;
+    @FXML
+    private ImageView selectedImageViewB1, selectedImageViewB2, selectedImageViewB3, selectedImageViewB4, selectedImageViewB5;
 
     private int userID; // This should be set with the logged-in user's ID
     private DatabaseManager databaseManager;
@@ -69,14 +73,6 @@ public class MainPageController {
         // Initialize the database manager
         this.databaseManager = new DatabaseManager();
     }
-
-    // -------------------------------
-    // THIS SECTION IS DUMMY STATS AND CAN BE DELETED
-    public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
-    public String basicUsername = "123";             //Test data, this can be deleted
-    public String basicPassword = "123";                   //Test data, this can be deleted
-
-    //----------------------------------
 
     private Map<String, Image> selectedImages = new HashMap<>();
     public void changeToMain() throws IOException{
@@ -105,6 +101,126 @@ public class MainPageController {
     private void toSearchPage(ActionEvent event) throws IOException {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
+    public void editPageLoadUp(int userId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        Map<String, byte[]> userImages = dbManager.getUserImages(userId);
+
+        for (Map.Entry<String, byte[]> entry : userImages.entrySet()) {
+            String imageId = entry.getKey();
+            byte[] imageData = entry.getValue();
+
+            if (imageId.equals("A1")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA1.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A2")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA2.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A3")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA3.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A4")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA4.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A5")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA5.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B1")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB1.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B2")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB2.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B3")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB3.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B4")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB4.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B5")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB5.setImage(image); // Set the image to ImageView
+            }
+        }
+    }
+    public void editPageDisplay(int userId, String imageID) {
+        DatabaseManager dbManager = new DatabaseManager();
+        Map<String, byte[]> userImagesEditPage = dbManager.getUserImagesForEditPage(userId, imageID);
+
+        for (Map.Entry<String, byte[]> entry : userImagesEditPage.entrySet()) {
+            String imageId = entry.getKey();
+            byte[] imageData = entry.getValue();
+
+            if (imageId.equals("A1")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA1.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A2")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA2.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A3")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA3.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A4")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA4.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("A5")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewA5.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B1")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB1.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B2")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB2.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B3")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB3.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B4")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB4.setImage(image); // Set the image to ImageView
+            }
+            if (imageId.equals("B5")) { // Replace with the appropriate logic to identify ImageViews
+                ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                Image image = new Image(bis);
+                selectedImageViewB5.setImage(image); // Set the image to ImageView
+            }
+        }
+    }
     @FXML
     public void editPage(ActionEvent action){
         if (isProfileEditorVisible) {
@@ -116,6 +232,7 @@ public class MainPageController {
             }
 
         } else {
+            editPageLoadUp(getUserIDFromDoc());
             editPageEditor.setVisible(true);
             noImagesSelfProfile.setText(" ");
             editPageEditor.toFront();
@@ -125,53 +242,53 @@ public class MainPageController {
     }
     @FXML
     public void openImageSelectorForPicA1() {
-        //selectAndSaveImagePath(imageViewA1, picA1, "A1");
         onSaveImageClick("A1");
+        editPageDisplay(getUserIDFromDoc(),"A1");
     }
     @FXML
     public void openImageSelectorForPicA2() {
-        //selectAndSaveImagePath(imageViewA2, picA2, "A2");
         onSaveImageClick("A2");
+        editPageDisplay(getUserIDFromDoc(),"A2");
     }
     @FXML
     public void openImageSelectorForPicA3() {
-        //selectAndSaveImagePath(imageViewA3, picA3, "A3");
         onSaveImageClick("A3");
+        editPageDisplay(getUserIDFromDoc(),"A3");
     }
     @FXML
     public void openImageSelectorForPicA4() {
-        //selectAndSaveImagePath(imageViewA4, picA4, "A4");
         onSaveImageClick("A4");
+        editPageDisplay(getUserIDFromDoc(),"A4");
     }
     @FXML
     public void openImageSelectorForPicA5() {
-        //selectAndSaveImagePath(imageViewA5, picA5, "A5");
         onSaveImageClick("A5");
+        editPageDisplay(getUserIDFromDoc(),"A5");
     }
     @FXML
     public void openImageSelectorForPicB1() {
-        //selectAndSaveImagePath(imageViewB1, picB1, "B1");
         onSaveImageClick("B1");
+        editPageDisplay(getUserIDFromDoc(),"B1");
     }
     @FXML
     public void openImageSelectorForPicB2() {
-        //selectAndSaveImagePath(imageViewB2, picB2, "B2");
         onSaveImageClick("B2");
+        editPageDisplay(getUserIDFromDoc(),"B2");
     }
     @FXML
     public void openImageSelectorForPicB3() {
-        //selectAndSaveImagePath(imageViewB3, picB3, "B3");
         onSaveImageClick("B3");
+        editPageDisplay(getUserIDFromDoc(),"B3");
     }
     @FXML
     public void openImageSelectorForPicB4() {
-        //selectAndSaveImagePath(imageViewB4, picB4, "B4");
         onSaveImageClick("B4");
+        editPageDisplay(getUserIDFromDoc(),"B4");
     }
     @FXML
     public void openImageSelectorForPicB5() {
-        //selectAndSaveImagePath(imageViewB5, picB5, "B5");
         onSaveImageClick("B5");
+        editPageDisplay(getUserIDFromDoc(),"B5");
     }
 
     @FXML
@@ -275,52 +392,9 @@ public class MainPageController {
                 System.out.println("Invalid picID: " + picID);
         }
     }
-    private void selectAndSaveImagePath(ImageView imageView, VBox vBox, String imageId) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Image");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
-        );
-
-        File selectedFile = fileChooser.showOpenDialog(vBox.getScene().getWindow());
-        if (selectedFile != null) {
-            try {
-                // Load and display the image
-                Image image = new Image(new FileInputStream(selectedFile));
-                imageView.setImage(image);
-
-                // Store the selected image in the map instead of saving it to a directory
-                selectedImages.put(imageId, image);
-
-                // Adjust VBox size
-                imageView.setFitWidth(150);
-                imageView.setFitHeight(150);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    // Helper method to get the file extension (like .png or .jpg)
-    private void loadSavedImage(String imageId, ImageView imageView) {
-        File dir = new File("saved_images");
-        File file = new File(dir, imageId + ".png"); // Load PNG file by default
-
-        if (file.exists()) {
-            try (FileInputStream input = new FileInputStream(file)) {
-                Image image = new Image(input);
-                imageView.setImage(image);
-                imageView.setFitWidth(150);
-                imageView.setFitHeight(150);
-                System.out.println("Loaded saved image: " + file.getAbsolutePath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
     @FXML
     public void finishButton() throws SQLException, IOException {
-        //onSaveImageClick();
+        changeToMain();
     }
     private int getUserIDFromDoc() {
         int userId = -1;  // Default value if no user ID is found
@@ -350,7 +424,6 @@ public class MainPageController {
 
         return userId;
     }
-
     private byte[] convertImageFileToByteArray(File file) {
         try (FileInputStream fis = new FileInputStream(file);
              ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
@@ -378,6 +451,7 @@ public class MainPageController {
                 DatabaseManager dbManager = new DatabaseManager();
                 String imageId = InputimageID;
                 dbManager.saveImage(userId, imageId, imageData);
+
                 System.out.println("Image saved successfully.");
             } else {
                 System.out.println("Failed to convert image to byte array.");
@@ -457,44 +531,6 @@ public class MainPageController {
         }
     }
 
-
-    private void loadSavedImageFromDB(String imageId, ImageView imageView, int userId) {
-        try {
-            Connection conn = DatabaseManager.connect();
-            String sql = "SELECT image FROM images WHERE image_id = ? AND user_id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, imageId);
-            pstmt.setInt(2, userId);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                byte[] imageBytes = rs.getBytes("image");
-                if (imageBytes != null) {
-                    // Convert byte array back to Image
-                    ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
-                    Image image = new Image(bis);
-                    imageView.setImage(image);
-                    imageView.setFitWidth(150);  // Adjust ImageView size
-                    imageView.setFitHeight(150);
-                }
-            }
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    private void saveImageToDatabase(String imageId, byte[] imageBytes, int userId) throws SQLException {
-        Connection conn = DatabaseManager.connect();
-        String sql = "INSERT INTO images (image_id, user_id, image) VALUES (?, ?, ?)";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-
-        pstmt.setString(1, imageId);
-        pstmt.setInt(2, userId);
-        pstmt.setBytes(3, imageBytes);  // Saving the image as byte[] (BLOB)
-
-        pstmt.executeUpdate();
-        conn.close();
-    }
     @FXML
     public void initialize() {
         sideBar.setVisible(false);
@@ -505,38 +541,5 @@ public class MainPageController {
         userID = getUserIDFromDoc();
         System.out.println("Initializing MainPage...");
         loadUserImages(userID);
-    }
-    private void setImageView(String location, File imageFile, ImageView imageView, VBox defaultBox) {
-        if (imageView == null) {
-            System.out.println("ImageView for location " + location + " is null. Please check the FXML file.");
-            return;
-        }
-
-        if (imageFile != null && imageFile.exists()) {
-            try {
-                Image image = new Image(imageFile.toURI().toString());
-                imageView.setImage(image);
-
-                // Show the image and hide the default box
-                imageView.setVisible(true);
-                defaultBox.setVisible(false);
-            } catch (Exception e) {
-                System.out.println("Error loading image for " + location + ": " + e.getMessage());
-                e.printStackTrace();
-                imageView.setVisible(false);
-                defaultBox.setVisible(true);
-            }
-        } else {
-            // No image found, show the default box
-            imageView.setVisible(false);
-            defaultBox.setVisible(true);
-        }
-    }
-    private boolean checkForSavedImage(String imageId) {
-        File dir = new File("saved_images");
-        File file = new File(dir, imageId + ".png");
-
-        // Return true if the image file exists
-        return file.exists();
     }
 }

@@ -51,12 +51,12 @@
     </AnchorPane>
     <HBox style="-fx-padding: 150 0 0 75" spacing="20">
       <VBox>
-        <VBox fx:id="DefultA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+        <VBox fx:id="DefultA1" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
           <ImageView fx:id="imageViewA1" fitHeight="150" fitWidth="150" />
         </VBox>
       </VBox>
       <VBox>
-        <VBox fx:id="DefultA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+        <VBox fx:id="DefultA2" style="-fx-background-color: transparent;" prefWidth="150" prefHeight="150" maxHeight="150">
           <ImageView fx:id="imageViewA2" fitHeight="150" fitWidth="150" />
         </VBox>
       </VBox>
@@ -111,35 +111,45 @@
     </AnchorPane>
     <HBox style="-fx-padding: 150 0 0 75" spacing="20">
       <VBox>
-        <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picA1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA1" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicA1"/>
           <Button text="Delete" onAction="#deletePicA1"/>
         </HBox>
       </VBox>
       <VBox>
-        <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picA2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA2" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicA2"/>
           <Button text="Delete" onAction="#deletePicA2"/>
         </HBox>
       </VBox>
       <VBox>
-        <VBox fx:id="picA3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picA3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA3" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicA3"/>
           <Button text="Delete" onAction="#deletePicA3"/>
         </HBox>
       </VBox>
       <VBox>
-        <VBox fx:id="picA4" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picA4" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA4" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicA4"/>
           <Button text="Delete" onAction="#deletePicA4"/>
         </HBox>
       </VBox>
       <VBox>
-        <VBox fx:id="picA5" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picA5" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewA5" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicA5"/>
           <Button text="Delete" onAction="#deletePicA5"/>
@@ -148,35 +158,45 @@
     </HBox>
     <HBox style="-fx-padding: 25 0 0 75" spacing="20">
       <VBox>
-        <VBox fx:id="picB1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picB1" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB1" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicB1"/>
           <Button text="Delete" onAction="#deletePicB1"/>
         </HBox>
       </VBox>
       <VBox>
-        <VBox fx:id="picB2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picB2" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB2" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicB2"/>
           <Button text="Delete" onAction="#deletePicB2"/>
         </HBox>
       </VBox>
       <VBox>
-        <VBox fx:id="picB3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picB3" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB3" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicB3"/>
           <Button text="Delete" onAction="#deletePicB3"/>
         </HBox>
       </VBox>
       <VBox>
-        <VBox fx:id="picB4" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picB4" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB4" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicB4"/>
           <Button text="Delete" onAction="#deletePicB4"/>
         </HBox>
       </VBox>
       <VBox>
-        <VBox fx:id="picB5" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150"> </VBox>
+        <VBox fx:id="picB5" style="-fx-background-color: white;" prefWidth="150" prefHeight="150" maxHeight="150">
+          <ImageView fx:id="selectedImageViewB5" fitWidth="150" fitHeight="150" />
+        </VBox>
         <HBox>
           <Button text="Select Image" onAction="#openImageSelectorForPicB5"/>
           <Button text="Delete" onAction="#deletePicB5"/>
