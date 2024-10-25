@@ -110,8 +110,6 @@ public class DatabaseManager {
         }
     }
 
-
-
     // Retrieve user images as a Map with JavaFX Image
     public Map<String, byte[]> getUserImages(int userId) {
         Map<String, byte[]> userImages = new HashMap<>();
@@ -197,6 +195,37 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.out.println("Error while deleting existing image: " + e.getMessage());
         }
+    }
+
+    public boolean deleteImageFromDatabase(String imageId, int userId) {
+        String query = "DELETE FROM images WHERE image_id = ? AND user_id = ?";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, imageId);
+            pstmt.setInt(2, userId);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("Error deleting image from database: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String getUsernameDB(int userId) {
+        String query = "SELECT username FROM users WHERE user_id = ?";
+        String username = null;
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                username = rs.getString("username");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching username from database: " + e.getMessage());
+        }
+
+        return username;
     }
 
     public Map<String, File> getUserImagesAsFiles(int userID) {

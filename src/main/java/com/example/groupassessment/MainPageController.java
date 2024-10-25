@@ -292,44 +292,91 @@ public class MainPageController {
     }
 
     @FXML
+    private void onDeleteButtonClick(String imageId) {
+        int userId = getUserIDFromDoc(); // Replace with your logic to get the current user ID
+        DatabaseManager dbManager = new DatabaseManager();
+
+        // Delete the image from the database
+        boolean isDeleted = dbManager.deleteImageFromDatabase(imageId, userId);
+
+        if (isDeleted) {
+            System.out.println("Image deleted successfully from database.");
+
+            // Clear the corresponding ImageView
+            if (imageId.equals("A1")) {
+                selectedImageViewA1.setImage(null);
+            }
+            if (imageId.equals("A2")) {
+                selectedImageViewA2.setImage(null);
+            }
+            if (imageId.equals("A3")) {
+                selectedImageViewA3.setImage(null);
+            }
+            if (imageId.equals("A4")) {
+                selectedImageViewA4.setImage(null);
+            }
+            if (imageId.equals("A5")) {
+                selectedImageViewA5.setImage(null);
+            }
+            if (imageId.equals("B1")) {
+                selectedImageViewB1.setImage(null);
+            }
+            if (imageId.equals("B2")) {
+                selectedImageViewB2.setImage(null);
+            }
+            if (imageId.equals("B3")) {
+                selectedImageViewB3.setImage(null);
+            }
+            if (imageId.equals("B4")) {
+                selectedImageViewB4.setImage(null);
+            }
+            if (imageId.equals("B5")) {
+                selectedImageViewB5.setImage(null);
+            }
+
+        } else {
+            System.out.println("Failed to delete the image.");
+        }
+    }
+    @FXML
     public void deletePicA1(){
-        deletePic("A1");
+        onDeleteButtonClick("A1");
     }
     @FXML
     public void deletePicA2(){
-        deletePic("A2");
+        onDeleteButtonClick("A2");
     }
     @FXML
     public void deletePicA3(){
-        deletePic("A3");
+        onDeleteButtonClick("A3");
     }
     @FXML
     public void deletePicA4(){
-        deletePic("A4");
+        onDeleteButtonClick("A4");
     }
     @FXML
     public void deletePicA5(){
-        deletePic("A5");
+        onDeleteButtonClick("A5");
     }
     @FXML
     public void deletePicB1(){
-        deletePic("B1");
+        onDeleteButtonClick("B1");
     }
     @FXML
     public void deletePicB2(){
-        deletePic("B2");
+        onDeleteButtonClick("B2");
     }
     @FXML
     public void deletePicB3(){
-        deletePic("B3");
+        onDeleteButtonClick("B3");
     }
     @FXML
     public void deletePicB4(){
-        deletePic("B4");
+        onDeleteButtonClick("B4");
     }
     @FXML
     public void deletePicB5(){
-        deletePic("B5");
+        onDeleteButtonClick("B5");
     }
     public void deletePic(String picID) {
         // Directory where images are saved
@@ -530,7 +577,20 @@ public class MainPageController {
             }
         }
     }
+    public String getUsername(){
+        userID = getUserIDFromDoc();
+        DatabaseManager dbManager = new DatabaseManager();
+        String username = dbManager.getUsernameDB(userID);
 
+        if (username != null) {
+            System.out.println("Username: " + username);
+            return username;
+        } else {
+            System.out.println("User not found for ID: " + userID);
+            return null;
+        }
+
+    }
     @FXML
     public void initialize() {
         sideBar.setVisible(false);
@@ -541,5 +601,6 @@ public class MainPageController {
         userID = getUserIDFromDoc();
         System.out.println("Initializing MainPage...");
         loadUserImages(userID);
+        getUsername();
     }
 }
