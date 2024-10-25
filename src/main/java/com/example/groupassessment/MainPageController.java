@@ -1,52 +1,35 @@
 package com.example.groupassessment;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+// JavaFX imports
 import javafx.animation.TranslateTransition;
-import javafx.util.Duration;
-import javafx.stage.FileChooser;
-
-import java.sql.SQLException;
-import java.io.File;
-import java.io.IOException;
-import java.io.*;
-import java.util.Map;
-import java.util.HashMap;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.animation.TranslateTransition;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.stage.FileChooser;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
-
-import java.io.ByteArrayOutputStream;
-import java.io.*;
-
-import javafx.scene.image.ImageView;
+// Java standard library imports
 import java.awt.image.BufferedImage;
+import java.io.*;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+// External library imports
 import javax.imageio.ImageIO;
-
-
 
 public class MainPageController {
     @FXML
