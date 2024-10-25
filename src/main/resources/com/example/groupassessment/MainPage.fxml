@@ -14,7 +14,7 @@
   <VBox> <!-- This is the main design items -->
     <HBox style="-fx-background-color: grey;" prefHeight="100" maxHeight="100" prefWidth="1000">
       <AnchorPane>
-        <Label text="Username" style="-fx-font-size: 30px;" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50"/>
+        <Label fx:id="usernameText" text="Username" style="-fx-font-size: 30px;" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50"/>
         <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="890" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
       </AnchorPane>
     </HBox>

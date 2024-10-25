@@ -49,6 +49,8 @@ public class MainPageController {
     @FXML
     private VBox editPageEditor;
     @FXML
+    private Label usernameText;
+    @FXML
     private VBox picA1, picA2, picA3, picA4, picA5, picB1, picB2, picB3, picB4, picB5;
 
     @FXML
@@ -591,6 +593,7 @@ public class MainPageController {
         }
 
     }
+
     @FXML
     public void initialize() {
         sideBar.setVisible(false);
@@ -601,6 +604,10 @@ public class MainPageController {
         userID = getUserIDFromDoc();
         System.out.println("Initializing MainPage...");
         loadUserImages(userID);
-        getUsername();
+        String username = getUsername();
+        if (username != null){
+            usernameText.setText(username);
+        }
+
     }
 }

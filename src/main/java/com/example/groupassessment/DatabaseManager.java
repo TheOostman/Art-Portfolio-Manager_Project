@@ -211,7 +211,7 @@ public class DatabaseManager {
     }
 
     public String getUsernameDB(int userId) {
-        String query = "SELECT username FROM users WHERE user_id = ?";
+        String query = "SELECT username FROM users WHERE id = ?";
         String username = null;
 
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
