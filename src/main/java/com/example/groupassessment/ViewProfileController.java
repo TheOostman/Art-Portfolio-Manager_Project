@@ -16,35 +16,32 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ViewProfileController {
     @FXML
-    private TextField usernameEntry;
-    @FXML
-    private TextField passwordEntry;
-    @FXML
     private VBox sideBar;
-
     private boolean isSideBarVisible = false;
+    private Map<String, Image> selectedImages = new HashMap<>();
 
-    // THIS SECTION IS DUMMY STATS AND CAN BE DELETED
-    public static boolean isLoggedIn = true;        // Please use this boolean for signing and register !!!!
-    public String basicUsername = "123";             //Test data, this can be deleted
-    public String basicPassword = "123";                   //Test data, this can be deleted
-    //----------------------------------
-
-    public void changeToMain() throws IOException{
+    // change pages
+    @FXML
+    public void changeToMain() throws IOException {
         MainApplication.changeScene("MainPage.fxml");
     }
-    @FXML
-    private void toSignInBn(ActionEvent event) throws IOException {
-        MainApplication.changeScene("LoginPage.fxml");
-    }
-    @FXML
-    private void toSearchPage(ActionEvent event) throws IOException {
+    public void toSearchPage() throws IOException {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
-
+    public void toFeedPage() throws IOException {
+        MainApplication.changeScene("FeedPage.fxml");
+    }
+    public void changeToInbox() throws IOException {
+        MainApplication.changeScene("InboxPage.fxml");
+    }
+    public void toSignInBn() throws IOException {
+        MainApplication.changeScene("LoginPage.fxml");
+    }
     @FXML
     private void dropDownBn(ActionEvent event) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(300), sideBar);

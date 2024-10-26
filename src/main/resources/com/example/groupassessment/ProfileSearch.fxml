@@ -63,7 +63,6 @@
           <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
           <Button text="MY PROFILE" prefWidth="150" onAction="#changeToMain"/>
           <Button text="INBOX" prefWidth="150" onAction="#changeToMain"/>
-          <Button text="view profile test" prefWidth="150" onAction="#toViewProfile"/>
           <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
         </VBox>
       </VBox>

@@ -62,8 +62,9 @@ public class MainPageController {
         // Initialize the database manager
         this.databaseManager = new DatabaseManager();
     }
-    // pages used
     private Map<String, Image> selectedImages = new HashMap<>();
+
+    // change pages
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
     }
@@ -79,6 +80,11 @@ public class MainPageController {
     private void toSearchPage(ActionEvent event) throws IOException {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
+    @FXML
+    private void changeToInbox(ActionEvent event) throws IOException {
+        MainApplication.changeScene("InboxPage.fxml");
+    }
+
     @FXML
     private void dropDownBn(ActionEvent event) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(300), sideBar);
