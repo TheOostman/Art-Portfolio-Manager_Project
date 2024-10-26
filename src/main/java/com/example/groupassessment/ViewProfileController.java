@@ -63,7 +63,7 @@ public class ViewProfileController {
 
     public void setUsername(String username) {
         usernameLabel.setText(username);
-        // Load other user data as needed (e.g., profile image, bio, etc.)
+        // Load other user data as needed (e.g., profile image, bio, etc.) ...
     }
 
 
