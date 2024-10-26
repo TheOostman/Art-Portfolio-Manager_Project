@@ -12,16 +12,15 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Updated to the latest version
-
+      uses: actions/checkout@v3  
     - name: Set up JDK
-      uses: actions/setup-java@v3  # Updated to the latest version
+      uses: actions/setup-java@v3  
       with:
         java-version: '17'
-        distribution: 'temurin'  # Specifies the Java distribution
+        distribution: 'temurin'
 
     - name: Cache Maven packages
-      uses: actions/cache@v3  # Updated to the latest version
+      uses: actions/cache@v3 
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
