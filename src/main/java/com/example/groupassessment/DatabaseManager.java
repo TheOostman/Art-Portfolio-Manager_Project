@@ -86,7 +86,7 @@ public class DatabaseManager {
                 + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + "    image_id TEXT NOT NULL,\n"
                 + "    user_id INTEGER REFERENCES users(id),\n"
-                + "    image BLOB\n"
+                + "    image BLOB,\n"
                 + "    title TEXT,\n"
                 + "    description TEXT\n"
                 + ");";
@@ -223,11 +223,12 @@ public class DatabaseManager {
         return username;
     }
 
-    // Update the title and comments of an image in the database
     public void updateImageMetadata(int userId, String imageId, String newTitle, String newDescription) {
-        String query = "UPDATE images SET title = ?, comments = ? WHERE user_id = ? AND image_id = ?";
+        String query = "UPDATE images SET title = ?, description = ? WHERE user_id = ? AND image_id = ?";
 
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            conn.setAutoCommit(true); // Ensure immediate commit
+
             pstmt.setString(1, newTitle);
             pstmt.setString(2, newDescription);
             pstmt.setInt(3, userId);
@@ -243,6 +244,46 @@ public class DatabaseManager {
             System.out.println("Error updating image metadata: " + e.getMessage());
         }
     }
+
+
+    // Method to get the title of an image from the database
+    public String getImageTitle(int userId, String imageId) {
+        String title = null;
+        String query = "SELECT title FROM images WHERE user_id = ? AND image_id = ?";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            pstmt.setString(2, imageId);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                title = rs.getString("title"); // Get title from result set
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving image title: " + e.getMessage());
+        }
+        return title; // Return the retrieved title
+    }
+
+    // Method to get the description of an image from the database
+    public String getImageDescription(int userId, String imageId) {
+        String description = null;
+        String query = "SELECT description FROM images WHERE user_id = ? AND image_id = ?";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            pstmt.setString(2, imageId);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                description = rs.getString("description"); // Get description from result set
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving image description: " + e.getMessage());
+        }
+        return description; // Return the retrieved description
+    }
+
 
     public Map<String, File> getUserImagesAsFiles(int userID) {
         Map<String, File> userImages = new HashMap<>();

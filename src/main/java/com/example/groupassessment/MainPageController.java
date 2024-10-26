@@ -513,51 +513,56 @@ public class MainPageController {
             ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
             Image image = new Image(bis);
 
+            // Retrieve title and description from the database
+            String title = dbManager.getImageTitle(userId, imageId);
+            String description = dbManager.getImageDescription(userId, imageId);
+
             // Set image and add click event to open it in an edit pop-up
             switch (imageId) {
                 case "A1":
                     imageViewA1.setImage(image);
-                    imageViewA1.setOnMouseClicked(e -> EditImage(image, "Image A1", "Comments for Image A1", imageId, userId));
+                    imageViewA1.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "A2":
                     imageViewA2.setImage(image);
-                    imageViewA2.setOnMouseClicked(e -> EditImage(image, "Image A2", "Comments for Image A2", imageId, userId));
+                    imageViewA2.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "A3":
                     imageViewA3.setImage(image);
-                    imageViewA3.setOnMouseClicked(e -> EditImage(image, "Image A3", "Comments for Image A3", imageId, userId));
+                    imageViewA3.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "A4":
                     imageViewA4.setImage(image);
-                    imageViewA4.setOnMouseClicked(e -> EditImage(image, "Image A4", "Comments for Image A4", imageId, userId));
+                    imageViewA4.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "A5":
                     imageViewA5.setImage(image);
-                    imageViewA5.setOnMouseClicked(e -> EditImage(image, "Image A5", "Comments for Image A5", imageId, userId));
+                    imageViewA5.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "B1":
                     imageViewB1.setImage(image);
-                    imageViewB1.setOnMouseClicked(e -> EditImage(image, "Image B1", "Comments for Image B1", imageId, userId));
+                    imageViewB1.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "B2":
                     imageViewB2.setImage(image);
-                    imageViewB2.setOnMouseClicked(e -> EditImage(image, "Image B2", "Comments for Image B2", imageId, userId));
+                    imageViewB2.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "B3":
                     imageViewB3.setImage(image);
-                    imageViewB3.setOnMouseClicked(e -> EditImage(image, "Image B3", "Comments for Image B3", imageId, userId));
+                    imageViewB3.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "B4":
                     imageViewB4.setImage(image);
-                    imageViewB4.setOnMouseClicked(e -> EditImage(image, "Image B4", "Comments for Image B4", imageId, userId));
+                    imageViewB4.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
                 case "B5":
                     imageViewB5.setImage(image);
-                    imageViewB5.setOnMouseClicked(e -> EditImage(image, "Image B5", "Comments for Image B5", imageId, userId));
+                    imageViewB5.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
                     break;
             }
         }
     }
+
     public String getUsername(){
         userID = getUserIDFromDoc();
         DatabaseManager dbManager = new DatabaseManager();
@@ -590,6 +595,7 @@ public class MainPageController {
 
     }
     // edit image (title and comments)
+    // Edit image (title and comments)
     private void EditImage(Image image, String title, String description, String imageId, int userId) {
         Stage editStage = new Stage();
         editStage.setTitle("Edit Image");
@@ -597,32 +603,39 @@ public class MainPageController {
         ImageView fullImageView = new ImageView(image);
         fullImageView.setFitWidth(500);
         fullImageView.setPreserveRatio(true);
+        // Initialize dbManager here
+        DatabaseManager dbManager = new DatabaseManager();
 
         // Editable fields for title and comments
         TextField titleField = new TextField(title);
         titleField.setPromptText("Enter new title");
         titleField.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-        TextArea descriptionArea  = new TextArea(description);
-        descriptionArea .setWrapText(true);
-        descriptionArea .setPromptText("Enter Description");
+        TextArea descriptionArea = new TextArea(description);
+        descriptionArea.setWrapText(true);
+        descriptionArea.setPromptText("Enter Description");
 
         // Save button to apply changes
         Button saveButton = new Button("Save");
         saveButton.setOnAction(e -> {
             String newTitle = titleField.getText();
-            String newDescription = descriptionArea .getText();
+            String newDescription = descriptionArea.getText();
 
-            // Update the title and comments in the database or data store
-            DatabaseManager dbManager = new DatabaseManager();
-            dbManager.updateImageMetadata(userId, imageId, newTitle, newDescription );
+            // Update the title and description in the database
+            dbManager.updateImageMetadata(userId, imageId, newTitle, newDescription);
+
+            // Refresh the image title and description in the UI immediately
+            loadUserImages(userId);
 
             editStage.close(); // Close the edit window after saving
         });
 
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(15));
-        layout.getChildren().addAll(new Label("Edit Title:"), titleField, fullImageView, new Label("Edit Description:"), descriptionArea , saveButton);
+        layout.getChildren().addAll(
+                new Label("Edit Title:"), titleField, fullImageView,
+                new Label("Edit Description:"), descriptionArea, saveButton
+        );
 
         Scene scene = new Scene(layout, 700, 900);
         editStage.setScene(scene);
