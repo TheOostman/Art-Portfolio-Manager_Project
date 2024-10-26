@@ -30,10 +30,6 @@ public class LoginController {
         statement.executeUpdate();
     }
 
-    public void changeToMain() throws IOException{
-        MainApplication.changeScene("MainPage.fxml");
-    }
-
     @FXML
     private void toRegisterPageBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("RegisterPage.fxml");
@@ -102,7 +98,7 @@ public class LoginController {
 
             // Change scene after successfully saving user session
             try {
-                changeToMain();
+                MainApplication.changeScene("MainPage.fxml");
             } catch (IOException e) {
                 System.out.println("Error navigating to main page: " + e.getMessage());
             }
