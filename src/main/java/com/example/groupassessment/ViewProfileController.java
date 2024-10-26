@@ -22,6 +22,7 @@ import java.util.Map;
 public class ViewProfileController {
     @FXML
     private VBox sideBar;
+
     private boolean isSideBarVisible = false;
     private Map<String, Image> selectedImages = new HashMap<>();
 
