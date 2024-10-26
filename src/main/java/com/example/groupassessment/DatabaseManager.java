@@ -222,12 +222,12 @@ public class DatabaseManager {
     }
 
     // Update the title and comments of an image in the database
-    public void updateImageMetadata(int userId, String imageId, String newTitle, String newComments) {
+    public void updateImageMetadata(int userId, String imageId, String newTitle, String newDescription) {
         String query = "UPDATE images SET title = ?, comments = ? WHERE user_id = ? AND image_id = ?";
 
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, newTitle);
-            pstmt.setString(2, newComments);
+            pstmt.setString(2, newDescription);
             pstmt.setInt(3, userId);
             pstmt.setString(4, imageId);
 
