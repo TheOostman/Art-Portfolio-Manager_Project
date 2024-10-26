@@ -26,7 +26,7 @@
         <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" onAction="#dropDownBn"/>
     </HBox>
 
-    <VBox spacing="20" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="50">
+    <VBox spacing="20" AnchorPane.leftAnchor="50" AnchorPane.topAnchor="120">
         <!-- Title Labels -->
         <Label text="Your feed" style="-fx-font-weight: bold; -fx-font-size: 30px; -fx-text-fill: #FF6600;" />
         <!-- Feed Container Area inside a ScrollPane -->
@@ -46,7 +46,9 @@
         </VBox>
     </VBox>
     <!-- sidebar menu -->
-    <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000" style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false">
+    <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000"
+          style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false"
+          AnchorPane.rightAnchor="0">
         <AnchorPane>
             <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="60" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
         </AnchorPane>
