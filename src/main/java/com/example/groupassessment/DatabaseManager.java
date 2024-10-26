@@ -84,7 +84,7 @@ public class DatabaseManager {
         // SQL command to create the images table if it doesn't exist
         String imagesTableSql = "CREATE TABLE IF NOT EXISTS images (\n"
                 + "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                + "    image_id TEXT UNIQUE NOT NULL,\n"
+                + "    image_id TEXT NOT NULL,\n"
                 + "    user_id INTEGER REFERENCES users(id),\n"
                 + "    image BLOB\n"
                 + "    title TEXT,\n"
@@ -243,7 +243,6 @@ public class DatabaseManager {
             System.out.println("Error updating image metadata: " + e.getMessage());
         }
     }
-
 
     public Map<String, File> getUserImagesAsFiles(int userID) {
         Map<String, File> userImages = new HashMap<>();
