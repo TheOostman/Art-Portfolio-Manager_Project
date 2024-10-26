@@ -35,6 +35,8 @@
       <!-- password entry -->
       <Label text="Password"/>
       <TextField fx:id="passwordEntry" prefWidth="200" maxWidth="200"/>
+        <Label fx:id="feedbackLabel" text="" style="-fx-text-fill: red;" layoutX="120" layoutY="220"/>
+
       </VBox>
 
       <!-- Buttons -->

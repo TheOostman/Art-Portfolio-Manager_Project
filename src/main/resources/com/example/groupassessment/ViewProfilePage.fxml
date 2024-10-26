@@ -22,7 +22,7 @@
 
 
 
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.ViewProfileController" prefHeight="400.0" prefWidth="600.0">
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.ViewProfileController">
     <VBox>
 
     <!-- header -->
@@ -31,8 +31,8 @@
         <ImageView fitWidth="100" preserveRatio="true">
             <Image url="@Image/CornerDesign.png"/>
         </ImageView>
-
-        <Label text="Collect Viewed Profile NAme" style="-fx-font-size: 30px;"/>
+        <!--Display selected username-->
+        <Label fx:id="usernameLabel" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
         <Pane HBox.hgrow="ALWAYS"/>
         <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" onAction="#dropDownBn"/>
     </HBox>

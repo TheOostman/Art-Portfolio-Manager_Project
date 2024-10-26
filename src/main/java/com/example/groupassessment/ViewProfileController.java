@@ -67,6 +67,14 @@ public class ViewProfileController {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
 
+    @FXML
+    private Label usernameLabel; // Assume you have a label to show the username
+
+    public void setUsername(String username) {
+        usernameLabel.setText(username);
+        // Load other user data as needed (e.g., profile image, bio, etc.)
+    }
+
     // pop up view image
     private void OpenImage(Image image, String title, String comments) {
         Stage imageStage = new Stage();

@@ -3,6 +3,8 @@ package com.example.groupassessment;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -153,13 +155,34 @@ public class SearchController {
 
     @FXML
     private void handleUserSelection() {
-        String selectedUsername = usernamesListView.getSelectionModel().getSelectedItem(); // Get the selected username
+        String selectedUsername = usernamesListView.getSelectionModel().getSelectedItem(); // Get the selected item
         if (selectedUsername != null) {
             System.out.println("Selected Username: " + selectedUsername);
-            // Handle selected username (e.g., navigate to user profile)
+            // Load the profile view for the selected username
+            loadProfileView(selectedUsername);
         }
     }
 
+    private void loadProfileView(String username) {
+        try {
+            // Load the profile view FXML file (e.g., "ProfileView.fxml")
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewProfilePage.fxml"));
+            Parent profileView = loader.load();
+
+            // Pass the selected username to the ProfileController if necessary
+            ViewProfileController profileController = loader.getController();
+            profileController.setUsername(username);  // Assume you have a setUsername method in ProfileController
+
+            // Create a new scene and set it to the stage
+            Scene scene = new Scene(profileView);
+            Stage stage = (Stage) usernamesListView.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading profile view: " + e.getMessage());
+        }
+    }
     // Page Changes
     @FXML
     private void toSignInBn(ActionEvent event) throws IOException {

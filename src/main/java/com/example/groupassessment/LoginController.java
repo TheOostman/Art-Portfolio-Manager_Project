@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 
 import java.io.*;
 
+import javafx.scene.control.Label;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +18,9 @@ public class LoginController {
     private TextField usernameEntry;
     @FXML
     private TextField passwordEntry;
+    @FXML
+    private Label feedbackLabel;  // Label for feedback messages
+
 
     public void registerUser(String username, String password, Connection connection) throws SQLException {
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
@@ -60,7 +64,6 @@ public class LoginController {
 
         return false;
     }
-
     public int getUserId(String username) {
         String sql = "SELECT id FROM users WHERE username = ?";
         int userId = -1; // Default value if user is not found
@@ -91,6 +94,7 @@ public class LoginController {
 
         if (verifyCredentials(enteredUsername, enteredPassword)) {
             System.out.println("Login successful for user: " + enteredUsername);
+            feedbackLabel.setText("");  // Clear feedback message
 
             // Write current user data immediately
             int userId = getUserId(enteredUsername);
@@ -104,6 +108,7 @@ public class LoginController {
             }
         } else {
             System.out.println("Failed login attempt for user: " + enteredUsername);
+            feedbackLabel.setText("Invalid username or password");  // Set error message
         }
     }
 
