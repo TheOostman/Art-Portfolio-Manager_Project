@@ -32,7 +32,7 @@ public class RegisterController {
 
     @FXML
     public void initialize() {
-        // Set up ComboBox with role options
+        // comboBox with role options
         ObservableList<String> roles = FXCollections.observableArrayList(
                 "Artist", "Recruiter", "Community Member"
         );
@@ -45,6 +45,7 @@ public class RegisterController {
     private void toSignInBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("LoginPage.fxml");
     }
+
     // SQLite connection URL
     private final String url = "jdbc:sqlite:users.db";
 
@@ -62,7 +63,7 @@ public class RegisterController {
     }
 
     private boolean isEmailValid(String email) {
-        // Basic email pattern check
+        // email pattern check
         return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
 
@@ -79,7 +80,7 @@ public class RegisterController {
 
             pstmt.executeUpdate();
             messageLabel.setText("Registration successful! Go to ");
-            messageLabel.setText(messageLabel.getText() + "[Sign In]"); // Concatenate sign-in link text
+            messageLabel.setText(messageLabel.getText() + "Sign In");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

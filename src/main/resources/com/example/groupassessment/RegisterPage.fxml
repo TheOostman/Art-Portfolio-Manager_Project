@@ -30,7 +30,7 @@
           <Label text="Your Role"/>
           <ComboBox fx:id="roleComboBox" layoutX="150" layoutY="180" prefWidth="150" />
 
-          <!-- feedback box -->
+          <!-- feedback -->
           <Label fx:id="messageLabel" text="" style="-fx-text-fill: red; -fx-font-weight: bold;" wrapText="true"/>
 
           <!-- Buttons -->
