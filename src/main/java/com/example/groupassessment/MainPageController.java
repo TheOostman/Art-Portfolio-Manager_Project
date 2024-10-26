@@ -67,6 +67,10 @@ public class MainPageController {
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
     }
+    @FXML
+    private void toFeedPage(ActionEvent event) throws IOException {
+        MainApplication.changeScene("FeedPage.fxml");
+    }
 
     @FXML
     private void toSignInBn(ActionEvent event) throws IOException {

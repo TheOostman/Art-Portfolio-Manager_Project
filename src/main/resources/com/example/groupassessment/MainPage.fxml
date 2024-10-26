@@ -39,6 +39,7 @@
           <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
           <Button text="EDIT PROFILE" prefWidth="150" onAction="#editPage"/>
           <Button text="SEARCH FOR PROFILE" prefWidth="150" onAction="#toSearchPage"/>
+          <Button text="FEED PAGE" prefWidth="150" onAction="#toFeedPage"/>
           <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
         </VBox>
       </VBox>
