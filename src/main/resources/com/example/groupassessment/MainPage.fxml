@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <?import javafx.scene.image.ImageView?>
+
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.groupassessment.MainPageController">
   <VBox>
     <!-- header -->
@@ -37,6 +38,7 @@
       </AnchorPane>
     </HBox>
   </VBox>
+  <!-- sidebar menu -->
   <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000" style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false">
     <AnchorPane>
       <VBox>
@@ -46,8 +48,9 @@
         <VBox style="-fx-padding: 40 0 0 0;">
           <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
           <Button text="EDIT PROFILE" prefWidth="150" onAction="#editPage"/>
-          <Button text="SEARCH FOR PROFILE" prefWidth="150" onAction="#toSearchPage"/>
-          <Button text="FEED PAGE" prefWidth="150" onAction="#toFeedPage"/>
+          <Button text="SEARCH" prefWidth="150" onAction="#toSearchPage"/>
+          <Button text="FEED" prefWidth="150" onAction="#toFeedPage"/>
+          <Button text="INBOX" prefWidth="150" onAction="#changeToInbox"/>
           <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
         </VBox>
       </VBox>

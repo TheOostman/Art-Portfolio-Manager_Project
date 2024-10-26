@@ -62,7 +62,8 @@
         <VBox style="-fx-padding: 40 0 0 0;">
           <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
           <Button text="MY PROFILE" prefWidth="150" onAction="#changeToMain"/>
-          <Button text="INBOX" prefWidth="150" onAction="#changeToMain"/>
+          <Button text="FEED" prefWidth="150" onAction="#toFeedPage"/>
+          <Button text="INBOX" prefWidth="150" onAction="#changeToInbox"/>
           <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
         </VBox>
       </VBox>

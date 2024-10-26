@@ -76,8 +76,6 @@ public class Feed {
         }
     }
 
-    // change pages
-
     @FXML
     private VBox sideBar;
     private boolean isSideBarVisible = false;

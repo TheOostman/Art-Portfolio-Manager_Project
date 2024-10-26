@@ -360,9 +360,6 @@ public class SearchController {
     public void changeToMain() throws IOException {
         MainApplication.changeScene("MainPage.fxml");
     }
-    public void toSearchPage() throws IOException {
-        MainApplication.changeScene("ProfileSearch.fxml");
-    }
     public void toFeedPage() throws IOException {
         MainApplication.changeScene("FeedPage.fxml");
     }
