@@ -594,7 +594,6 @@ public class MainPageController {
         }
 
     }
-    // edit image (title and comments)
     // Edit image (title and comments)
     private void EditImage(Image image, String title, String description, String imageId, int userId) {
         Stage editStage = new Stage();
@@ -603,7 +602,7 @@ public class MainPageController {
         ImageView fullImageView = new ImageView(image);
         fullImageView.setFitWidth(500);
         fullImageView.setPreserveRatio(true);
-        // Initialize dbManager here
+    // Initialize dbManager here
         DatabaseManager dbManager = new DatabaseManager();
 
         // Editable fields for title and comments

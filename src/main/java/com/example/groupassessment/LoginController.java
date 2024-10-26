@@ -91,33 +91,37 @@ public class LoginController {
 
         if (verifyCredentials(enteredUsername, enteredPassword)) {
             System.out.println("Login successful for user: " + enteredUsername);
+
+            // Write current user data immediately
+            int userId = getUserId(enteredUsername);
+            writeUserSessionData(userId);
+
+            // Change scene after successfully saving user session
             try {
-                File dir = new File("src/main/resources/userData");
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                File outputFile = new File(dir, "UserData.txt");
-                int userId = getUserId(enteredUsername);
-
-                try (FileWriter writer = new FileWriter(outputFile)) {
-                    writer.write("User ID: " + userId);
-                    System.out.println("User ID saved to: " + outputFile.getAbsolutePath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
                 changeToMain();
             } catch (IOException e) {
-                System.out.println("Error navigating to main page");
-
+                System.out.println("Error navigating to main page: " + e.getMessage());
             }
         } else {
             System.out.println("Failed login attempt for user: " + enteredUsername);
         }
     }
 
+    // Helper method to handle writing session data
+    private void writeUserSessionData(int userId) {
+        File dir = new File("src/main/resources/userData");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File outputFile = new File(dir, "UserData.txt");
 
-
-
+        // Ensure file is overwritten each time
+        try (FileWriter writer = new FileWriter(outputFile, false)) {
+            writer.write("User ID: " + userId);
+            System.out.println("User ID saved to: " + outputFile.getAbsolutePath());
+        } catch (IOException e) {
+            System.out.println("Error saving user session data: " + e.getMessage());
+        }
+    }
 }
 
