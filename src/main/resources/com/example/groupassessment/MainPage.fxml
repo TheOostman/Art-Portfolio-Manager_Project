@@ -51,7 +51,7 @@
           <Button text="SEARCH" prefWidth="150" onAction="#toSearchPage"/>
           <Button text="FEED" prefWidth="150" onAction="#toFeedPage"/>
           <Button text="INBOX" prefWidth="150" onAction="#changeToInbox"/>
-          <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
+          <Button text="LOGOUT" prefWidth="150" onAction="#logout"/>
         </VBox>
       </VBox>
     </AnchorPane>
