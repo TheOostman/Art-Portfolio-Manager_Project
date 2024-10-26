@@ -623,12 +623,8 @@ public class MainPageController {
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(15));
         layout.getChildren().addAll(new Label("Edit Title:"), titleField, fullImageView, new Label("Edit Description:"), descriptionArea , saveButton);
-        // Determine image dimensions and adjust the scene size
-        double imageWidth = image.getWidth();
-        double imageHeight = image.getHeight();
-        double padding = 50; // Additional space for title, description, and padding
 
-        Scene scene = new Scene(layout, imageWidth + padding, imageHeight + padding);
+        Scene scene = new Scene(layout, 700, 900);
         editStage.setScene(scene);
         editStage.initModality(Modality.APPLICATION_MODAL);
         editStage.showAndWait();
