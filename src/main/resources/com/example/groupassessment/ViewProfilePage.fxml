@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.Pane?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.ViewProfileController">
+    <VBox>
+
+    <!-- header -->
+    <HBox alignment="CENTER" style="-fx-background-color: #D7F6FD;" prefHeight="100" maxHeight="100" prefWidth="1000">
+        <!-- ImageView to display in corner-->
+        <ImageView fitWidth="100" preserveRatio="true">
+            <Image url="@Image/CornerDesign.png"/>
+        </ImageView>
+        <!--Display selected username-->
+        <Label fx:id="usernameLabel" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" onAction="#dropDownBn"/>
+    </HBox>
+    </VBox>
+
+    <!-- sidebar menu -->
+    <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000" style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false">
+        <AnchorPane>
+            <VBox>
+                <AnchorPane>
+                    <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" AnchorPane.leftAnchor="60" AnchorPane.topAnchor="15" onAction="#dropDownBn"/>
+                </AnchorPane>
+                <VBox style="-fx-padding: 40 0 0 0;">
+                    <Label text="MENU" style="-fx-font-weight: bold; -fx-font-size: 24px;" />
+                    <Button text="MY PROFILE" prefWidth="150" onAction="#changeToMain"/>
+                    <Button text="SEARCH" prefWidth="150" onAction="#toSearchPage"/>
+                    <Button text="FEED" prefWidth="150" onAction="#toFeedPage"/>
+                    <Button text="INBOX" prefWidth="150" onAction="#changeToInbox"/>
+                    <Button text="LOGOUT" prefWidth="150" onAction="#toSignInBn"/>
+                </VBox>
+            </VBox>
+        </AnchorPane>
+    </VBox>
+
+</StackPane>

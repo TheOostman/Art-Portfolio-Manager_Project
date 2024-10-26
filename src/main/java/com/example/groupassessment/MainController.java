@@ -8,8 +8,6 @@ import javafx.scene.control.TextField;
 public class MainController {
     @FXML
     private Button profileButton;
-    //@FXML
-    //private Button signinRegister;
     @FXML
     private TextField usernameEntry;
     @FXML

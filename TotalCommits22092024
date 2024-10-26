@@ -1,0 +1,472 @@
+[33mcommit 1672ef05834bd1fa8766969152e7afb75c768b09[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 17:12:45 2024 +1000
+
+    Test Case 1, User register - Everyone
+
+[33mcommit 3d2392b07d74849c214445239cfd23d85ab0d491[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 16:26:32 2024 +1000
+
+    small update - Ethan
+
+[33mcommit 0942bfe4e9d01daf2c8ad1f067c0aa531a2c99b4[m
+Merge: 181806f 588d692
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 16:24:34 2024 +1000
+
+    Merge branch 'oldMainBackup'
+
+[33mcommit 181806fcfc2aeaaed4ad44bd7c867aed93a53c0c[m
+Merge: 1cd0202 a7b6b90
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 16:15:33 2024 +1000
+
+    Merge branch 'main' of https://github.com/TheOostman/Art-Portfolio-Manager_Project
+
+[33mcommit a7b6b90a1572523c20bf238634b9fff1591aadf0[m
+Author: Han <n11180021@qut.edu.au>
+Date:   Sun Sep 22 16:15:09 2024 +1000
+
+    renamefile
+
+[33mcommit 1cd0202d043c41e1260faea260ceb1988a05fee5[m
+Merge: 9ac432d 704c4de
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 16:12:43 2024 +1000
+
+    Merge branch 'main' of https://github.com/TheOostman/Art-Portfolio-Manager_Project
+
+[33mcommit 704c4deef5ff2dbff47ed6884bca0a944b69a38d[m
+Author: moon1300 <n11180021@qut.edu.au>
+Date:   Sun Sep 22 16:11:21 2024 +1000
+
+    Add files via upload
+    
+    prototype
+
+[33mcommit 9ac432df1acede9fa076f7d6cad69279c50cd691[m
+Merge: 547ef55 0c86839
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 15:40:28 2024 +1000
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 547ef554df55d23506ad23e19e56e18edca0d597[m
+Merge: 6eb60a5 a2cd93c
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 15:39:15 2024 +1000
+
+    Merge branch 'RegisterUser'
+    
+    # Conflicts:
+    #       users.db
+
+[33mcommit 588d692900648f418fa6ef7e89748f0cc8cfe725[m[33m ([m[1;31morigin/oldMainBackup[m[33m, [m[1;32moldMainBackup[m[33m)[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 15:38:03 2024 +1000
+
+    small update - Ethan
+
+[33mcommit a2cd93cfa4ac1b671b3a46d53f442624f9b429ea[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 15:36:37 2024 +1000
+
+    small update - Ethan
+
+[33mcommit ea7cb64a8efca38ddb26dadbc0e862fd26085143[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 15:32:54 2024 +1000
+
+    loadup bug fixed for uploading img - Ethan
+
+[33mcommit 86d34fc6d7510ebc3228a4c9f90b086eebd3a0ac[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 15:17:02 2024 +1000
+
+    Picture Development - Ethan
+
+[33mcommit 0c8683952f7bf74f8da675fc87857695c5dedc0d[m
+Merge: 2517ae5 6eb60a5
+Author: Han <n11180021@qut.edu.au>
+Date:   Sun Sep 22 14:27:11 2024 +1000
+
+    han
+
+[33mcommit 2517ae5700d222f1680f5438e9f9011300b3b0db[m
+Author: Han <n11180021@qut.edu.au>
+Date:   Sun Sep 22 14:20:51 2024 +1000
+
+    Sprint Plan / User Stories Update- Han
+
+[33mcommit 6eb60a580e92287a9fa25f29808bd26325e1770c[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 14:06:42 2024 +1000
+
+    asd
+
+[33mcommit 2fe74712eab08cdcdd40b2cc68acb3255ff66b7f[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 14:05:13 2024 +1000
+
+    Database & configured - Ethan
+
+[33mcommit 6c5477e05cf40dc191d072ff203de6f61e1a2e3b[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 12:28:40 2024 +1000
+
+    Database setup & configured - Ethan
+
+[33mcommit a30ac9ac00823dc1c93341571525445eb94f2dc0[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 11:34:57 2024 +1000
+
+    Little details - Ethan srimanjary
+
+[33mcommit 1467b5ad39632dd5eb57f80c0b9fa23f0a884340[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 10:46:55 2024 +1000
+
+    Little details - Ethan
+
+[33mcommit acfdce5ffa7d5001df5a4c40c8bb431c2720bdb6[m[33m ([m[1;31morigin/Design1[m[33m, [m[1;32mDesign1[m[33m)[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 01:53:02 2024 +1000
+
+    Little details - Ethan
+
+[33mcommit 739c30c1eca629bcfa1ef0113770b9459e431497[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 01:10:17 2024 +1000
+
+    Little details - Ethan
+
+[33mcommit f18812ac6e198d29e9b72b9aa8f0655032e36ca4[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 00:56:00 2024 +1000
+
+    Refesh Done - Ethan
+
+[33mcommit 197b3eddec39fa5fae0f8c2d126939ec0dfdeca3[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 00:49:14 2024 +1000
+
+    Delete Pictures Done - Ethan
+
+[33mcommit 711438aec616f04c17e4a6f8984e8ddb6caed2c4[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 00:31:34 2024 +1000
+
+    Upload images done - Ethan
+
+[33mcommit a8e256feb502d98ffa934533f81c576021b365de[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sun Sep 22 00:18:22 2024 +1000
+
+    Upload of pictures done - Ethan
+
+[33mcommit 080eb0c4eb43658691e74b6281a4e537b2aa6cb4[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 23:35:34 2024 +1000
+
+    Upload and download pictures progress - Ethan
+
+[33mcommit d31999b65a954e0a9e1835742f611c8f38500d82[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 23:05:18 2024 +1000
+
+    Uploading of images progress - Ethan
+
+[33mcommit e5ca4fe1e5a3f601291bbb9ec8c9f942ac019ea5[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 17:15:07 2024 +1000
+
+    adding an edit section - Ethan
+
+[33mcommit 073cd412ce2c0ee5e4c6a47646dba99bd28044c5[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 17:02:35 2024 +1000
+
+    small details - ethan
+
+[33mcommit 53fa82a2c88af8dbb707acea81799bb63f9c5596[m[33m ([m[1;32mmainBackup[m[33m)[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 10:20:20 2024 +1000
+
+    Tasks for today - Ethan
+
+[33mcommit 3dd2767add707a17532e7b0d00f70107493553aa[m
+Merge: 15143be 57141e7
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 02:19:44 2024 +1000
+
+    Merge remote-tracking branch 'origin/Design1'
+
+[33mcommit 57141e7d262d8ed231e98dfc6c0ffd5c70ec912f[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 02:19:23 2024 +1000
+
+    Search GUI done  - Ethan
+
+[33mcommit 81281e1f6b7a3fa98ab2fbd56c876fd99e6d172a[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 01:20:45 2024 +1000
+
+    Menu logout Button  - Ethan
+
+[33mcommit 717e86992a6ce267e578c3c3c263516018ce1711[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 21 00:38:20 2024 +1000
+
+    Menu creation start  - Ethan
+
+[33mcommit 64997ac74968efd76da0329a7de95959ceaa2ea3[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 23:53:29 2024 +1000
+
+    Design  - Ethan
+
+[33mcommit 15143beee4944cfffd60f769bfecbdca9b4d8f37[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 23:52:33 2024 +1000
+
+    Merge of new Design  - Ethan
+
+[33mcommit 0301f3cbaac79fe517e061206fcec10c38bc2c98[m
+Merge: 3dc00b4 8496aaa
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 23:23:00 2024 +1000
+
+    Merge remote-tracking branch 'origin/Design1'
+    
+    # Conflicts:
+    #       src/main/java/com/example/groupassessment/MainController.java
+
+[33mcommit 8496aaa8a2102cd05f9d1047d618981635c9ba43[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 23:21:50 2024 +1000
+
+    Multiple Document Creation  - Ethan
+
+[33mcommit e3be24cd33855520a152e00db70ea8c75f9f620d[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 23:21:16 2024 +1000
+
+    Multiple Document Creation  - Ethan
+
+[33mcommit 9729f76c75b69db00350d464d88b5bc2fc11bbc8[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 22:47:11 2024 +1000
+
+    MainPage progress save  - Ethan
+
+[33mcommit f7e165e1a47bba62e3cc67687936c52d396df1fb[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 22:12:16 2024 +1000
+
+    Created Main Window Page  - Ethan
+
+[33mcommit 651a1aca78e82801f20a66f874f41f4c2a4052f3[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 22:00:20 2024 +1000
+
+    Created Dummy Login System  - Ethan
+
+[33mcommit 2e43f3b4bebb5205841009b9ac37372cb79a91ea[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 21:46:03 2024 +1000
+
+    Register Page Creation  - Ethan
+
+[33mcommit cdb279153194f5e4029739b0bbf20426c1910fa3[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 21:23:02 2024 +1000
+
+    Starting Register Page  - Ethan
+
+[33mcommit f14ff9304e7f71882128bc24fac6f6b8e868bdfb[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 21:17:53 2024 +1000
+
+    Login Page Created  - Ethan
+
+[33mcommit 3dc00b437c4e4f66a2e431382f6d7dc39ef46666[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 20:23:01 2024 +1000
+
+    edits  - Ethan
+
+[33mcommit f316a2415c7be0134ce8a9e6c8db25cbaf5f8356[m[33m ([m[1;31morigin/Minh[m[33m)[m
+Merge: 3c61da5 b7af713
+Author: Minh <n11530847@qut.edu.au>
+Date:   Fri Sep 20 16:06:27 2024 +1000
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 3c61da579a788d3302a0f279c72adda4a3a61777[m
+Author: Minh <n11530847@qut.edu.au>
+Date:   Fri Sep 20 16:05:47 2024 +1000
+
+    test
+
+[33mcommit 11ac3dac8faa36bf8d63a564f076b9c9f7a70e25[m
+Author: Minh <n11530847@qut.edu.au>
+Date:   Fri Sep 20 15:53:56 2024 +1000
+
+    Initial commit
+
+[33mcommit b7af713e6b11afb1ab026b3de89412cce3493164[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 15:16:59 2024 +1000
+
+    AllCommitsUpdated - Ethan
+
+[33mcommit 1af0cd78b5372696366232de94ed4dd4550893cf[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 14:18:15 2024 +1000
+
+    test - Ethan
+
+[33mcommit 66e325c945f51abe1cda2d9e84c2dc6d1f92d900[m
+Author: Srimanjary <106217384+Srimanjary@users.noreply.github.com>
+Date:   Fri Sep 20 13:49:15 2024 +1000
+
+    Add files via upload
+
+[33mcommit 948ecf4c2e6f4988e7fb7126d963446c8fe3380e[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 20 00:17:51 2024 +1000
+
+    commit log by Ethan  - Ethan
+
+[33mcommit 06785f58a359184f785e60c1b32a21c90810513b[m[33m ([m[1;32mBackup[m[33m)[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Thu Sep 19 10:37:27 2024 +1000
+
+    small change  - Ethan
+
+[33mcommit 791a3ec828eec2111bf82b571af273d975370f0b[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Thu Sep 19 10:19:16 2024 +1000
+
+    small change  - Ethan
+
+[33mcommit 6965238be4a966c1796ed043297d9e008ca319eb[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 23:04:26 2024 +1000
+
+    Design 1 Creation  - Ethan
+
+[33mcommit f9431bf1914d7668cc42ecea67c2bfcbadb9342f[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 22:23:19 2024 +1000
+
+    Start of the picture shower  - Ethan
+
+[33mcommit c81df89a70ea2fc3539534399c432b90ed04ee87[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 22:18:54 2024 +1000
+
+    Updated Design  - Ethan
+
+[33mcommit cde4716a507109a7011f1caa873ce9f1de240aa0[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 21:14:20 2024 +1000
+
+    Updated Design  - Ethan
+
+[33mcommit 7e9d712eb7a572c17c8d911aeb18cd2e02b51538[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 18:30:06 2024 +1000
+
+    Updated Design  - Ethan
+
+[33mcommit 48be097c595f3521d1cd9a23539ded5404d389ba[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 18:03:45 2024 +1000
+
+    Updated Design  - Ethan
+
+[33mcommit 84dc23ec48ffb414c78b2e67dcc30b175f5a99b0[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 17:24:09 2024 +1000
+
+    Updated Design  - Ethan
+
+[33mcommit 9c35057e3ac95587290968a3fdcc78843b288643[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 16:54:28 2024 +1000
+
+    Updated Design  - Ethan
+
+[33mcommit 5f6e58a204cfc6696b8d3e8dc8e0bffa0718349f[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Tue Sep 17 16:14:04 2024 +1000
+
+    default testing data  - Ethan
+
+[33mcommit d9edbeab78b810b4906ae61f873e70028615db8b[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 14 02:47:15 2024 +1000
+
+    Readme.txt update - Ethan.O
+
+[33mcommit 113942664dadc4be839813d5a7c27b3597747247[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 14 02:32:19 2024 +1000
+
+    Readme.txt added - Ethan.O
+
+[33mcommit 93e9b250d5819d8ff1681c419629f9f6505cea7f[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 14 02:19:13 2024 +1000
+
+    Basic UI setup and start of most login/register content + vairables - Ethan.O
+
+[33mcommit 836e756661bbfc050940bdd50711dcbf41d75b33[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 14 01:41:44 2024 +1000
+
+    setup for the start of login/register - Ethan.O
+
+[33mcommit aa8eeed911d7e6534f3264789cf70bc6693ddf7a[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Sat Sep 14 01:17:13 2024 +1000
+
+    updating UI disign - Ethan.O
+
+[33mcommit 70a92483bd30552ee526cc95633693ce39792f4d[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 13 20:59:34 2024 +1000
+
+    updating UI disign
+
+[33mcommit 29c33148ec74c6dce7095cef0c92e7ada5c8196a[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 13 20:35:38 2024 +1000
+
+    changed hello view
+
+[33mcommit f24f44ad3cddf4701f5f0817a32ba084d51ed45f[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 13 20:28:40 2024 +1000
+
+    changed hello view
+
+[33mcommit c247cc7adab66cbb8f4b19a7714c0dea886a5f77[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 13 20:13:18 2024 +1000
+
+    IT GANG 1st meeting.pdf
+
+[33mcommit e08f7666b7569d058a14bcbbba291f0af9a8cc47[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 13 20:08:11 2024 +1000
+
+    first start of application
+
+[33mcommit 8a28634da09482040f33547c3f8c22ce7b083e5e[m
+Author: TheOostman <ethan.oosthuiz3n@gmail.com>
+Date:   Fri Sep 13 19:57:17 2024 +1000
+
+    first commit
