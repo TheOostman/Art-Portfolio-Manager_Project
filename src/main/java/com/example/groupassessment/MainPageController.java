@@ -500,6 +500,7 @@ public class MainPageController {
             System.out.println("No image selected.");
         }
     }
+
     public void loadUserImages(int userId) {
         DatabaseManager dbManager = new DatabaseManager();
         Map<String, byte[]> userImages = dbManager.getUserImages(userId);
@@ -594,7 +595,8 @@ public class MainPageController {
         editStage.setTitle("Edit Image");
 
         ImageView fullImageView = new ImageView(image);
-        fullImageView.setFitWidth(300);
+        fullImageView.setFitWidth(500);
+        fullImageView.setPreserveRatio(true);
 
         // Editable fields for title and comments
         TextField titleField = new TextField(title);

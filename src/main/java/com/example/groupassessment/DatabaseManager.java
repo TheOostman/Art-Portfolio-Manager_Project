@@ -87,6 +87,8 @@ public class DatabaseManager {
                 + "    image_id TEXT UNIQUE NOT NULL,\n"
                 + "    user_id INTEGER REFERENCES users(id),\n"
                 + "    image BLOB\n"
+                + "    title TEXT,\n"
+                + "    description TEXT\n"
                 + ");";
 
         // Establish connection and execute the SQL commands
