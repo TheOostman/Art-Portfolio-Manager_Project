@@ -36,15 +36,13 @@ public class ViewProfileController {
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
     }
-
-    @FXML
-    private void toRegisterPageBn(ActionEvent event) throws IOException {
-        MainApplication.changeScene("RegisterPage.fxml");
-    }
-
     @FXML
     private void toSignInBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("LoginPage.fxml");
+    }
+    @FXML
+    private void toSearchPage(ActionEvent event) throws IOException {
+        MainApplication.changeScene("ProfileSearch.fxml");
     }
 
     @FXML
@@ -63,40 +61,12 @@ public class ViewProfileController {
     }
 
     @FXML
-    private void toSearchPage(ActionEvent event) throws IOException {
-        MainApplication.changeScene("ProfileSearch.fxml");
-    }
-
-    @FXML
-    private Label usernameLabel; // Assume you have a label to show the username
+    private Label usernameLabel;
 
     public void setUsername(String username) {
         usernameLabel.setText(username);
         // Load other user data as needed (e.g., profile image, bio, etc.)
     }
 
-    // pop up view image
-    private void OpenImage(Image image, String title, String comments) {
-        Stage imageStage = new Stage();
-        imageStage.setTitle(title);
 
-        ImageView fullImageView = new ImageView(image);
-        fullImageView.setPreserveRatio(true);
-
-        Label titleLabel = new Label("Title: " + title);
-        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-
-        TextArea commentsArea = new TextArea(comments);
-        commentsArea.setWrapText(true);
-        commentsArea.setEditable(false); // Disable editing for view-only mode
-
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(15));
-        layout.getChildren().addAll(titleLabel, fullImageView, commentsArea);
-
-        Scene scene = new Scene(layout, 500, 500);
-        imageStage.setScene(scene);
-        imageStage.initModality(Modality.APPLICATION_MODAL);
-        imageStage.showAndWait();
-    }
 }

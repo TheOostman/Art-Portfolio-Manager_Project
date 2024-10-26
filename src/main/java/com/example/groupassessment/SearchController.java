@@ -4,8 +4,9 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -16,13 +17,8 @@ import javafx.util.Duration;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import javafx.scene.control.ListView;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
@@ -32,11 +28,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import java.io.IOException;
-
 
 public class SearchController {
     @FXML
@@ -55,11 +48,11 @@ public class SearchController {
     //----------------------------------
 
     @FXML
-    private TextField searchField;  // For user input
+    private TextField searchField;
     @FXML
-    private ListView<String> usernamesListView;  // For displaying matched usernames
+    private ListView<String> usernamesListView;
     @FXML
-    private GridPane imagesGridPane;  // For displaying matched images
+    private GridPane imagesGridPane;
     // SQLite connection URL
     private final String url = "jdbc:sqlite:users.db";
 
@@ -74,7 +67,7 @@ public class SearchController {
         return conn;
     }
 
-    // Method to search for usernames
+    // search for usernames
     private List<String> searchUsernames(String searchText) {
         List<String> matchedUsernames = new ArrayList<>();
         String query = "SELECT username FROM users WHERE username LIKE ?";
@@ -92,21 +85,65 @@ public class SearchController {
         return matchedUsernames;
     }
 
-    // Method to search for image titles and descriptions
-    private List<Image> searchImages(String searchText) {
-        List<Image> matchedImages = new ArrayList<>();
-        String query = "SELECT title, image FROM images WHERE title LIKE ? OR description LIKE ?";
+    public class ImageData {
+        private Image image;
+        private String title;
+        private String description;
+        private String username;
+        private String role;
+
+        public ImageData(Image image, String title, String description, String username, String role) {
+            this.image = image;
+            this.title = title;
+            this.description = description;
+            this.username = username;
+            this.role = role;
+        }
+
+        public Image getImage() {
+            return image;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getRole() {
+            return role;
+        }
+    }
+    private List<ImageData> searchImages(String searchText) {
+        List<ImageData> matchedImages = new ArrayList<>();
+        String query = """
+        SELECT images.title, images.description, images.image, users.username, users.role 
+        FROM images 
+        JOIN users ON images.user_id = users.id 
+        WHERE images.title LIKE ? OR images.description LIKE ?
+        """;
 
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, "%" + searchText + "%");  // Use wildcard for partial match
+            pstmt.setString(1, "%" + searchText + "%");
             pstmt.setString(2, "%" + searchText + "%");
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()) {
-                // Retrieve image data (assuming the image is stored as a BLOB in the database)
                 byte[] imgBytes = rs.getBytes("image");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                String username = rs.getString("username");
+                String role = rs.getString("role");
+
                 if (imgBytes != null) {
                     Image image = new Image(new ByteArrayInputStream(imgBytes));
-                    matchedImages.add(image);
+                    matchedImages.add(new ImageData(image, title, description, username, role));
                 }
             }
         } catch (SQLException e) {
@@ -118,40 +155,59 @@ public class SearchController {
 
     @FXML
     private void searchUsername() {
-        String searchText = searchField.getText().toLowerCase();  // Get the search text from the TextField
-
-        // Search for usernames and images
+        String searchText = searchField.getText().toLowerCase();
         List<String> matchedUsernames = searchUsernames(searchText);
-        List<Image> matchedImages = searchImages(searchText);
+        List<ImageData> matchedImages = searchImages(searchText);
 
         // Update the ListView for usernames
         ObservableList<String> userResults = FXCollections.observableArrayList(matchedUsernames);
+        if (matchedUsernames.isEmpty()) {
+            userResults.add("No Usernames Found");
+        }
         usernamesListView.setItems(userResults);
 
         // Clear the GridPane before adding new images
         imagesGridPane.getChildren().clear();
 
-        // Add images to the GridPane
-        int col = 0;
-        int row = 0;
-        for (Image image : matchedImages) {
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(100);  // Set a desired width
-            imageView.setFitHeight(100);  // Set a desired height
-            imageView.setPreserveRatio(true);
+        if (matchedImages.isEmpty()) {
+            // Display "No Titles Found" if no images were found
+            Label noImagesLabel = new Label("No Titles Found");
 
-            imagesGridPane.add(imageView, col, row);  // Add ImageView to GridPane
+            imagesGridPane.add(noImagesLabel, 0, 0);
+        } else {
+            // Add images to the GridPane if any matched images were found
+            int col = 0;
+            int row = 0;
+            for (ImageData imageData : matchedImages) {
+                ImageView imageView = new ImageView(imageData.getImage());
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+                imageView.setPreserveRatio(true);
 
-            col++;  // Move to the next column
-            if (col > 2) {  // Change this number to set how many images per row
-                col = 0;  // Reset column count
-                row++;  // Move to the next row
+                // Open image popup with title, description, username, and role
+                imageView.setOnMouseClicked(event -> OpenImage(
+                        imageData.getImage(),
+                        imageData.getTitle(),
+                        imageData.getDescription(),
+                        imageData.getUsername(),
+                        imageData.getRole()
+                ));
+
+                imagesGridPane.add(imageView, col, row);
+
+                col++;
+                if (col > 2) {
+                    col = 0;
+                    row++;
+                }
             }
         }
 
         // Clear any previous selection
         usernamesListView.getSelectionModel().clearSelection();
     }
+
+
 
     @FXML
     private void handleUserSelection() {
@@ -183,6 +239,37 @@ public class SearchController {
             System.out.println("Error loading profile view: " + e.getMessage());
         }
     }
+
+    // pop up view image
+    private void OpenImage(Image image, String title, String comments, String username, String role) {
+        Stage imageStage = new Stage();
+        imageStage.setTitle(title);
+
+        ImageView fullImageView = new ImageView(image);
+        fullImageView.setFitWidth(500);
+        fullImageView.setPreserveRatio(true);
+
+        Label titleLabel = new Label("Title: " + title);
+        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        Label userLabel = new Label("User: " + username);
+        Label roleLabel = new Label("Role: " + role);
+
+        TextArea commentsArea = new TextArea(comments);
+        commentsArea.setWrapText(true);
+        commentsArea.setEditable(false);
+
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(15));
+        layout.getChildren().addAll(titleLabel, userLabel, roleLabel, fullImageView, commentsArea);
+
+        Scene scene = new Scene(layout, 700, 900);
+        imageStage.setScene(scene);
+        imageStage.initModality(Modality.APPLICATION_MODAL);
+        imageStage.showAndWait();
+    }
+
+
     // Page Changes
     @FXML
     private void toSignInBn(ActionEvent event) throws IOException {

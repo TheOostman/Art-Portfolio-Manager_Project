@@ -62,7 +62,7 @@ public class MainPageController {
         // Initialize the database manager
         this.databaseManager = new DatabaseManager();
     }
-
+    // pages used
     private Map<String, Image> selectedImages = new HashMap<>();
     public void changeToMain() throws IOException{
         MainApplication.changeScene("MainPage.fxml");
@@ -71,10 +71,13 @@ public class MainPageController {
     private void toFeedPage(ActionEvent event) throws IOException {
         MainApplication.changeScene("FeedPage.fxml");
     }
-
     @FXML
     private void toSignInBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("LoginPage.fxml");
+    }
+    @FXML
+    private void toSearchPage(ActionEvent event) throws IOException {
+        MainApplication.changeScene("ProfileSearch.fxml");
     }
     @FXML
     private void dropDownBn(ActionEvent event) {
@@ -90,10 +93,7 @@ public class MainPageController {
         transition.play();
         isSideBarVisible = !isSideBarVisible;
     }
-    @FXML
-    private void toSearchPage(ActionEvent event) throws IOException {
-        MainApplication.changeScene("ProfileSearch.fxml");
-    }
+
     public void editPageLoadUp(int userId) {
         DatabaseManager dbManager = new DatabaseManager();
         Map<String, byte[]> userImages = dbManager.getUserImages(userId);
@@ -575,7 +575,6 @@ public class MainPageController {
             System.out.println("User not found for ID: " + userID);
             return null;
         }
-
     }
 
     @FXML

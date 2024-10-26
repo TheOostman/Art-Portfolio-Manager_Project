@@ -19,7 +19,7 @@ public class LoginController {
     @FXML
     private TextField passwordEntry;
     @FXML
-    private Label feedbackLabel;  // Label for feedback messages
+    private Label feedbackLabel;
 
 
     public void registerUser(String username, String password, Connection connection) throws SQLException {
@@ -42,7 +42,7 @@ public class LoginController {
     // SQLite connection URL
     private final String url = "jdbc:sqlite:users.db";
 
-    // Verify the entered credentials by querying the database
+    // Verify credentials
     private boolean verifyCredentials(String username, String password) {
         String sql = "SELECT password FROM users WHERE username = ?";
 

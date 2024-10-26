@@ -100,19 +100,19 @@ public class RegisterController {
             return;
         }
 
-        // Validate username uniqueness
+        // username uniqueness
         if (isUsernameTaken(username)) {
             messageLabel.setText("Username already in use.");
             return;
         }
 
-        // Validate email format
+        // email format
         if (!isEmailValid(email)) {
             messageLabel.setText("Email invalid.");
             return;
         }
 
-        // Validate role selection
+        // must select role
         if (role == null || role.equals("Select a role")) {
             messageLabel.setText("Must select a role.");
             return;

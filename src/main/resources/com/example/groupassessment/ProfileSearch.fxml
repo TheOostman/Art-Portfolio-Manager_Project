@@ -45,11 +45,8 @@
 
     <!-- Label for Image Titles -->
     <Label text="Artworks" style="-fx-font-size: 20px; -fx-font-weight: bold;" AnchorPane.topAnchor="420" AnchorPane.leftAnchor="90"/>
-    <!-- ScrollPane for the GridPane -->
-    <ScrollPane AnchorPane.topAnchor="450" AnchorPane.leftAnchor="90" prefWidth="700" prefHeight="200" style="-fx-background-color: white; -fx-border-width: 1;">
-      <!-- GridPane for showing image results -->
+    <ScrollPane AnchorPane.topAnchor="450" AnchorPane.leftAnchor="90" prefWidth="700" prefHeight="200" style="-fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: black;">
       <GridPane fx:id="imagesGridPane" hgap="10" vgap="10" style="-fx-background-color: white;">
-        <!-- Images will be dynamically added here -->
       </GridPane>
     </ScrollPane>
   </AnchorPane>
