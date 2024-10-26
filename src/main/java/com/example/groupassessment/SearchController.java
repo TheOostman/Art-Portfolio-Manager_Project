@@ -4,6 +4,9 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
@@ -18,8 +21,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javafx.scene.control.ListView;
+
+import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.io.IOException;
 
@@ -41,41 +53,110 @@ public class SearchController {
     //----------------------------------
 
     @FXML
-    private TextField searchField;  // For searching usernames
+    private TextField searchField;  // For user input
     @FXML
-    private ListView<String> resultsListView;  // To display and select the search results
+    private ListView<String> usernamesListView;  // For displaying matched usernames
+    @FXML
+    private GridPane imagesGridPane;  // For displaying matched images
+    // SQLite connection URL
+    private final String url = "jdbc:sqlite:users.db";
 
-    // This list is just for example purposes. change to get info from database
-    private List<String> usernames = List.of("john_doe", "jane_smith", "mark_twain", "mary_jane", "jason_bourne", "johnathan_doe");
+    // Method to connect to the database
+    private Connection connect() {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
+    // Method to search for usernames
+    private List<String> searchUsernames(String searchText) {
+        List<String> matchedUsernames = new ArrayList<>();
+        String query = "SELECT username FROM users WHERE username LIKE ?";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, "%" + searchText + "%");  // Use wildcard for partial match
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                matchedUsernames.add(rs.getString("username"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error searching usernames: " + e.getMessage());
+        }
+
+        return matchedUsernames;
+    }
+
+    // Method to search for image titles and descriptions
+    private List<Image> searchImages(String searchText) {
+        List<Image> matchedImages = new ArrayList<>();
+        String query = "SELECT title, image FROM images WHERE title LIKE ? OR description LIKE ?";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, "%" + searchText + "%");  // Use wildcard for partial match
+            pstmt.setString(2, "%" + searchText + "%");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                // Retrieve image data (assuming the image is stored as a BLOB in the database)
+                byte[] imgBytes = rs.getBytes("image");
+                if (imgBytes != null) {
+                    Image image = new Image(new ByteArrayInputStream(imgBytes));
+                    matchedImages.add(image);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error searching images: " + e.getMessage());
+        }
+
+        return matchedImages;
+    }
 
     @FXML
     private void searchUsername() {
         String searchText = searchField.getText().toLowerCase();  // Get the search text from the TextField
-        List<String> matchedUsernames = new ArrayList<>();
 
-        // Filter usernames based on search input
-        for (String username : usernames) {
-            if (username.toLowerCase().contains(searchText)) {
-                matchedUsernames.add(username);
+        // Search for usernames and images
+        List<String> matchedUsernames = searchUsernames(searchText);
+        List<Image> matchedImages = searchImages(searchText);
+
+        // Update the ListView for usernames
+        ObservableList<String> userResults = FXCollections.observableArrayList(matchedUsernames);
+        usernamesListView.setItems(userResults);
+
+        // Clear the GridPane before adding new images
+        imagesGridPane.getChildren().clear();
+
+        // Add images to the GridPane
+        int col = 0;
+        int row = 0;
+        for (Image image : matchedImages) {
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(100);  // Set a desired width
+            imageView.setFitHeight(100);  // Set a desired height
+            imageView.setPreserveRatio(true);
+
+            imagesGridPane.add(imageView, col, row);  // Add ImageView to GridPane
+
+            col++;  // Move to the next column
+            if (col > 2) {  // Change this number to set how many images per row
+                col = 0;  // Reset column count
+                row++;  // Move to the next row
             }
         }
 
-        // Update the ListView with search results
-        ObservableList<String> searchResults = FXCollections.observableArrayList(matchedUsernames);
-        resultsListView.setItems(searchResults);
-
-        // Optional: Clear any previous selection when new search results are shown
-        resultsListView.getSelectionModel().clearSelection();
+        // Clear any previous selection
+        usernamesListView.getSelectionModel().clearSelection();
     }
 
-    // This method can be called to get the selected username(s)
     @FXML
-    private void handleSelection() {
-        String selectedUsername = resultsListView.getSelectionModel().getSelectedItem(); // Get the selected item
+    private void handleUserSelection() {
+        String selectedUsername = usernamesListView.getSelectionModel().getSelectedItem(); // Get the selected username
         if (selectedUsername != null) {
             System.out.println("Selected Username: " + selectedUsername);
-            // You can further handle the selected user here, e.g., open a profile page
-          //  toViewProfile(selectedUsername);
+            // Handle selected username (e.g., navigate to user profile)
         }
     }
 
