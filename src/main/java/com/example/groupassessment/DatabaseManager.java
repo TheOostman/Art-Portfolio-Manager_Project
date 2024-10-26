@@ -221,6 +221,28 @@ public class DatabaseManager {
         return username;
     }
 
+    // Update the title and comments of an image in the database
+    public void updateImageMetadata(int userId, String imageId, String newTitle, String newComments) {
+        String query = "UPDATE images SET title = ?, comments = ? WHERE user_id = ? AND image_id = ?";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, newTitle);
+            pstmt.setString(2, newComments);
+            pstmt.setInt(3, userId);
+            pstmt.setString(4, imageId);
+
+            int rowsUpdated = pstmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Image metadata updated successfully for imageId: " + imageId);
+            } else {
+                System.out.println("No image found to update for imageId: " + imageId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating image metadata: " + e.getMessage());
+        }
+    }
+
+
     public Map<String, File> getUserImagesAsFiles(int userID) {
         Map<String, File> userImages = new HashMap<>();
         System.out.println("Database UserID: "+userID);

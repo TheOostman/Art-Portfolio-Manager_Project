@@ -508,47 +508,47 @@ public class MainPageController {
             ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
             Image image = new Image(bis);
 
-            // Set image and add click event to open it in a pop-up
+            // Set image and add click event to open it in an edit pop-up
             switch (imageId) {
                 case "A1":
                     imageViewA1.setImage(image);
-                    imageViewA1.setOnMouseClicked(e -> OpenImage(image, "Image A1", "Comments for Image A1"));
+                    imageViewA1.setOnMouseClicked(e -> EditImage(image, "Image A1", "Comments for Image A1", imageId, userId));
                     break;
                 case "A2":
                     imageViewA2.setImage(image);
-                    imageViewA2.setOnMouseClicked(e -> OpenImage(image, "Image A2", "Comments for Image A2"));
+                    imageViewA2.setOnMouseClicked(e -> EditImage(image, "Image A2", "Comments for Image A2", imageId, userId));
                     break;
                 case "A3":
                     imageViewA3.setImage(image);
-                    imageViewA3.setOnMouseClicked(e -> OpenImage(image, "Image A3", "Comments for Image A3"));
+                    imageViewA3.setOnMouseClicked(e -> EditImage(image, "Image A3", "Comments for Image A3", imageId, userId));
                     break;
                 case "A4":
                     imageViewA4.setImage(image);
-                    imageViewA4.setOnMouseClicked(e -> OpenImage(image, "Image A4", "Comments for Image A4"));
+                    imageViewA4.setOnMouseClicked(e -> EditImage(image, "Image A4", "Comments for Image A4", imageId, userId));
                     break;
                 case "A5":
                     imageViewA5.setImage(image);
-                    imageViewA5.setOnMouseClicked(e -> OpenImage(image, "Image A5", "Comments for Image A5"));
+                    imageViewA5.setOnMouseClicked(e -> EditImage(image, "Image A5", "Comments for Image A5", imageId, userId));
                     break;
                 case "B1":
                     imageViewB1.setImage(image);
-                    imageViewB1.setOnMouseClicked(e -> OpenImage(image, "Image B1", "Comments for Image B1"));
+                    imageViewB1.setOnMouseClicked(e -> EditImage(image, "Image B1", "Comments for Image B1", imageId, userId));
                     break;
                 case "B2":
                     imageViewB2.setImage(image);
-                    imageViewB2.setOnMouseClicked(e -> OpenImage(image, "Image B2", "Comments for Image B2"));
+                    imageViewB2.setOnMouseClicked(e -> EditImage(image, "Image B2", "Comments for Image B2", imageId, userId));
                     break;
                 case "B3":
                     imageViewB3.setImage(image);
-                    imageViewB3.setOnMouseClicked(e -> OpenImage(image, "Image B3", "Comments for Image B3"));
+                    imageViewB3.setOnMouseClicked(e -> EditImage(image, "Image B3", "Comments for Image B3", imageId, userId));
                     break;
                 case "B4":
                     imageViewB4.setImage(image);
-                    imageViewB4.setOnMouseClicked(e -> OpenImage(image, "Image B4", "Comments for Image B4"));
+                    imageViewB4.setOnMouseClicked(e -> EditImage(image, "Image B4", "Comments for Image B4", imageId, userId));
                     break;
                 case "B5":
                     imageViewB5.setImage(image);
-                    imageViewB5.setOnMouseClicked(e -> OpenImage(image, "Image B5", "Comments for Image B5"));
+                    imageViewB5.setOnMouseClicked(e -> EditImage(image, "Image B5", "Comments for Image B5", imageId, userId));
                     break;
             }
         }
@@ -584,29 +584,48 @@ public class MainPageController {
         }
 
     }
-    // pop-up view image
-    private void OpenImage(Image image, String title, String comments) {
-        Stage imageStage = new Stage();
-        imageStage.setTitle(title);
+    // edit image (title and comments)
+    private void EditImage(Image image, String title, String description, String imageId, int userId) {
+        Stage editStage = new Stage();
+        editStage.setTitle("Edit Image");
 
         ImageView fullImageView = new ImageView(image);
-        fullImageView.setPreserveRatio(true);
+        fullImageView.setFitWidth(300);
 
-        Label titleLabel = new Label("Title: " + title);
-        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        // Editable fields for title and comments
+        TextField titleField = new TextField(title);
+        titleField.setPromptText("Enter new title");
+        titleField.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-        TextArea commentsArea = new TextArea(comments);
-        commentsArea.setWrapText(true);
-        commentsArea.setEditable(true); // Allow the user to write comments
+        TextArea descriptionArea  = new TextArea(description);
+        descriptionArea .setWrapText(true);
+        descriptionArea .setPromptText("Enter Description");
+
+        // Save button to apply changes
+        Button saveButton = new Button("Save");
+        saveButton.setOnAction(e -> {
+            String newTitle = titleField.getText();
+            String newDescription = descriptionArea .getText();
+
+            // Update the title and comments in the database or data store
+            DatabaseManager dbManager = new DatabaseManager();
+            dbManager.updateImageMetadata(userId, imageId, newTitle, newDescription );
+
+            editStage.close(); // Close the edit window after saving
+        });
 
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(15));
-        layout.getChildren().addAll(titleLabel, fullImageView, commentsArea);
+        layout.getChildren().addAll(new Label("Edit Title:"), titleField, fullImageView, new Label("Edit Description:"), descriptionArea , saveButton);
+        // Determine image dimensions and adjust the scene size
+        double imageWidth = image.getWidth();
+        double imageHeight = image.getHeight();
+        double padding = 50; // Additional space for title, description, and padding
 
-        Scene scene = new Scene(layout, 500, 500);
-        imageStage.setScene(scene);
-        imageStage.initModality(Modality.APPLICATION_MODAL);
-        imageStage.showAndWait();
+        Scene scene = new Scene(layout, imageWidth + padding, imageHeight + padding);
+        editStage.setScene(scene);
+        editStage.initModality(Modality.APPLICATION_MODAL);
+        editStage.showAndWait();
     }
 
 }
