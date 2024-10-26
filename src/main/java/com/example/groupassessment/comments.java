@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentController {
+public class comments {
     @FXML
     private TextField usernameEntry;
     @FXML

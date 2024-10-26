@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageController {
+public class messages {
     @FXML
     private TextField senderEntry;
     @FXML
