@@ -65,5 +65,5 @@ public class ViewProfileController {
         // Load other user data as needed (e.g., profile image, bio, etc.) ...
     }
 
-//asd
+
 }
