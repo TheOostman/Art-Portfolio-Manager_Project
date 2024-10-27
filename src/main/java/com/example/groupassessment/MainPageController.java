@@ -54,7 +54,6 @@ public class MainPageController {
         // Initialize the database manager
         this.databaseManager = new DatabaseManager();
     }
-    private Map<String, Image> selectedImages = new HashMap<>();
 
     // change pages
     public void changeToMain() throws IOException{
@@ -71,12 +70,11 @@ public class MainPageController {
     @FXML
     private void changeToInbox(ActionEvent event) throws IOException {
         MainApplication.changeScene("InboxPage.fxml");
-    }@FXML
-
-
+    }
+    @FXML
     private void logout(ActionEvent event) throws IOException {
         try {
-            int userId = -1; // Or some default value indicating no user is logged in
+            int userId = -1; // default value indicating no user is logged in
 
             // Delete user data file if it exists
             File fileToDelete = new File("src/main/resources/userData/UserData.txt");
@@ -90,31 +88,22 @@ public class MainPageController {
             }
 
             System.out.println("Session data cleared");
-
-            // Reset userID and other session data
             userID = -1; // Indicates no user is logged in
             usernameText.setText(""); // Clear username display
-            // Optionally clear any other user-related data here
 
             // Redirect to the login page
             MainApplication.changeScene("LoginPage.fxml"); // Change to your actual login page scene
-
             // Log the logout action for monitoring purposes
             System.out.println("User logged out successfully.");
-
             // Display success message
             showMessage("Logout successful. You can now sign in with a different user ID.");
-
         } catch (Exception e) {
             // Log the error for debugging
             System.err.println("Logout failed: " + e.getMessage());
-
             // Display error message
             showMessage("Logout failed. Please try again.");
         }
     }
-
-
     private void showMessage(String message) {
         // This method should display messages to the user
         // Consider using a dialog for better user experience
@@ -126,8 +115,6 @@ public class MainPageController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
     @FXML
     private void dropDownBn(ActionEvent event) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(300), sideBar);
@@ -142,7 +129,145 @@ public class MainPageController {
         transition.play();
         isSideBarVisible = !isSideBarVisible;
     }
+    // load images and info
+    public void loadUserImages(int userId) {
+        DatabaseManager dbManager = new DatabaseManager();
+        Map<String, byte[]> userImages = dbManager.getUserImages(userId);
 
+        for (Map.Entry<String, byte[]> entry : userImages.entrySet()) {
+            String imageId = entry.getKey();
+            byte[] imageData = entry.getValue();
+
+            // Convert byte array to Image
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+            Image image = new Image(bis);
+
+            // Retrieve title and description from the database
+            String title = dbManager.getImageTitle(userId, imageId);
+            String description = dbManager.getImageDescription(userId, imageId);
+
+            // Set image and add click event to open it in an edit pop-up
+            switch (imageId) {
+                case "A1":
+                    imageViewA1.setImage(image);
+                    imageViewA1.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "A2":
+                    imageViewA2.setImage(image);
+                    imageViewA2.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "A3":
+                    imageViewA3.setImage(image);
+                    imageViewA3.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "A4":
+                    imageViewA4.setImage(image);
+                    imageViewA4.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "A5":
+                    imageViewA5.setImage(image);
+                    imageViewA5.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "B1":
+                    imageViewB1.setImage(image);
+                    imageViewB1.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "B2":
+                    imageViewB2.setImage(image);
+                    imageViewB2.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "B3":
+                    imageViewB3.setImage(image);
+                    imageViewB3.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "B4":
+                    imageViewB4.setImage(image);
+                    imageViewB4.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+                case "B5":
+                    imageViewB5.setImage(image);
+                    imageViewB5.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
+                    break;
+            }
+        }
+    }
+
+    public String getUsername(){
+        userID = getUserIDFromDoc();
+        DatabaseManager dbManager = new DatabaseManager();
+        String username = dbManager.getUsernameDB(userID);
+
+        if (username != null) {
+            System.out.println("Username: " + username);
+            return username;
+        } else {
+            System.out.println("User not found for ID: " + userID);
+            return null;
+        }
+    }
+
+    @FXML
+    public void initialize() {
+        sideBar.setVisible(false);
+        editPageEditor.setVisible(false);
+        System.out.println("Initializing MainPage...");
+        System.out.println("imageViewA1: " + (imageViewA1 != null ? "Initialized" : "Null"));
+        System.out.println("imageViewA2: " + (imageViewA2 != null ? "Initialized" : "Null"));
+        userID = getUserIDFromDoc();
+        System.out.println("Initializing MainPage...");
+        loadUserImages(userID);
+        String username = getUsername();
+        if (username != null){
+            usernameText.setText(username);
+        }
+
+    }
+    // Edit image (title and comments)
+    private void EditImage(Image image, String title, String description, String imageId, int userId) {
+        Stage editStage = new Stage();
+        editStage.setTitle("Edit Image");
+
+        ImageView fullImageView = new ImageView(image);
+        fullImageView.setFitWidth(500);
+        fullImageView.setPreserveRatio(true);
+        DatabaseManager dbManager = new DatabaseManager();
+
+        // title and comments
+        TextField titleField = new TextField(title);
+        titleField.setPromptText("Enter new title");
+        titleField.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        TextArea descriptionArea = new TextArea(description);
+        descriptionArea.setWrapText(true);
+        descriptionArea.setPromptText("Enter Description");
+
+        // Save button
+        Button saveButton = new Button("Save");
+        saveButton.setOnAction(e -> {
+            String newTitle = titleField.getText();
+            String newDescription = descriptionArea.getText();
+
+            // Update the title and description in the database
+            dbManager.updateImageMetadata(userId, imageId, newTitle, newDescription);
+            loadUserImages(userId);
+
+            editStage.close(); // close window after saving
+        });
+
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(15));
+        layout.getChildren().addAll(
+                new Label("Edit Title:"), titleField, fullImageView,
+                new Label("Edit Description:"), descriptionArea, saveButton
+        );
+
+        Scene scene = new Scene(layout, 700, 900);
+        editStage.setScene(scene);
+        editStage.initModality(Modality.APPLICATION_MODAL);
+        editStage.showAndWait();
+    }
+
+    //edit pages
     public void editPageLoadUp(int userId) {
         DatabaseManager dbManager = new DatabaseManager();
         Map<String, byte[]> userImages = dbManager.getUserImages(userId);
@@ -151,55 +276,55 @@ public class MainPageController {
             String imageId = entry.getKey();
             byte[] imageData = entry.getValue();
 
-            if (imageId.equals("A1")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A1")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA1.setImage(image); // Set the image to ImageView
+                selectedImageViewA1.setImage(image);
             }
-            if (imageId.equals("A2")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A2")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA2.setImage(image); // Set the image to ImageView
+                selectedImageViewA2.setImage(image);
             }
-            if (imageId.equals("A3")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A3")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA3.setImage(image); // Set the image to ImageView
+                selectedImageViewA3.setImage(image);
             }
-            if (imageId.equals("A4")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A4")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA4.setImage(image); // Set the image to ImageView
+                selectedImageViewA4.setImage(image);
             }
-            if (imageId.equals("A5")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A5")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA5.setImage(image); // Set the image to ImageView
+                selectedImageViewA5.setImage(image);
             }
-            if (imageId.equals("B1")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B1")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB1.setImage(image); // Set the image to ImageView
+                selectedImageViewB1.setImage(image);
             }
-            if (imageId.equals("B2")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B2")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB2.setImage(image); // Set the image to ImageView
+                selectedImageViewB2.setImage(image);
             }
-            if (imageId.equals("B3")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B3")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB3.setImage(image); // Set the image to ImageView
+                selectedImageViewB3.setImage(image);
             }
-            if (imageId.equals("B4")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B4")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB4.setImage(image); // Set the image to ImageView
+                selectedImageViewB4.setImage(image);
             }
-            if (imageId.equals("B5")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B5")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB5.setImage(image); // Set the image to ImageView
+                selectedImageViewB5.setImage(image);
             }
         }
     }
@@ -211,55 +336,55 @@ public class MainPageController {
             String imageId = entry.getKey();
             byte[] imageData = entry.getValue();
 
-            if (imageId.equals("A1")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A1")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA1.setImage(image); // Set the image to ImageView
+                selectedImageViewA1.setImage(image);
             }
-            if (imageId.equals("A2")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A2")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA2.setImage(image); // Set the image to ImageView
+                selectedImageViewA2.setImage(image);
             }
-            if (imageId.equals("A3")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A3")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA3.setImage(image); // Set the image to ImageView
+                selectedImageViewA3.setImage(image);
             }
-            if (imageId.equals("A4")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A4")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA4.setImage(image); // Set the image to ImageView
+                selectedImageViewA4.setImage(image);
             }
-            if (imageId.equals("A5")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("A5")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewA5.setImage(image); // Set the image to ImageView
+                selectedImageViewA5.setImage(image);
             }
-            if (imageId.equals("B1")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B1")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB1.setImage(image); // Set the image to ImageView
+                selectedImageViewB1.setImage(image);
             }
-            if (imageId.equals("B2")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B2")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB2.setImage(image); // Set the image to ImageView
+                selectedImageViewB2.setImage(image);
             }
-            if (imageId.equals("B3")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B3")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB3.setImage(image); // Set the image to ImageView
+                selectedImageViewB3.setImage(image);
             }
-            if (imageId.equals("B4")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B4")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB4.setImage(image); // Set the image to ImageView
+                selectedImageViewB4.setImage(image);
             }
-            if (imageId.equals("B5")) { // Replace with the appropriate logic to identify ImageViews
+            if (imageId.equals("B5")) {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
                 Image image = new Image(bis);
-                selectedImageViewB5.setImage(image); // Set the image to ImageView
+                selectedImageViewB5.setImage(image);
             }
         }
     }
@@ -335,7 +460,7 @@ public class MainPageController {
 
     @FXML
     private void onDeleteButtonClick(String imageId) {
-        int userId = getUserIDFromDoc(); // Replace with your logic to get the current user ID
+        int userId = getUserIDFromDoc();
         DatabaseManager dbManager = new DatabaseManager();
 
         // Delete the image from the database
@@ -443,9 +568,8 @@ public class MainPageController {
             System.out.println("No image found for " + picID);
         }
     }
-    // Helper method to clear the ImageView after deletion
+    // clear the ImageView after deletion
     private void clearImageView(String picID) {
-        // Clear the image from the corresponding ImageView based on the picID
         switch (picID) {
             case "A1":
                 imageViewA1.setImage(null);
@@ -489,7 +613,7 @@ public class MainPageController {
         int userId = -1;  // Default value if no user ID is found
 
         try {
-            // Use the class loader to load the file from resources
+            // class loader to load the file from resources
             InputStream inputStream = getClass().getResourceAsStream("/userData/UserData.txt");
 
             if (inputStream == null) {
@@ -549,145 +673,4 @@ public class MainPageController {
             System.out.println("No image selected.");
         }
     }
-
-    public void loadUserImages(int userId) {
-        DatabaseManager dbManager = new DatabaseManager();
-        Map<String, byte[]> userImages = dbManager.getUserImages(userId);
-
-        for (Map.Entry<String, byte[]> entry : userImages.entrySet()) {
-            String imageId = entry.getKey();
-            byte[] imageData = entry.getValue();
-
-            // Convert byte array to Image
-            ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
-            Image image = new Image(bis);
-
-            // Retrieve title and description from the database
-            String title = dbManager.getImageTitle(userId, imageId);
-            String description = dbManager.getImageDescription(userId, imageId);
-
-            // Set image and add click event to open it in an edit pop-up
-            switch (imageId) {
-                case "A1":
-                    imageViewA1.setImage(image);
-                    imageViewA1.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "A2":
-                    imageViewA2.setImage(image);
-                    imageViewA2.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "A3":
-                    imageViewA3.setImage(image);
-                    imageViewA3.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "A4":
-                    imageViewA4.setImage(image);
-                    imageViewA4.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "A5":
-                    imageViewA5.setImage(image);
-                    imageViewA5.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "B1":
-                    imageViewB1.setImage(image);
-                    imageViewB1.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "B2":
-                    imageViewB2.setImage(image);
-                    imageViewB2.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "B3":
-                    imageViewB3.setImage(image);
-                    imageViewB3.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "B4":
-                    imageViewB4.setImage(image);
-                    imageViewB4.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-                case "B5":
-                    imageViewB5.setImage(image);
-                    imageViewB5.setOnMouseClicked(e -> EditImage(image, title, description, imageId, userId));
-                    break;
-            }
-        }
-    }
-
-    public String getUsername(){
-        userID = getUserIDFromDoc();
-        DatabaseManager dbManager = new DatabaseManager();
-        String username = dbManager.getUsernameDB(userID);
-
-        if (username != null) {
-            System.out.println("Username: " + username);
-            return username;
-        } else {
-            System.out.println("User not found for ID: " + userID);
-            return null;
-        }
-    }
-
-    @FXML
-    public void initialize() {
-        sideBar.setVisible(false);
-        editPageEditor.setVisible(false);
-        System.out.println("Initializing MainPage...");
-        System.out.println("imageViewA1: " + (imageViewA1 != null ? "Initialized" : "Null"));
-        System.out.println("imageViewA2: " + (imageViewA2 != null ? "Initialized" : "Null"));
-        userID = getUserIDFromDoc();
-        System.out.println("Initializing MainPage...");
-        loadUserImages(userID);
-        String username = getUsername();
-        if (username != null){
-            usernameText.setText(username);
-        }
-
-    }
-    // Edit image (title and comments)
-    private void EditImage(Image image, String title, String description, String imageId, int userId) {
-        Stage editStage = new Stage();
-        editStage.setTitle("Edit Image");
-
-        ImageView fullImageView = new ImageView(image);
-        fullImageView.setFitWidth(500);
-        fullImageView.setPreserveRatio(true);
-    // Initialize dbManager here
-        DatabaseManager dbManager = new DatabaseManager();
-
-        // Editable fields for title and comments
-        TextField titleField = new TextField(title);
-        titleField.setPromptText("Enter new title");
-        titleField.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-
-        TextArea descriptionArea = new TextArea(description);
-        descriptionArea.setWrapText(true);
-        descriptionArea.setPromptText("Enter Description");
-
-        // Save button to apply changes
-        Button saveButton = new Button("Save");
-        saveButton.setOnAction(e -> {
-            String newTitle = titleField.getText();
-            String newDescription = descriptionArea.getText();
-
-            // Update the title and description in the database
-            dbManager.updateImageMetadata(userId, imageId, newTitle, newDescription);
-
-            // Refresh the image title and description in the UI immediately
-            loadUserImages(userId);
-
-            editStage.close(); // Close the edit window after saving
-        });
-
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(15));
-        layout.getChildren().addAll(
-                new Label("Edit Title:"), titleField, fullImageView,
-                new Label("Edit Description:"), descriptionArea, saveButton
-        );
-
-        Scene scene = new Scene(layout, 700, 900);
-        editStage.setScene(scene);
-        editStage.initModality(Modality.APPLICATION_MODAL);
-        editStage.showAndWait();
-    }
-
 }
