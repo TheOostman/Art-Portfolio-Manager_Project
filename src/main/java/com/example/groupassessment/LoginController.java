@@ -21,15 +21,6 @@ public class LoginController {
     @FXML
     private Label feedbackLabel;
 
-
-    public void registerUser(String username, String password, Connection connection) throws SQLException {
-        String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, username);
-        statement.setString(2, password);
-        statement.executeUpdate();
-    }
-
     @FXML
     private void toRegisterPageBn(ActionEvent event) throws IOException {
         MainApplication.changeScene("RegisterPage.fxml");
@@ -90,7 +81,7 @@ public class LoginController {
 
         if (verifyCredentials(enteredUsername, enteredPassword)) {
             System.out.println("Login successful for user: " + enteredUsername);
-            feedbackLabel.setText("");  // Clear feedback message
+            feedbackLabel.setText("");
 
             // Write current user data immediately
             int userId = getUserId(enteredUsername);
@@ -104,7 +95,7 @@ public class LoginController {
             }
         } else {
             System.out.println("Failed login attempt for user: " + enteredUsername);
-            feedbackLabel.setText("Invalid username or password");  // Set error message
+            feedbackLabel.setText("Invalid username or password");
         }
     }
 

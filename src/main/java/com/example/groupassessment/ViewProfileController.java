@@ -36,14 +36,12 @@ public class ViewProfileController {
     @FXML
     private Label roleLabel;
     @FXML
-    private HBox imagesContainer; // VBox to hold images dynamically
+    private HBox imagesContainer;
 
     private boolean isSideBarVisible = false;
 
     // SQLite connection URL
     private final String url = "jdbc:sqlite:users.db";
-
-    private int userID; // This should be set with the logged-in user's ID
 
     // Method to connect to the database
     private Connection connect() {
@@ -56,7 +54,6 @@ public class ViewProfileController {
         return conn;
     }
 
-    // Method to set user information
     public void setUserInfo(String username, String role) {
         usernameLabel.setText(username);
         roleLabel.setText(role);
@@ -70,24 +67,21 @@ public class ViewProfileController {
 
         for (ImageData imageData : userImages) {
             ImageView imageView = new ImageView(imageData.getImage());
-            imageView.setFitWidth(200); // Set width of the image view
-            imageView.setFitHeight(200); // Optionally set height if needed
+            imageView.setFitWidth(200);
+            imageView.setFitHeight(200);
             imageView.setPreserveRatio(true);
             imageView.setSmooth(true); // Enables smoother rendering
             imageView.setOnMouseClicked(event -> openImagePopup(imageData)); // Open popup on click
 
             // Add margin for spacing
-            HBox.setMargin(imageView, new Insets(0, 10, 0, 10)); // Adjust margins as necessary
-
-            imagesContainer.getChildren().add(imageView); // Add image view to container
+            HBox.setMargin(imageView, new Insets(0, 10, 0, 10));
+            imagesContainer.getChildren().add(imageView);
         }
-
         if (userImages.isEmpty()) {
             Label noImagesLabel = new Label("No images to display.");
             imagesContainer.getChildren().add(noImagesLabel);
         }
     }
-
 
     // Grab user images from the database
     private List<ImageData> grabUserImages(String username) {
@@ -110,13 +104,12 @@ public class ViewProfileController {
 
                 if (imgBytes != null) {
                     Image image = new Image(new ByteArrayInputStream(imgBytes));
-                    userImages.add(new ImageData(image, title, description, username, null)); // role is not needed
+                    userImages.add(new ImageData(image, title, description, username, null));
                 }
             }
         } catch (SQLException e) {
             System.out.println("Error grabbing user images: " + e.getMessage());
         }
-
         return userImages;
     }
 
@@ -166,19 +159,15 @@ public class ViewProfileController {
     public void changeToMain() throws IOException {
         MainApplication.changeScene("MainPage.fxml");
     }
-
     public void toSearchPage() throws IOException {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
-
     public void toFeedPage() throws IOException {
         MainApplication.changeScene("FeedPage.fxml");
     }
-
     public void changeToInbox() throws IOException {
         MainApplication.changeScene("InboxPage.fxml");
     }
-
     public void toSignInBn() throws IOException {
         MainApplication.changeScene("LoginPage.fxml");
     }

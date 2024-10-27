@@ -62,7 +62,7 @@ public class SearchController {
         String query = "SELECT username FROM users WHERE username LIKE ?";
 
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, "%" + searchText + "%");  // Use wildcard for partial match
+            pstmt.setString(1, "%" + searchText + "%"); //wildcard
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 matchedUsernames.add(rs.getString("username"));
@@ -191,12 +191,9 @@ public class SearchController {
                 }
             }
         }
-
         // Clear any previous selection
         usernamesListView.getSelectionModel().clearSelection();
     }
-
-
     private String getUserRole(String username) {
         String role = null;
         String query = "SELECT role FROM users WHERE username = ?"; // Example query
@@ -212,18 +209,18 @@ public class SearchController {
             System.out.println("Error fetching user role: " + e.getMessage());
         }
 
-        return role; // Will return null if the role is not found
+        return role;
     }
 
     @FXML
     private void handleUserSelection() {
-        String selectedUsername = usernamesListView.getSelectionModel().getSelectedItem(); // Get the selected item
-        String userRole = getUserRole(selectedUsername); // Assume this method retrieves the user role based on the username
+        String selectedUsername = usernamesListView.getSelectionModel().getSelectedItem();
+        String userRole = getUserRole(selectedUsername);
 
         if (selectedUsername != null && userRole != null) {
             System.out.println("Selected Username: " + selectedUsername + ", Role: " + userRole);
             // Load the profile view for the selected username
-            loadProfileView(selectedUsername, userRole); // Pass both username and role
+            loadProfileView(selectedUsername, userRole);
         }
     }
 
@@ -247,7 +244,6 @@ public class SearchController {
             System.out.println("Error loading profile view: " + e.getMessage());
         }
     }
-
 
     // pop up view image
     private void OpenImage(Image image, String title, String comments, String username, String role) {
