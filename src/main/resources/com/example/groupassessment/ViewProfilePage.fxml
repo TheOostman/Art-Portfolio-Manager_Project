@@ -17,6 +17,10 @@
         </ImageView>
         <!--Display selected username-->
         <Label fx:id="usernameLabel" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+        <Label fx:id="roleLabel" text="Role:" />
+        <VBox fx:id="imagesContainer">
+        </VBox>
+
         <Pane HBox.hgrow="ALWAYS"/>
         <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" onAction="#dropDownBn"/>
     </HBox>
