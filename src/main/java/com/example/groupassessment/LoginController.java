@@ -20,7 +20,19 @@ public class LoginController {
     private TextField passwordEntry;
     @FXML
     private Label feedbackLabel;
+    @FXML
+    private Connection connection;
 
+    public LoginController() {
+        try {
+            this.connection = DriverManager.getConnection("jdbc:sqlite:users.db");
+        } catch (SQLException e) {
+            System.out.println("Failed to connect to the database: " + e.getMessage());
+        }
+    }
+    public LoginController(Connection connection) {
+        this.connection = connection;
+    }
 
     public void registerUser(String username, String password, Connection connection) throws SQLException {
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
@@ -41,45 +53,31 @@ public class LoginController {
     // Verify credentials
     public boolean verifyCredentials(String username, String password) {
         String sql = "SELECT password FROM users WHERE username = ?";
-
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // Set the username parameter
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
-
             if (rs.next()) {
                 String storedPassword = rs.getString("password");
                 return password.equals(storedPassword);
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return false;
     }
+
     public int getUserId(String username) {
         String sql = "SELECT id FROM users WHERE username = ?";
-        int userId = -1; // Default value if user is not found
-
-        try (Connection conn = DatabaseManager.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // Set the username in the query
+        int userId = -1;
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, username);
-
-            // Execute the query and retrieve the userId
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 userId = rs.getInt("id");
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return userId;
     }
 
