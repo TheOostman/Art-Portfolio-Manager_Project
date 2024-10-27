@@ -223,12 +223,11 @@ public class DatabaseManager {
         return username;
     }
 
+    // Update the title and comments of an image in the database
     public void updateImageMetadata(int userId, String imageId, String newTitle, String newDescription) {
         String query = "UPDATE images SET title = ?, description = ? WHERE user_id = ? AND image_id = ?";
 
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-            conn.setAutoCommit(true); // Ensure immediate commit
-
             pstmt.setString(1, newTitle);
             pstmt.setString(2, newDescription);
             pstmt.setInt(3, userId);
@@ -244,7 +243,6 @@ public class DatabaseManager {
             System.out.println("Error updating image metadata: " + e.getMessage());
         }
     }
-
 
     // Method to get the title of an image from the database
     public String getImageTitle(int userId, String imageId) {

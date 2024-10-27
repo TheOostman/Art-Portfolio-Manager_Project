@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -37,11 +34,6 @@ public class MainPageController {
     private VBox editPageEditor;
     @FXML
     private Label usernameText;
-    @FXML
-    private VBox picA1, picA2, picA3, picA4, picA5, picB1, picB2, picB3, picB4, picB5;
-
-    @FXML
-    private VBox DefultA1, DefultA2, DefultA3, DefultA4, DefultA5, DefultB1, DefultB2, DefultB3, DefultB4, DefultB5;
     @FXML
     private ImageView imageViewA1, imageViewA2, imageViewA3, imageViewA4, imageViewA5;
     @FXML
@@ -73,17 +65,68 @@ public class MainPageController {
         MainApplication.changeScene("FeedPage.fxml");
     }
     @FXML
-    private void toSignInBn(ActionEvent event) throws IOException {
-        MainApplication.changeScene("LoginPage.fxml");
-    }
-    @FXML
     private void toSearchPage(ActionEvent event) throws IOException {
         MainApplication.changeScene("ProfileSearch.fxml");
     }
     @FXML
     private void changeToInbox(ActionEvent event) throws IOException {
         MainApplication.changeScene("InboxPage.fxml");
+    }@FXML
+
+
+    private void logout(ActionEvent event) throws IOException {
+        try {
+            int userId = -1; // Or some default value indicating no user is logged in
+
+            // Delete user data file if it exists
+            File fileToDelete = new File("src/main/resources/userData/UserData.txt");
+            if (fileToDelete.exists()) {
+                boolean deleted = fileToDelete.delete();
+                if (deleted) {
+                    System.out.println("User data file deleted successfully");
+                } else {
+                    System.out.println("Failed to delete user data file");
+                }
+            }
+
+            System.out.println("Session data cleared");
+
+            // Reset userID and other session data
+            userID = -1; // Indicates no user is logged in
+            usernameText.setText(""); // Clear username display
+            // Optionally clear any other user-related data here
+
+            // Redirect to the login page
+            MainApplication.changeScene("LoginPage.fxml"); // Change to your actual login page scene
+
+            // Log the logout action for monitoring purposes
+            System.out.println("User logged out successfully.");
+
+            // Display success message
+            showMessage("Logout successful. You can now sign in with a different user ID.");
+
+        } catch (Exception e) {
+            // Log the error for debugging
+            System.err.println("Logout failed: " + e.getMessage());
+
+            // Display error message
+            showMessage("Logout failed. Please try again.");
+        }
     }
+
+
+    private void showMessage(String message) {
+        // This method should display messages to the user
+        // Consider using a dialog for better user experience
+        System.out.println(message); // Example implementation
+        // You can also use JavaFX Alert for a pop-up message
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     @FXML
     private void dropDownBn(ActionEvent event) {
@@ -581,7 +624,7 @@ public class MainPageController {
             System.out.println("User not found for ID: " + userID);
             return null;
         }
-    } //asd
+    }
 
     @FXML
     public void initialize() {
