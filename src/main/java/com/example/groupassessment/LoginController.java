@@ -39,7 +39,7 @@ public class LoginController {
     private final String url = "jdbc:sqlite:users.db";
 
     // Verify credentials
-    private boolean verifyCredentials(String username, String password) {
+    public boolean verifyCredentials(String username, String password) {
         String sql = "SELECT password FROM users WHERE username = ?";
 
         try (Connection conn = DriverManager.getConnection(url);

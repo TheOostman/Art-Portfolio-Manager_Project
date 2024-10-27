@@ -197,26 +197,45 @@ public class SearchController {
     }
 
 
+    private String getUserRole(String username) {
+        String role = null;
+        String query = "SELECT role FROM users WHERE username = ?"; // Example query
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                role = rs.getString("role");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching user role: " + e.getMessage());
+        }
+
+        return role; // Will return null if the role is not found
+    }
 
     @FXML
     private void handleUserSelection() {
         String selectedUsername = usernamesListView.getSelectionModel().getSelectedItem(); // Get the selected item
-        if (selectedUsername != null) {
-            System.out.println("Selected Username: " + selectedUsername);
+        String userRole = getUserRole(selectedUsername); // Assume this method retrieves the user role based on the username
+
+        if (selectedUsername != null && userRole != null) {
+            System.out.println("Selected Username: " + selectedUsername + ", Role: " + userRole);
             // Load the profile view for the selected username
-            loadProfileView(selectedUsername);
+            loadProfileView(selectedUsername, userRole); // Pass both username and role
         }
     }
 
-    private void loadProfileView(String username) {
+    private void loadProfileView(String username, String role) {
         try {
-            // Load the profile view FXML file (e.g., "ProfileView.fxml")
+            // Load the profile view FXML file (e.g., "ViewProfilePage.fxml")
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewProfilePage.fxml"));
             Parent profileView = loader.load();
 
-            // Pass the selected username to the ProfileController if necessary
+            // Pass the selected username and role to the ProfileController
             ViewProfileController profileController = loader.getController();
-            profileController.setUsername(username);  // Assume you have a setUsername method in ProfileController
+            profileController.setUserInfo(username, role);  // Updated to use setUserInfo method
 
             // Create a new scene and set it to the stage
             Scene scene = new Scene(profileView);
@@ -228,6 +247,7 @@ public class SearchController {
             System.out.println("Error loading profile view: " + e.getMessage());
         }
     }
+
 
     // pop up view image
     private void OpenImage(Image image, String title, String comments, String username, String role) {
