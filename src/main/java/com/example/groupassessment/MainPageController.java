@@ -71,10 +71,26 @@ public class MainPageController {
     @FXML
     private void changeToInbox(ActionEvent event) throws IOException {
         MainApplication.changeScene("InboxPage.fxml");
-    }
-    @FXML
+    }@FXML
+
+
     private void logout(ActionEvent event) throws IOException {
         try {
+            int userId = -1; // Or some default value indicating no user is logged in
+
+            // Delete user data file if it exists
+            File fileToDelete = new File("src/main/resources/userData/UserData.txt");
+            if (fileToDelete.exists()) {
+                boolean deleted = fileToDelete.delete();
+                if (deleted) {
+                    System.out.println("User data file deleted successfully");
+                } else {
+                    System.out.println("Failed to delete user data file");
+                }
+            }
+
+            System.out.println("Session data cleared");
+
             // Reset userID and other session data
             userID = -1; // Indicates no user is logged in
             usernameText.setText(""); // Clear username display
@@ -98,6 +114,7 @@ public class MainPageController {
         }
     }
 
+
     private void showMessage(String message) {
         // This method should display messages to the user
         // Consider using a dialog for better user experience
@@ -109,6 +126,7 @@ public class MainPageController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 
     @FXML
     private void dropDownBn(ActionEvent event) {
