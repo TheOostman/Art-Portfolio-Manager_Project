@@ -5,28 +5,38 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.Pane?>
-
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.groupassessment.ViewProfileController">
     <VBox>
+        <!-- Header -->
+        <HBox alignment="CENTER" style="-fx-background-color: #D7F6FD;" prefHeight="100" maxHeight="100" prefWidth="1000">
+            <ImageView fitWidth="100" preserveRatio="true">
+                <Image url="@Image/CornerDesign.png"/>
+            </ImageView>
+            <Label fx:id="roleLabel" text="Role:" style="-fx-font-weight: Semi-Bold; -fx-font-size: 20px; -fx-text-fill: #92D3DE;" />
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="usernameLabel" style="-fx-font-size: 30px; -fx-font-weight: bold; "/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" onAction="#dropDownBn"/>
+        </HBox>
 
-    <!-- header -->
-    <HBox alignment="CENTER" style="-fx-background-color: #D7F6FD;" prefHeight="100" maxHeight="100" prefWidth="1000">
-        <!-- ImageView to display in corner-->
-        <ImageView fitWidth="100" preserveRatio="true">
-            <Image url="@Image/CornerDesign.png"/>
-        </ImageView>
-        <!--Display selected username-->
-        <Label fx:id="usernameLabel" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
-        <Label fx:id="roleLabel" text="Role:" />
-        <VBox fx:id="imagesContainer">
-        </VBox>
+        <!-- Profile Title -->
+        <HBox>
+            <AnchorPane>
+                <Label text="Portfolio Showcase" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="350" style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
+            </AnchorPane>
+        </HBox>
 
-        <Pane HBox.hgrow="ALWAYS"/>
-        <Button text="| | |" prefWidth="90" style="-fx-font-size: 30px; -fx-background-color: transparent; -fx-font-weight: bold;" onAction="#dropDownBn"/>
-    </HBox>
+        <!-- No Images/ Images Displayed -->
+        <HBox>
+            <AnchorPane>
+                <Label alignment="CENTER" fx:id="noImagesSelfProfile" text=" "/>
+            </AnchorPane>
+        <!-- Display Images -->
+        <HBox fx:id="imagesContainer" spacing="20" style="-fx-padding: 150 0 0 75">
+        </HBox>
+        </HBox>
     </VBox>
-
-    <!-- sidebar menu -->
+    <!-- Sidebar Menu -->
     <VBox StackPane.alignment="CENTER_RIGHT" fx:id="sideBar" prefWidth="200" maxWidth="180" prefHeight="1000" style="-fx-background-color: #A9A9A9; -fx-padding: 0 0 0 10;" visible="false">
         <AnchorPane>
             <VBox>
@@ -44,5 +54,4 @@
             </VBox>
         </AnchorPane>
     </VBox>
-
 </StackPane>

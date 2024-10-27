@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.collections.FXCollections;
@@ -35,7 +36,7 @@ public class ViewProfileController {
     @FXML
     private Label roleLabel;
     @FXML
-    private VBox imagesContainer; // VBox to hold images dynamically
+    private HBox imagesContainer; // VBox to hold images dynamically
 
     private boolean isSideBarVisible = false;
 
@@ -69,9 +70,14 @@ public class ViewProfileController {
 
         for (ImageData imageData : userImages) {
             ImageView imageView = new ImageView(imageData.getImage());
-            imageView.setFitWidth(100); // Set width of the image view
+            imageView.setFitWidth(200); // Set width of the image view
+            imageView.setFitHeight(200); // Optionally set height if needed
             imageView.setPreserveRatio(true);
-            imageView.setOnMouseClicked(event -> openImagePopup(imageData));
+            imageView.setSmooth(true); // Enables smoother rendering
+            imageView.setOnMouseClicked(event -> openImagePopup(imageData)); // Open popup on click
+
+            // Add margin for spacing
+            HBox.setMargin(imageView, new Insets(0, 10, 0, 10)); // Adjust margins as necessary
 
             imagesContainer.getChildren().add(imageView); // Add image view to container
         }
@@ -81,6 +87,7 @@ public class ViewProfileController {
             imagesContainer.getChildren().add(noImagesLabel);
         }
     }
+
 
     // Grab user images from the database
     private List<ImageData> grabUserImages(String username) {
