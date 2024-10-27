@@ -21,3 +21,8 @@ jobs:
           cache: maven
       - name: Build and Test with Maven
         run: mvn -B clean verify --file pom.xml
+
+
+#mvn -B clean verify --file pom.xml:
+#The clean command ensures that any previous builds are removed before building again.
+#verify runs both the build and test phases, so any unit tests will be executed.

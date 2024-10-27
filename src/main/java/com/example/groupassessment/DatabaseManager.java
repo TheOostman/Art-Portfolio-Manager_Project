@@ -282,7 +282,6 @@ public class DatabaseManager {
         return description; // Return the retrieved description
     }
 
-
     public Map<String, File> getUserImagesAsFiles(int userID) {
         Map<String, File> userImages = new HashMap<>();
         System.out.println("Database UserID: "+userID);
@@ -298,7 +297,7 @@ public class DatabaseManager {
 
                 if (imageData != null) {
                     String validPrefix = imageId.length() < 3 ? imageId + "_x" : imageId; // Ensure prefix is >= 3 characters
-                    File imageFile = File.createTempFile(validPrefix, ".png"); // Create a temporary file for each image
+                    File imageFile = File.createTempFile(validPrefix, ".png");
                     try (FileOutputStream fos = new FileOutputStream(imageFile)) {
                         fos.write(imageData);
                     }
