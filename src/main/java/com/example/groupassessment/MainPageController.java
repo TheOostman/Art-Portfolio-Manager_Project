@@ -71,7 +71,8 @@ public class MainPageController {
     @FXML
     private void changeToInbox(ActionEvent event) throws IOException {
         MainApplication.changeScene("InboxPage.fxml");
-    }@FXML
+    }
+    @FXML
     private void logout(ActionEvent event) throws IOException {
         try {
             // Reset userID and other session data
@@ -108,7 +109,6 @@ public class MainPageController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 
     @FXML
     private void dropDownBn(ActionEvent event) {
